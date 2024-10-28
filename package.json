@@ -9,6 +9,9 @@
     "prepare": "lint-staged && npm run check && father doctor",
     "release": "tsx scripts/release.ts"
   },
+  "bin": {
+    "tnf": "bin/tnf.js"
+  },
   "files": [
     "bin",
     "client",
@@ -33,5 +36,8 @@
     "*.ts?(x)": [
       "prettier --no-error-on-unmatched-pattern --cache --parser=typescript --write"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
