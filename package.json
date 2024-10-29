@@ -4,10 +4,11 @@
   "scripts": {
     "build": "father build",
     "check": "prettier --check .",
+    "dev": "father dev",
     "format": "prettier --write .",
-    "test": "vitest",
-    "prepare": "lint-staged && npm run check && father doctor",
-    "release": "tsx scripts/release.ts"
+    "// prepare": "lint-staged && npm run check && father doctor",
+    "release": "tsx scripts/release.ts",
+    "test": "vitest"
   },
   "bin": {
     "tnf": "bin/tnf.js"
@@ -17,6 +18,21 @@
     "client",
     "dist"
   ],
+  "exports": {
+    "./router": "./client/router.js"
+  },
+  "dependencies": {
+    "@tanstack/react-router": "^1.77.6",
+    "@tanstack/router-devtools": "^1.77.6",
+    "@tanstack/router-generator": "^1.74.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/yargs-parser": "^21.0.3",
+    "@umijs/mako": "^0.9.3",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "yargs-parser": "^21.1.1"
+  },
   "devDependencies": {
     "@total-typescript/tsconfig": "^1.0.4",
     "father": "^4.5.1",
