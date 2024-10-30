@@ -1,6 +1,6 @@
 {
   "name": "@umijs/tnf",
-  "version": "0.0.0-alpha.4",
+  "version": "0.0.0-alpha.5",
   "scripts": {
     "build": "father build",
     "check": "prettier --check .",
