@@ -4,9 +4,9 @@
   "scripts": {
     "build": "father build",
     "check": "prettier --check .",
+    "ci": "npm run check && npm run build && npm run test && father doctor",
     "dev": "father dev",
     "format": "prettier --write .",
-    "// prepare": "lint-staged && npm run check && father doctor",
     "release": "tsx scripts/release.ts",
     "test": "vitest"
   },
