@@ -1,4 +1,4 @@
-# tnf
+# @umijs/tnf
 
 ~~the north face~~, the next framework.
 
@@ -7,7 +7,7 @@
 Create a new project with the following command:
 
 ```bash
-$ npx tnf create myapp --template=simple
+$ npx @umijs/tnf create myapp --template=simple
 $ cd myapp
 $ npm install
 $ npm run build
