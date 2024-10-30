@@ -1,6 +1,6 @@
 # @umijs/tnf
 
-~~the north face~~, the next framework.
+Tnf, ~~the north face~~, the next framework. Tnf is focused on simple, performance and developer experience. Framework should be simple. CSR development should be simple. Type safety should be built-in.
 
 ## Getting Started
 
@@ -20,6 +20,10 @@ $ npx serve dist
 
 - `tnf create <project-name> --template=<template-name>`: Create a new project with the given template.
 - `tnf build`: Build the project.
+
+## API
+
+- `@umijs/tnf/router`: The router module, reexported from `@tanstack/react-router`.
 
 ## LICENSE
 
