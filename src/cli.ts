@@ -8,6 +8,8 @@ switch (cmd) {
     import('./create.js').then(({ create }) => {
       create({
         cwd: process.cwd(),
+        name: argv._[1] as string | undefined,
+        template: argv.template,
       }).catch(console.error);
     });
     break;

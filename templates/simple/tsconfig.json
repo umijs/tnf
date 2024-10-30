@@ -1,7 +1,6 @@
 {
   "extends": "@total-typescript/tsconfig/bundler/no-dom",
   "compilerOptions": {
-    "outDir": "./dist",
     "rootDir": "./src"
   },
   "include": ["src"]
