@@ -2,7 +2,7 @@
   "name": "@examples/hackernews",
   "private": true,
   "scripts": {
-    "build": "tnf build"
+    "build": "tnf build && npx serve dist"
   },
   "dependencies": {
     "@types/react": "^18.3.12",
