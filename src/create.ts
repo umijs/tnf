@@ -1,6 +1,6 @@
 import { intro, isCancel, outro, select, text } from '@clack/prompts';
 import fs from 'fs';
-import path from 'path';
+import path from 'pathe';
 
 export async function create({
   cwd,

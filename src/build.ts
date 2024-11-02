@@ -1,6 +1,6 @@
 import type { BuildParams } from '@umijs/mako';
 import chokidar from 'chokidar';
-import path from 'path';
+import path from 'pathe';
 import { prepare } from './prepare';
 
 export async function build({

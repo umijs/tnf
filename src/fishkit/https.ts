@@ -2,7 +2,7 @@ import { spawnSync } from 'child_process';
 import fs from 'fs';
 import type { RequestListener } from 'http';
 import https from 'https';
-import path from 'path';
+import path from 'pathe';
 import pc from 'picocolors';
 import spdy from 'spdy';
 

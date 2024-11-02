@@ -1,7 +1,7 @@
 import { generator } from '@tanstack/router-generator';
 import type { Config } from '@tanstack/router-generator';
 import fs from 'fs';
-import path from 'path';
+import path from 'pathe';
 
 interface BaseOptions {
   cwd: string;
