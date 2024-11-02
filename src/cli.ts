@@ -20,6 +20,13 @@ switch (cmd) {
       }).catch(console.error);
     });
     break;
+  case 'dev':
+    import('./dev.js').then(({ dev }) => {
+      dev({
+        cwd: process.cwd(),
+      }).catch(console.error);
+    });
+    break;
   default:
     console.error(`Unknown command: ${cmd}`);
     process.exit(1);

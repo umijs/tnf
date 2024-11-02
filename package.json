@@ -31,12 +31,14 @@
     "@types/react-dom": "^18.3.1",
     "@types/yargs-parser": "^21.0.3",
     "@umijs/mako": "^0.9.3",
+    "chokidar": "^4.0.1",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
     "yargs-parser": "^21.1.1"
   },
   "devDependencies": {
     "@total-typescript/tsconfig": "^1.0.4",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "father": "^4.5.1",
     "git-repo-info": "^2.1.1",
     "husky": "^9.1.6",

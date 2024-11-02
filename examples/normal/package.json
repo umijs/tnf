@@ -2,7 +2,8 @@
   "name": "@examples/normal",
   "private": true,
   "scripts": {
-    "build": "tnf build"
+    "build": "tnf build",
+    "dev": "tnf dev"
   },
   "dependencies": {
     "@types/react": "^18.3.12",

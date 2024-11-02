@@ -1,6 +1,6 @@
-import 'zx/globals';
 import assert from 'assert';
 import getGitRepoInfo from 'git-repo-info';
+import 'zx/globals';
 
 (async () => {
   const { branch } = getGitRepoInfo();
