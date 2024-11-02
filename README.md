@@ -20,6 +20,7 @@ $ npx serve dist
 
 - `tnf create <project-name> --template=<template-name>`: Create a new project with the given template.
 - `tnf build`: Build the project.
+- `tnf dev`: Start the development server.
 
 ## API
 

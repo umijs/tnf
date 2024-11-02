@@ -4,7 +4,7 @@
   "scripts": {
     "build": "father build",
     "check": "prettier --check .",
-    "ci": "npm run check && npm run build && npm run test && father doctor",
+    "ci": "npm run check && npm run build && npm run test --run && father doctor",
     "dev": "father dev",
     "format": "prettier --write .",
     "release": "tsx scripts/release.ts",
@@ -40,6 +40,7 @@
     "chokidar": "^4.0.1",
     "compression": "^1.7.5",
     "connect-history-api-fallback": "^2.0.0",
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "express-http-proxy": "^2.1.1",
     "http-proxy-middleware": "^3.0.3",
