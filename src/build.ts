@@ -1,9 +1,17 @@
-import { build as buildWithMako } from '@umijs/mako';
+import type { BuildParams } from '@umijs/mako';
 import chokidar from 'chokidar';
 import path from 'path';
 import { prepare } from './prepare';
 
-export async function build({ cwd, watch }: { cwd: string; watch?: boolean }) {
+export async function build({
+  cwd,
+  config,
+  watch,
+}: {
+  cwd: string;
+  config?: BuildParams['config'];
+  watch?: boolean;
+}) {
   const tmpPath = path.join(cwd, 'src/.tnf');
 
   const doPrepare = async () => {
@@ -27,24 +35,22 @@ export async function build({ cwd, watch }: { cwd: string; watch?: boolean }) {
       });
   }
 
-  await buildWithMako({
-    config: {
-      entry: {
-        client: path.join(tmpPath, 'client.tsx'),
-      },
-      resolve: {
-        alias: [
-          ['@', path.join(cwd, 'src')],
-          ['react', resolveLib('react')],
-          ['react-dom', resolveLib('react-dom')],
-          ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
-          [
-            '@tanstack/router-devtools',
-            resolveLib('@tanstack/router-devtools'),
-          ],
-        ],
-      },
-    },
+  const mako = await import('@umijs/mako');
+  config ||= {};
+  config.entry = {
+    client: path.join(tmpPath, 'client.tsx'),
+  };
+  config.resolve ||= {};
+  config.resolve.alias = [
+    ...(config.resolve.alias || []),
+    ['@', path.join(cwd, 'src')],
+    ['react', resolveLib('react')],
+    ['react-dom', resolveLib('react-dom')],
+    ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
+    ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
+  ];
+  await mako.build({
+    config,
     root: cwd,
     watch: !!watch,
   });

@@ -1,4 +1,14 @@
 import yargsParser from 'yargs-parser';
+import { MIN_NODE_VERSION, NODE_TITLE } from './constants.js';
+import {
+  checkVersion,
+  setNoDeprecation,
+  setNodeTitle,
+} from './fishkit/node.js';
+
+setNoDeprecation();
+checkVersion(MIN_NODE_VERSION);
+setNodeTitle(NODE_TITLE);
 
 const argv = yargsParser(process.argv.slice(2));
 const cmd = argv._[0];
