@@ -43,6 +43,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "express-http-proxy": "^2.1.1",
+    "get-port-please": "^3.1.2",
     "http-proxy-middleware": "^3.0.3",
     "pathe": "^1.1.2",
     "picocolors": "^1.1.1",
