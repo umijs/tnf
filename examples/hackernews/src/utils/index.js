@@ -16,7 +16,7 @@ export function timeAgo(time) {
   return pluralize(~~(between / 86400), ' day');
 }
 
-function pluralize(time, label) {
+export function pluralize(time, label) {
   if (time === 1) {
     return time + label;
   }
