@@ -68,6 +68,9 @@ importers:
       express-http-proxy:
         specifier: ^2.1.1
         version: 2.1.1
+      get-port-please:
+        specifier: ^3.1.2
+        version: 3.1.2
       http-proxy-middleware:
         specifier: ^3.0.3
         version: 3.0.3
@@ -4313,6 +4316,10 @@ packages:
       has-proto: 1.0.3
       has-symbols: 1.0.3
       hasown: 2.0.2
+
+  /get-port-please@3.1.2:
+    resolution: {integrity: sha512-Gxc29eLs1fbn6LQ4jSU4vXjlwyZhF5HsGuMAa7gqBP4Rw4yxxltyDUuF5MBclFzDTXO+ACchGQoeela4DSfzdQ==}
+    dev: false
 
   /get-stream@8.0.1:
     resolution: {integrity: sha512-VaUJspBffn/LMCJVoMvSAdmscJyS1auj5Zulnn5UoYcY531UWmdwhRWkcGKnGU93m5HSXP9LP2usOryrBtQowA==}
