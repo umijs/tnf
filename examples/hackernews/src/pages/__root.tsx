@@ -10,7 +10,7 @@ export const Route = createRootRoute({
       <>
         <div className={styles.header}>
           <div className={styles.inner}>
-            <Link>
+            <Link to="/">
               <img alt="presentation" className={styles.logo}
                    src="https://zos.alipayobjects.com/rmsportal/AsASAiphPWWUJWG.png"/>
             </Link>
