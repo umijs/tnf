@@ -24,7 +24,7 @@ function Home() {
       <h3>Welcome Home!</h3>
       <ul>
         {list.map((i: any) => (
-          <li>{i.title}</li>
+          <li key={i.id}>{i.title}</li>
         ))}
       </ul>
     </div>
