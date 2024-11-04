@@ -17,7 +17,7 @@ export interface DevOpts {
 export async function dev(opts: DevOpts) {
   const port = opts.port || DEFAULT_PORT;
   const _port = await getPort(port);
-  const hmrPort = _port + 1;
+  const hmrPort = await getPort(_port + 1);
   const host = opts.host || 'localhost';
 
   await createServer({
