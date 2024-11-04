@@ -23,6 +23,7 @@ export async function build({
     await prepare({
       cwd,
       tmpPath,
+      isDevMode: watch,
     });
   };
 
