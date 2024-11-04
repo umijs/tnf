@@ -6,12 +6,13 @@ import path from 'pathe';
 interface BaseOptions {
   cwd: string;
   tmpPath: string;
+  isDevMode?: boolean;
 }
 
 interface PrepareOptions extends BaseOptions {}
 
 export async function prepare(opts: PrepareOptions) {
-  const { cwd, tmpPath } = opts;
+  const { cwd, tmpPath, isDevMode = false } = opts;
 
   fs.rmSync(tmpPath, { recursive: true, force: true });
   fs.mkdirSync(tmpPath, { recursive: true });
@@ -39,6 +40,9 @@ export async function prepare(opts: PrepareOptions) {
     routeToken: 'route',
   } as Config);
 
+  const browserMockFile = path.join(cwd, 'mock/browser.ts');
+  const hasBrowserMock = fs.existsSync(browserMockFile);
+
   // generate client entry
   fs.writeFileSync(
     path.join(tmpPath, 'client.tsx'),
@@ -58,9 +62,25 @@ declare module '@tanstack/react-router' {
     router: typeof router
   }
 }
+  ${
+    hasBrowserMock
+      ? `const isDevMode = ()=> ${isDevMode ? 'true' : 'false'};
+
+async function prepareApp() {
+  if (isDevMode()) {
+    const { worker } = await import('../../mock/browser');
+    return worker.start();
+  }
+
+  return Promise.resolve();
+}
+prepareApp().then(()=>{`
+      : ''
+  }
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <RouterProvider router={router} />
 );
+${hasBrowserMock ? `});` : ''}
   `,
   );
 
