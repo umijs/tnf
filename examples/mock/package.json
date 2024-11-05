@@ -1,0 +1,19 @@
+{
+  "name": "@examples/mock",
+  "private": true,
+  "scripts": {
+    "build": "tnf build",
+    "dev": "tnf dev"
+  },
+  "dependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@umijs/tnf": "workspace:*",
+    "msw": "^2.6.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
+}
