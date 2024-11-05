@@ -6,7 +6,7 @@ const changesetConfig = path.join(__dirname, '../.changeset/config.json');
 
 const getWorkspaces = async () => getPackages(root);
 
-const change = async () => {
+(async () => {
   const ws = await getWorkspaces();
   const appNames: string[] = [];
   ws.packages.forEach((submodule) => {
@@ -26,7 +26,7 @@ const change = async () => {
     chalk.green(`[changeset-config]: refresh config ignore list complete`),
   );
 
-  $`changeset`;
-};
-
-change();
+})().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
