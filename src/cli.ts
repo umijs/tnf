@@ -21,11 +21,16 @@ async function run(cmd: string, options: RunOptions) {
       return create(options);
     case 'build':
       const { build } = await import('./build.js');
-      const config = await loadConfig({ cwd: options.cwd });
-      return build({ cwd: options.cwd, config });
+      return build({
+        cwd: options.cwd,
+        config: await loadConfig({ cwd: options.cwd }),
+      });
     case 'dev':
       const { dev } = await import('./dev.js');
-      return dev({ cwd: options.cwd, config });
+      return dev({
+        cwd: options.cwd,
+        config: await loadConfig({ cwd: options.cwd }),
+      });
     default:
       throw new Error(`Unknown command: ${cmd}`);
   }
