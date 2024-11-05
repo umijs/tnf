@@ -61,14 +61,6 @@ export const Route = createRootRoute({
                 target="_blank"
               >
                 Tnf
-              </a>{' '}
-              and{' '}
-              <a
-                rel="noopener noreferrer"
-                href="https://github.com/umijs/mako"
-                target="_blank"
-              >
-                Mako
               </a>
             </span>
           </div>
