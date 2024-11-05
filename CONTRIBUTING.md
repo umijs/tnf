@@ -42,7 +42,7 @@ $ pnpm test:e2e
 When you need to submit code, please synchronize the submission of the modification log.
 
 ```bash
-$ pnpm run changeset
+$ pnpm changeset
 
 🦋  What kind of change is this for @umijs/tnf? (current version is 0.0.0-alpha.5) … 
 ❯ patch
