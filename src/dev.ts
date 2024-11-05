@@ -1,45 +1,42 @@
 import type { BuildParams } from '@umijs/mako';
 import { getPort } from 'get-port-please';
 import { build } from './build';
+import type { Config } from './config';
 import { DEFAULT_PORT } from './constants';
 import { createServer } from './fishkit/server';
 
 export interface DevOpts {
   cwd: string;
-  port?: number;
-  https?: {
-    hosts?: string[];
-  };
-  ip?: string;
-  host?: string;
+  config?: Config;
 }
 
 export async function dev(opts: DevOpts) {
-  const port = opts.port || DEFAULT_PORT;
-  const _port = await getPort(port);
-  const hmrPort = await getPort(_port + 1);
-  const host = opts.host || 'localhost';
+  const devServer = opts.config?.devServer || {};
+  const port = await getPort(devServer.port || DEFAULT_PORT);
+  const hmrPort = await getPort(port + 1);
+  const host = devServer.host || 'localhost';
 
   await createServer({
-    port: _port,
+    port,
     hmrPort,
     host,
-    https: opts.https,
-    ip: opts.ip,
+    https: devServer.https,
+    ip: devServer.ip,
   });
 
   // build mako config
-  let config: BuildParams['config'] = {};
+  let devMakoConfig: BuildParams['config'] = {};
   if (process.env.HMR === 'none') {
-    config.hmr = false;
+    devMakoConfig.hmr = false;
   } else {
-    config.hmr = {};
+    devMakoConfig.hmr = {};
   }
-  config.devServer = { port: hmrPort, host };
+  devMakoConfig.devServer = { port: hmrPort, host };
 
   await build({
     ...opts,
-    config,
+    config: opts.config,
+    devMakoConfig,
     watch: true,
   });
 }

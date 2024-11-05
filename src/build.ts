@@ -1,18 +1,23 @@
 import type { BuildParams } from '@umijs/mako';
 import chokidar from 'chokidar';
 import path from 'pathe';
+import type { Config } from './config';
+import { FRAMEWORK_NAME } from './constants';
 import { prepare } from './prepare';
 
 export async function build({
   cwd,
   config,
+  devMakoConfig,
   watch,
 }: {
   cwd: string;
-  config?: BuildParams['config'];
+  config?: Config;
+  devMakoConfig?: BuildParams['config'];
   watch?: boolean;
 }) {
-  const tmpPath = path.join(cwd, 'src/.tnf');
+  config ||= {};
+  const tmpPath = path.join(cwd, `src/.${FRAMEWORK_NAME}`);
 
   const doPrepare = async () => {
     await prepare({
@@ -36,21 +41,25 @@ export async function build({
   }
 
   const mako = await import('@umijs/mako');
-  config ||= {};
-  config.entry = {
+  const bundleConfig: BuildParams['config'] = {};
+  bundleConfig.entry = {
     client: path.join(tmpPath, 'client.tsx'),
   };
-  config.resolve ||= {};
-  config.resolve.alias = [
-    ...(config.resolve.alias || []),
+  bundleConfig.resolve ||= {};
+  bundleConfig.resolve.alias = [
+    ...(bundleConfig.resolve.alias || []),
     ['@', path.join(cwd, 'src')],
     ['react', resolveLib('react')],
     ['react-dom', resolveLib('react-dom')],
     ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
     ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
   ];
+  bundleConfig.externals = config.externals;
   await mako.build({
-    config,
+    config: {
+      ...bundleConfig,
+      ...devMakoConfig,
+    },
     root: cwd,
     watch: !!watch,
   });
