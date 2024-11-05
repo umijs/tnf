@@ -1,43 +1,49 @@
+import assert from 'assert';
 import yargsParser from 'yargs-parser';
-import { MIN_NODE_VERSION, NODE_TITLE } from './constants.js';
+import { loadConfig } from './config.js';
+import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants.js';
 import {
   checkVersion,
   setNoDeprecation,
   setNodeTitle,
 } from './fishkit/node.js';
 
+interface RunOptions {
+  cwd: string;
+  name?: string;
+  template?: string;
+}
+
+async function run(cmd: string, options: RunOptions) {
+  switch (cmd) {
+    case 'create':
+      const { create } = await import('./create.js');
+      return create(options);
+    case 'build':
+      const { build } = await import('./build.js');
+      const config = await loadConfig({ cwd: options.cwd });
+      return build({ cwd: options.cwd, config });
+    case 'dev':
+      const { dev } = await import('./dev.js');
+      return dev({ cwd: options.cwd, config });
+    default:
+      throw new Error(`Unknown command: ${cmd}`);
+  }
+}
+
 setNoDeprecation();
 checkVersion(MIN_NODE_VERSION);
-setNodeTitle(NODE_TITLE);
+setNodeTitle(FRAMEWORK_NAME);
 
 const argv = yargsParser(process.argv.slice(2));
 const cmd = argv._[0];
 
-switch (cmd) {
-  case 'create':
-    import('./create.js').then(({ create }) => {
-      create({
-        cwd: process.cwd(),
-        name: argv._[1] as string | undefined,
-        template: argv.template,
-      }).catch(console.error);
-    });
-    break;
-  case 'build':
-    import('./build.js').then(({ build }) => {
-      build({
-        cwd: process.cwd(),
-      }).catch(console.error);
-    });
-    break;
-  case 'dev':
-    import('./dev.js').then(({ dev }) => {
-      dev({
-        cwd: process.cwd(),
-      }).catch(console.error);
-    });
-    break;
-  default:
-    console.error(`Unknown command: ${cmd}`);
-    process.exit(1);
-}
+assert(cmd, 'Command is required');
+run(cmd as string, {
+  cwd: process.cwd(),
+  name: argv._[1] as string | undefined,
+  template: argv.template as string | undefined,
+}).catch((err) => {
+  console.error(err.message);
+  process.exit(1);
+});
