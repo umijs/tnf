@@ -25,7 +25,6 @@ const getWorkspaces = async () => getPackages(root);
   console.log(
     chalk.green(`[changeset-config]: refresh config ignore list complete`),
   );
-
 })().catch((err) => {
   console.error(err);
   process.exit(1);
