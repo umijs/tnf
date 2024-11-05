@@ -50,7 +50,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+          pnpm i
+          pnpm playwright install chromium
 
       - name: Run CI
         run: pnpm run ci
