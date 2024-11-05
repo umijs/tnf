@@ -37,3 +37,29 @@ $ pnpm test --run
 $ pnpm test:e2e
 ```
 
+## Changelog
+
+When you need to submit code, please synchronize the submission of the modification log.
+
+```bash
+$ pnpm changeset
+
+🦋  What kind of change is this for @umijs/tnf? (current version is 0.0.0-alpha.5) … 
+❯ patch
+  minor
+  major
+
+🦋  Please enter a summary for this change (this will be in the changelogs).
+🦋    (submit empty line to open external editor)
+🦋  Summary › docs: changelog 
+
+🦋  === Summary of changesets ===
+🦋  patch:  @umijs/tnf
+🦋  
+🦋  Is this your desired changeset? (Y/n) · true
+🦋  Changeset added! - you can now commit it
+```
+
+Based on the modified package name, select the type to be published, usually choosing `patch`.Then enter `changelog`.
+
+After the code is merged into the main branch, it will be sent to GitHub CI to automatically change the version number of the corresponding package.
