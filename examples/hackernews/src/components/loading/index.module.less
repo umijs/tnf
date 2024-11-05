@@ -1,4 +1,3 @@
-
 @offset: 126;
 @duration: 1.4s;
 
@@ -8,7 +7,7 @@
   right: 15px;
   bottom: 15px;
   opacity: 0;
-  transition: opacity .15s ease;
+  transition: opacity 0.15s ease;
   animation: rotator @duration linear infinite;
   animation-play-state: paused;
 }
@@ -40,7 +39,7 @@
     stroke-dashoffset: @offset;
   }
   50% {
-    stroke-dashoffset: (@offset/2);
+    stroke-dashoffset: (@offset / 2);
     transform: rotate(135deg);
   }
   100% {

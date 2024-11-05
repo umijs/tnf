@@ -1,12 +1,12 @@
-import {useState, useEffect} from "react";
-import {fetchUser} from '../../services';
-import {timeAgo} from '../../utils';
-import styles from './index.less';
+import { useEffect, useState } from 'react';
+import { fetchUser } from '../../services';
+import { timeAgo } from '../../utils';
+import styles from './index.module.less';
 
-export default function UserPage({id}) {
+export default function UserPage({ id }) {
   const [user, setUser] = useState(null);
   useEffect(() => {
-    fetchUser(id).then(user => setUser(user))
+    fetchUser(id).then((user) => setUser(user));
   }, []);
   if (!user) return null;
   return (
@@ -21,16 +21,29 @@ export default function UserPage({id}) {
           <span className={styles.label}>Karma: </span>
           <span>{user.karma}</span>
         </li>
-        {user.about ?
-          <li className={styles.about} dangerouslySetInnerHTML={{__html: user.about}}/>
-          : null}
+        {user.about ? (
+          <li
+            className={styles.about}
+            dangerouslySetInnerHTML={{ __html: user.about }}
+          />
+        ) : null}
       </ul>
       <p className={styles.links}>
-        <a href={`https://news.ycombinator.com/submitted?id=${user.id}`} rel="noopener noreferrer"
-           target="_blank">submissions</a>
+        <a
+          href={`https://news.ycombinator.com/submitted?id=${user.id}`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          submissions
+        </a>
         <span> | </span>
-        <a href={`https://news.ycombinator.com/threads?id=${user.id}`} rel="noopener noreferrer"
-           target="_blank">comments</a>
+        <a
+          href={`https://news.ycombinator.com/threads?id=${user.id}`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          comments
+        </a>
       </p>
     </div>
   );

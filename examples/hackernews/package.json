@@ -2,7 +2,9 @@
   "name": "@examples/hackernews",
   "private": true,
   "scripts": {
-    "build": "tnf build && npx serve dist"
+    "build": "tnf build",
+    "dev": "tnf dev",
+    "preview": "npx serve dist -s"
   },
   "dependencies": {
     "@types/react": "^18.3.12",
@@ -10,5 +12,9 @@
     "@umijs/tnf": "workspace:*",
     "classnames": "^2.5.1",
     "firebase": "^2.4.2"
+  },
+  "devDependencies": {
+    "@total-typescript/tsconfig": "^1.0.4",
+    "typescript": "^5.6.3"
   }
 }

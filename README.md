@@ -11,7 +11,7 @@ $ npx @umijs/tnf create myapp --template=simple
 $ cd myapp
 $ npm install
 $ npm run build
-$ npx serve dist
+$ npx serve dist -s
 ```
 
 ## Commands
