@@ -2,4 +2,4 @@
 '@umijs/tnf': patch
 ---
 
-first changeset log
+chore: use changeset for changelog
