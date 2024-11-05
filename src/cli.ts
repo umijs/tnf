@@ -31,6 +31,12 @@ async function run(cmd: string, options: RunOptions) {
         cwd: options.cwd,
         config: await loadConfig({ cwd: options.cwd }),
       });
+    case 'preview':
+      const { preview } = await import('./preview.js');
+      return preview({
+        cwd: options.cwd,
+        config: await loadConfig({ cwd: options.cwd }),
+      });
     default:
       throw new Error(`Unknown command: ${cmd}`);
   }
