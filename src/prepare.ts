@@ -49,7 +49,7 @@ import {
   RouterProvider,
   createRouter,
 } from '@umijs/tnf/router';
-import { routeTree } from './routeTree.gen';
+import { routeTree } from './routeTree.gen.js';
 const router = createRouter({
   routeTree,
 });
