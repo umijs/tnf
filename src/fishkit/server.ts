@@ -38,6 +38,13 @@ export async function createServer(opts: ServerOpts) {
   // compression
   app.use(compression());
 
+  // history fallback
+  app.use(
+    history({
+      index: '/',
+    }),
+  );
+
   let wsProxy;
   if (opts.hmr) {
     // proxy ws to mako server
@@ -46,7 +53,6 @@ export async function createServer(opts: ServerOpts) {
       ws: true,
     });
     app.use('/__/hmr-ws', wsProxy);
-
     app.use(
       proxy(`http://127.0.0.1:${hmrPort}`, {
         proxyReqOptDecorator: function (proxyReqOpts: any) {
@@ -62,13 +68,6 @@ export async function createServer(opts: ServerOpts) {
       }),
     );
   }
-
-  // history fallback
-  app.use(
-    history({
-      index: '/',
-    }),
-  );
 
   // create server
   let server;
