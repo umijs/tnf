@@ -23,7 +23,7 @@ export async function createServer(opts: ServerOpts) {
     ip,
   } = opts.devServer || {};
   const _port = await getPort(port);
-  const hmrPort = await getPort(_port + 1);
+  const hmrPort = opts.hmr ? await getPort(_port + 1) : 0;
   const app = express();
 
   // cors
