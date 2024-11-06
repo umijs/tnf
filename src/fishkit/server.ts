@@ -93,7 +93,7 @@ export async function createServer(opts: ServerOpts) {
     console.log(`Server is running on ${protocol}//${host}:${_port}`);
   });
 
-  if (opts?.hmr) {
+  if (opts.hmr) {
     // prevent first websocket auto disconnected
     server.on('upgrade', wsProxy!.upgrade);
   }
