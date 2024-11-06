@@ -32,6 +32,7 @@ Config is loaded from `.tnfrc.ts` by default.
 
 - `externals: Record<string, string>`: An object that maps package names to their corresponding paths.
 - `devServer: { port?: number; host?: string; https?: { hosts?: string[] }; ip?: string }`: The development server configuration.
+- `less: { modifyVars?: Record<string, string>; globalVars?: Record<string, string>; math?: 'always' | 'strict' | 'parens-division' | 'parens' | 'strict-legacy' | number; sourceMap?: any; plugins?: (string | [string, Record<string, any>])[];}`: The configuration passed to lessLoader.
 
 ## LICENSE
 

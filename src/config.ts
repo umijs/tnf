@@ -19,6 +19,15 @@ const ConfigSchema = z.object({
       host: z.string().optional(),
     })
     .optional(),
+  less: z
+    .object({
+      modifyVars: z.any().optional(),
+      globalVars: z.any().optional(),
+      math: z.any().optional(),
+      sourceMap: z.any(),
+      plugins: z.array(z.any()).optional(),
+    })
+    .optional(),
 });
 
 export type Config = z.infer<typeof ConfigSchema>;
