@@ -10,7 +10,7 @@ export interface PreviewOpts {
 
 export async function preview(opts: PreviewOpts) {
   const devServer = opts.config?.devServer || {};
-  const { app } = await createServer({ devServer, hmr: false });
+  const { app } = await createServer({ devServer });
   const distDir = resolve(opts.cwd, 'dist');
 
   app.use(
