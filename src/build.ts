@@ -22,6 +22,7 @@ export async function build({
     await prepare({
       cwd,
       tmpPath,
+      config,
     });
   };
 
