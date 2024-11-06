@@ -28,6 +28,12 @@ const ConfigSchema = z.object({
       plugins: z.array(z.any()).optional(),
     })
     .optional(),
+  router: z
+    .object({
+      defaultPreload: z.enum(['intent', 'render', 'viewport']).optional(),
+      defaultPreloadDelay: z.number().optional(),
+    })
+    .optional(),
 });
 
 export type Config = z.infer<typeof ConfigSchema>;
