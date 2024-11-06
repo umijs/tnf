@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Link } from '@umijs/tnf/router';
 import { Context } from '../../context';
 import { fetchIdsByType, fetchItems } from '../../services';
@@ -6,22 +6,47 @@ import Item from '../item';
 import Loading from '../loading';
 import styles from './index.module.less';
 
-export default function ItemList({ type, page }) {
+interface Item {
+  id: number;
+  score: number;
+  title: string;
+  url?: string;
+  type: string;
+  by: string;
+  descendants: number;
+  time: number;
+}
+
+interface ItemListProps {
+  type: keyof Lists;
+  page: number;
+}
+
+interface Lists {
+  top: number[];
+  new: number[];
+  show: number[];
+  ask: number[];
+  job: number[];
+}
+
+
+export default function ItemList({ type, page }: ItemListProps) {
   const { dispatch } = useContext(Context);
-  const [lists, setLists] = useState({
+  const [lists, setLists] = useState<Lists>({
     top: [],
     new: [],
     show: [],
     ask: [],
     job: [],
   });
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
 
   const itemsPerPage = 20;
   const maxPage = useMemo(
     () => Math.ceil(lists[type].length / itemsPerPage),
-    [lists],
+    [lists, type],
   );
 
   useEffect(() => {
@@ -35,14 +60,14 @@ export default function ItemList({ type, page }) {
         const memo = _memo;
         memo[item.id] = item;
         return memo;
-      }, {});
+      }, {} as Record<number, Item>);
       setLoading(false);
       setItems(items);
       dispatch({ type: 'saveItems', payload: itemsById });
     }
 
     fetchList();
-  }, [page]);
+  }, [page, type]);
 
   return (
     <>

@@ -7,6 +7,6 @@ export const Route = createFileRoute('/user/$userId')({
 
 function User() {
   const { userId } = Route.useParams();
-  console.log('userId', userId);
+
   return <UserPage id={userId} />;
 }

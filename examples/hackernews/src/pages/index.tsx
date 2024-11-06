@@ -1,12 +1,17 @@
-import { createFileRoute } from '@umijs/tnf/router';
+import React, { createFileRoute } from '@umijs/tnf/router';
 import ItemList from '../components/item-list';
+
+interface Params {
+  page?: string;
+}
 
 export const Route = createFileRoute('/')({
   component: TopComponent,
 });
 
 function TopComponent() {
-  const page = Number(Route.useParams()?.page ?? '1') ?? 1;
+  const params = Route.useParams<Params>();
+  const page = Number(params?.page ?? '1') ?? 1;
 
   return <ItemList type="top" page={page} />;
 }

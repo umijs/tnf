@@ -1,10 +1,21 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchUser } from '../../services';
 import { timeAgo } from '../../utils';
 import styles from './index.module.less';
 
-export default function UserPage({ id }) {
-  const [user, setUser] = useState(null);
+interface UserPageProps {
+  id: string;
+}
+
+interface User {
+  id: string;
+  created: number;
+  karma: number;
+  about?: string;
+}
+
+export default function UserPage({ id }: UserPageProps) {
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     fetchUser(id).then((user) => setUser(user));
   }, []);
