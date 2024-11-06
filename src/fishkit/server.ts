@@ -39,7 +39,7 @@ export async function createServer(opts: ServerOpts) {
   app.use(compression());
 
   let wsProxy;
-  if (opts.hmr !== false) {
+  if (opts.hmr) {
     // proxy ws to mako server
     wsProxy = createProxyMiddleware({
       target: `http://127.0.0.1:${hmrPort}`,
@@ -93,7 +93,7 @@ export async function createServer(opts: ServerOpts) {
     console.log(`Server is running on ${protocol}//${host}:${_port}`);
   });
 
-  if (opts?.hmr !== false) {
+  if (opts?.hmr) {
     // prevent first websocket auto disconnected
     server.on('upgrade', wsProxy!.upgrade);
   }
