@@ -54,7 +54,6 @@ export async function build({
     ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
     ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
   ];
-  bundleConfig.externals = config.externals;
   await mako.build({
     config: {
       ...bundleConfig,
