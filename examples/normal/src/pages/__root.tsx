@@ -10,7 +10,9 @@ export const Route = createRootRoute({
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/foo">Foo</Link>
+          <Link to="/foo" preload="intent">
+            Foo
+          </Link>
         </li>
       </ul>
       <Outlet />

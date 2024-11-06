@@ -37,6 +37,9 @@ export async function prepare(opts: PrepareOptions) {
     routeTreeFileFooter: ['/* prettier-ignore-end */'],
     indexToken: 'index',
     routeToken: 'route',
+    experimental: {
+      enableCodeSplitting: true,
+    },
   } as Config);
 
   // generate client entry
@@ -49,7 +52,7 @@ import {
   RouterProvider,
   createRouter,
 } from '@umijs/tnf/router';
-import { routeTree } from './routeTree.gen.js';
+import { routeTree } from './routeTree.gen';
 const router = createRouter({
   routeTree,
 });

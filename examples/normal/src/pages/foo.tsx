@@ -4,20 +4,25 @@ import { createFileRoute, useLoaderData } from '@umijs/tnf/router';
 export const Route = createFileRoute('/foo')({
   component: Foo,
   loader: async () => {
-    return {
-      foo: 'bar',
-    };
+    const res = await fetch('https://dummyjson.com/users');
+    const data = await res.json();
+    return data;
   },
 });
 
 function Foo() {
-  const { foo } = useLoaderData({
+  const { users } = useLoaderData({
     from: '/foo',
   });
   return (
     <div>
       <h3>Welcome Foo!</h3>
-      <p>Hello {foo}</p>
+      <p>Users</p>
+      <ul>
+        {users.map((user: any) => (
+          <li key={user.id}>{user.firstName}</li>
+        ))}
+      </ul>
     </div>
   );
 }
