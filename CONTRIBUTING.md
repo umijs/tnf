@@ -26,6 +26,13 @@ $ pnpm dev
 $ pnpm build
 ```
 
+## Preview
+
+```bash
+# Preview the product after building the project
+$ pnpm preview
+```
+
 ## Test
 
 ```bash
