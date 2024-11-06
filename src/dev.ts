@@ -10,7 +10,7 @@ export interface DevOpts {
 
 export async function dev(opts: DevOpts) {
   const devServer = opts.config?.devServer || {};
-  const { hmrPort, host } = await createServer({ devServer });
+  const { hmrPort, host } = await createServer({ devServer, hmr: true });
 
   // build mako config
   let devMakoConfig: BuildParams['config'] = {};
