@@ -32,6 +32,7 @@ Config is loaded from `.tnfrc.ts` by default.
 
 - `externals: Record<string, string>`: An object that maps package names to their corresponding paths.
 - `devServer: { port?: number; host?: string; https?: { hosts?: string[] }; ip?: string }`: The development server configuration.
+- `less: LessLoaderOpts`: The configuration passed to lessLoader.
 
 ## LICENSE
 
