@@ -16,7 +16,6 @@ export async function build({
   devMakoConfig?: BuildParams['config'];
   watch?: boolean;
 }) {
-  config ||= {};
   const tmpPath = path.join(cwd, `src/.${FRAMEWORK_NAME}`);
 
   const doPrepare = async () => {
@@ -41,7 +40,8 @@ export async function build({
   }
 
   const mako = await import('@umijs/mako');
-  const bundleConfig: BuildParams['config'] = {};
+  // @ts-ignore https://github.com/umijs/mako/pull/1679
+  const bundleConfig: BuildParams['config'] = config || {};
   bundleConfig.entry = {
     client: path.join(tmpPath, 'client.tsx'),
   };
