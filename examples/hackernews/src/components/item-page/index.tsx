@@ -1,9 +1,10 @@
-import { Link } from '@umijs/tnf/router';
+import React, { Link } from '@umijs/tnf/router';
+import type { ItemProps } from '../../types';
 import { host, timeAgo } from '../../utils';
 import Comment from '../comment';
 import styles from './index.module.less';
 
-export default function ItemPage({ item, itemsById }) {
+export default function ItemPage({ item }: { item: ItemProps }) {
   if (!item) return null;
   return (
     <>
@@ -26,9 +27,7 @@ export default function ItemPage({ item, itemsById }) {
         </p>
         <div className={styles.commentChildren}>
           {item.kids
-            ? item.kids.map((id) => (
-                <Comment key={id} id={id} itemsById={itemsById} />
-              ))
+            ? item.kids.map((id) => <Comment key={id} id={id} />)
             : null}
         </div>
       </div>

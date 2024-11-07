@@ -4,9 +4,19 @@ import { fetchItem } from '../../services';
 import { pluralize, timeAgo } from '../../utils';
 import styles from './index.module.less';
 
-export default function Comment({ id, itemsById }) {
+interface CommentProps {
+  id: number;
+}
+
+interface CommentType {
+  by: string;
+  time: number;
+  text: string;
+  kids?: number[];
+}
+export default function Comment({ id }: CommentProps) {
   const [open, setOpen] = useState(true);
-  const [comment, setComment] = useState(null);
+  const [comment, setComment] = useState<CommentType | null>(null);
 
   useEffect(() => {
     async function fetchComments() {
@@ -45,9 +55,7 @@ export default function Comment({ id, itemsById }) {
       />
       <div className={styles.commentChildren}>
         {comment.kids && open
-          ? comment.kids.map((id) => (
-              <Comment key={id} id={id} itemsById={itemsById} />
-            ))
+          ? comment.kids.map((id) => <Comment key={id} id={id} />)
           : null}
       </div>
     </div>

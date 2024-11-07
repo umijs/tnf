@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
-import { fetchUser } from '../../services';
+import React from 'react';
 import { timeAgo } from '../../utils';
 import styles from './index.module.less';
 
-export default function UserPage({ id }) {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    fetchUser(id).then((user) => setUser(user));
-  }, []);
+interface User {
+  id: string;
+  created: number;
+  karma: number;
+  about?: string;
+}
+
+export default function UserPage({ user }: { user: User }) {
   if (!user) return null;
   return (
     <div className={styles.normal}>

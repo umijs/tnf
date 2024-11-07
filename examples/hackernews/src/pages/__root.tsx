@@ -1,12 +1,9 @@
-import React, { useReducer } from 'react';
-import { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
-import { Context, initialState, reducer } from '../context';
+import React, { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
 import '../global.less';
 import styles from './index.module.less';
 
 export const Route = createRootRoute({
   component: () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
     return (
       <>
         <div className={styles.header}>
@@ -66,9 +63,7 @@ export const Route = createRootRoute({
           </div>
         </div>
         <div className={styles.view}>
-          <Context.Provider value={{ state, dispatch }}>
-            <Outlet />
-          </Context.Provider>
+          <Outlet />
         </div>
       </>
     );

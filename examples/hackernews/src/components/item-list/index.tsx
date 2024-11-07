@@ -1,49 +1,29 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
-import { Link } from '@umijs/tnf/router';
-import { Context } from '../../context';
-import { fetchIdsByType, fetchItems } from '../../services';
+import React, { Link } from '@umijs/tnf/router';
+import type { ItemProps } from '../../types';
 import Item from '../item';
-import Loading from '../loading';
 import styles from './index.module.less';
 
-export default function ItemList({ type, page }) {
-  const { dispatch } = useContext(Context);
-  const [lists, setLists] = useState({
-    top: [],
-    new: [],
-    show: [],
-    ask: [],
-    job: [],
-  });
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+interface ItemListProps {
+  type: keyof Lists;
+  page: number;
+  maxPage: number;
+  items: ItemProps[];
+}
 
-  const itemsPerPage = 20;
-  const maxPage = useMemo(
-    () => Math.ceil(lists[type].length / itemsPerPage),
-    [lists],
-  );
+interface Lists {
+  top: number[];
+  new: number[];
+  show: number[];
+  ask: number[];
+  job: number[];
+}
 
-  useEffect(() => {
-    async function fetchList() {
-      const ids = await fetchIdsByType(type);
-      setLists({ ...lists, [type]: ids });
-      const items = await fetchItems(
-        ids.slice(itemsPerPage * (page - 1), itemsPerPage * page),
-      );
-      const itemsById = items.reduce((_memo, item) => {
-        const memo = _memo;
-        memo[item.id] = item;
-        return memo;
-      }, {});
-      setLoading(false);
-      setItems(items);
-      dispatch({ type: 'saveItems', payload: itemsById });
-    }
-
-    fetchList();
-  }, [page]);
-
+export default function ItemList({
+  type,
+  items,
+  page,
+  maxPage,
+}: ItemListProps) {
   return (
     <>
       <div className={styles.nav}>
@@ -65,7 +45,6 @@ export default function ItemList({ type, page }) {
       </div>
 
       <div className={styles.list}>
-        <Loading loading={loading} />
         {items.map((item) => (
           <Item key={item.id} item={item} />
         ))}

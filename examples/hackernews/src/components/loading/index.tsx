@@ -1,10 +1,15 @@
+import React from 'react';
 import classnames from 'classnames';
 import styles from './index.module.less';
 
-function Spinner({ loading }) {
+interface SpinnerProps {
+  loading: boolean;
+}
+
+function Spinner({ loading }: SpinnerProps) {
   const svgCls = classnames({
-    [styles.spinner]: true,
-    [styles.show]: loading,
+    [styles.spinner as string]: true,
+    [styles.show as string]: loading,
   });
   return (
     <div>

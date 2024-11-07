@@ -1,8 +1,21 @@
-import { Link } from '@umijs/tnf/router';
+import React, { Link } from '@umijs/tnf/router';
 import { host, timeAgo } from '../../utils';
 import styles from './index.module.less';
 
-export default function Item({ item }) {
+interface ItemProps {
+  item: {
+    score: number;
+    title: string;
+    url?: string;
+    type: string;
+    id: number;
+    by: string;
+    descendants: number;
+    time: number;
+  };
+}
+
+export default function Item({ item }: ItemProps) {
   const { score, title, url, type, id, by, descendants, time } = item;
 
   return (
@@ -17,7 +30,7 @@ export default function Item({ item }) {
             <span className={styles.host}> ({host(url)})</span>
           </span>
         ) : (
-          <Link to={`/item/$id`} params={{ id }} state={{ item }}>
+          <Link to={`/item/$id`} params={{ id }}>
             {title}
           </Link>
         )}
