@@ -10,11 +10,7 @@ import {
 import { generate } from './generate';
 
 async function run(cwd: string) {
-  const argv = yargsParser(process.argv.slice(2), {
-    alias: {
-      g: 'generate',
-    },
-  });
+  const argv = yargsParser(process.argv.slice(2));
   const cmd = argv._[0];
   assert(cmd, 'Command is required');
   switch (cmd) {
@@ -44,6 +40,7 @@ async function run(cwd: string) {
         config: await loadConfig({ cwd }),
       });
     case 'generate':
+    case 'g':
       const type = argv._[1] as string;
       const name = argv._[2] as string;
       assert(type, 'Type is required');
