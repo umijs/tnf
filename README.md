@@ -16,11 +16,10 @@ $ npx serve dist -s
 
 ## Commands
 
-> WIP. More commands will be added in the future.
-
 - `tnf create <project-name> --template=<template-name>`: Create a new project with the given template.
 - `tnf build`: Build the project.
 - `tnf dev`: Start the development server.
+- `tnf generate <type> <name>`: Generate a new page (or component and other types in the future).
 - `tnf preview`: Preview the product after building the project.
 
 ## API
