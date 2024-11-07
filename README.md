@@ -9,9 +9,21 @@ Create a new project with the following command:
 ```bash
 $ npx @umijs/tnf create myapp --template=simple
 $ cd myapp
-$ npm install
-$ npm run build
-$ npx serve dist -s
+$ pnpm i
+```
+
+Then you can generate a page with the following command.
+
+```bash
+$ npx tnf generate page foo
+```
+
+Then you can start the development server or build the project. After building, you can preview the product locally.
+
+```bash
+$ pnpm dev
+$ pnpm build
+$ pnpm preview
 ```
 
 ## Commands
