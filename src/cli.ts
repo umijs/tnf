@@ -22,7 +22,7 @@ async function run(cwd: string) {
       const { create } = await import('./create.js');
       return create({
         cwd: cwd,
-        name: argv.name,
+        name: argv._[1] as string | undefined,
         template: argv.template,
       });
     case 'build':
