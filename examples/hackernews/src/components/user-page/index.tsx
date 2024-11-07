@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { fetchUser } from '../../services';
+import React from 'react';
 import { timeAgo } from '../../utils';
 import styles from './index.module.less';
-
-interface UserPageProps {
-  id: string;
-}
 
 interface User {
   id: string;
@@ -14,11 +9,7 @@ interface User {
   about?: string;
 }
 
-export default function UserPage({ id }: UserPageProps) {
-  const [user, setUser] = useState<User | null>(null);
-  useEffect(() => {
-    fetchUser(id).then((user) => setUser(user));
-  }, []);
+export default function UserPage({ user }: { user: User }) {
   if (!user) return null;
   return (
     <div className={styles.normal}>

@@ -6,7 +6,6 @@ import styles from './index.module.less';
 
 interface CommentProps {
   id: number;
-  itemsById: Record<number, any>;
 }
 
 interface CommentType {
@@ -15,7 +14,7 @@ interface CommentType {
   text: string;
   kids?: number[];
 }
-export default function Comment({ id, itemsById }: CommentProps) {
+export default function Comment({ id }: CommentProps) {
   const [open, setOpen] = useState(true);
   const [comment, setComment] = useState<CommentType | null>(null);
 
@@ -56,9 +55,7 @@ export default function Comment({ id, itemsById }: CommentProps) {
       />
       <div className={styles.commentChildren}>
         {comment.kids && open
-          ? comment.kids.map((id) => (
-              <Comment key={id} id={id} itemsById={itemsById} />
-            ))
+          ? comment.kids.map((id) => <Comment key={id} id={id} />)
           : null}
       </div>
     </div>
