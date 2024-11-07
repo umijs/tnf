@@ -38,7 +38,7 @@ import 'zx/globals';
     const pkgPath = path.join(templateDir, dir, 'package.json');
     const content = fs.readFileSync(pkgPath, 'utf-8');
     const pkg = JSON.parse(content);
-    pkg.version = version;
+    pkg.dependencies['@umijs/tnf'] = `^${version}`;
     fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
   }
 
