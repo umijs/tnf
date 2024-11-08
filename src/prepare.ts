@@ -65,8 +65,23 @@ declare module '@tanstack/react-router' {
     router: typeof router
   }
 }
+const TanStackRouterDevtools =
+  process.env.NODE_ENV === 'production'
+    ? () => null
+    : React.lazy(() =>
+        import('@tanstack/router-devtools').then((res) => ({
+          default: res.TanStackRouterDevtools,
+        })),
+      )
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router} />
+  <>
+    <RouterProvider router={router} />
+    ${
+      config?.router?.devtool !== false
+        ? `<TanStackRouterDevtools router={router} initialIsOpen=${config?.router?.devtool?.options?.initialIsOpen || '{false}'} position=${config?.router?.devtool?.options?.position || '"bottom-left"'} />`
+        : ''
+    }
+  </>
 );
   `,
   );
