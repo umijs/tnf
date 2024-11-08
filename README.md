@@ -6,11 +6,11 @@ Tnf, ~~the north face~~, the next framework. Tnf is focused on simple, performan
 
 - Simple, performance and developer experience focused.
 - Type safety built-in.
-- [ ] TanStack Router built-in.
+- TanStack Router built-in.
 - [ ] Framework unplugin which is compatible with umi and other frameworks.
-- [ ] Security built-in. Including doctor rules with is used in Ant Group.
+- [ ] Security built-in. Including doctor rules which is used in Ant Group.
 - [ ] Support SSR, API routes and server functions.
-- [ ] AI based generator.
+- [ ] AI based generator and other features.
 - [ ] Rust based for heavy computation tasks.
 - [ ] Easy to integrate with popular libraries.
 
