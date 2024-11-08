@@ -4,7 +4,7 @@
   "scripts": {
     "build": "tnf build",
     "dev": "tnf dev",
-    "preview": "npx serve dist -s"
+    "preview": "tnf preview"
   },
   "dependencies": {
     "@types/react": "^18.3.12",

@@ -9,18 +9,30 @@ Create a new project with the following command:
 ```bash
 $ npx @umijs/tnf create myapp --template=simple
 $ cd myapp
-$ npm install
-$ npm run build
-$ npx serve dist -s
+$ pnpm i
+```
+
+Then you can generate a page with the following command.
+
+```bash
+$ npx tnf generate page foo
+```
+
+Then you can start the development server or build the project. After building, you can preview the product locally.
+
+```bash
+$ pnpm dev
+$ pnpm build
+$ pnpm preview
 ```
 
 ## Commands
 
-> WIP. More commands will be added in the future.
-
 - `tnf create <project-name> --template=<template-name>`: Create a new project with the given template.
 - `tnf build`: Build the project.
 - `tnf dev`: Start the development server.
+- `tnf generate/g <type> <name>`: Generate a new page (or component and other types in the future).
+- `tnf preview`: Preview the product after building the project.
 
 ## API
 
@@ -30,8 +42,10 @@ $ npx serve dist -s
 
 Config is loaded from `.tnfrc.ts` by default.
 
-- `externals: Record<string, string>`: An object that maps package names to their corresponding paths.
 - `devServer: { port?: number; host?: string; https?: { hosts?: string[] }; ip?: string }`: The development server configuration.
+- `externals: Record<string, string>`: An object that maps package names to their corresponding paths.
+- `less: { modifyVars?: Record<string, string>; globalVars?: Record<string, string>; math?: 'always' | 'strict' | 'parens-division' | 'parens' | 'strict-legacy' | number; sourceMap?: any; plugins?: (string | [string, Record<string, any>])[];}`: The configuration passed to lessLoader.
+- `router: { defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number }`: The router configuration.
 
 ## LICENSE
 

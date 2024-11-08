@@ -2,16 +2,18 @@ import { generator } from '@tanstack/router-generator';
 import type { Config } from '@tanstack/router-generator';
 import fs from 'fs';
 import path from 'pathe';
+import type { Config as TnfConfig } from './config';
 
 interface BaseOptions {
   cwd: string;
   tmpPath: string;
+  config?: TnfConfig;
 }
 
 interface PrepareOptions extends BaseOptions {}
 
 export async function prepare(opts: PrepareOptions) {
-  const { cwd, tmpPath } = opts;
+  const { cwd, tmpPath, config } = opts;
 
   fs.rmSync(tmpPath, { recursive: true, force: true });
   fs.mkdirSync(tmpPath, { recursive: true });
@@ -37,6 +39,9 @@ export async function prepare(opts: PrepareOptions) {
     routeTreeFileFooter: ['/* prettier-ignore-end */'],
     indexToken: 'index',
     routeToken: 'route',
+    experimental: {
+      enableCodeSplitting: true,
+    },
   } as Config);
 
   // generate client entry
@@ -52,6 +57,8 @@ import {
 import { routeTree } from './routeTree.gen';
 const router = createRouter({
   routeTree,
+  defaultPreload: ${config?.router?.defaultPreload ? `'${config.router.defaultPreload}'` : 'false'},
+  defaultPreloadDelay: ${config?.router?.defaultPreloadDelay || 50},
 });
 declare module '@tanstack/react-router' {
   interface Register {

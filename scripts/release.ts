@@ -29,6 +29,19 @@ import 'zx/globals';
     JSON.stringify(pkg, null, 2) + '\n',
   );
 
+  console.log('update templates');
+  const templateDir = path.join(__dirname, '../templates');
+  const templateDirs = fs
+    .readdirSync(templateDir)
+    .filter((dir) => fs.statSync(path.join(templateDir, dir)).isDirectory());
+  for (const dir of templateDirs) {
+    const pkgPath = path.join(templateDir, dir, 'package.json');
+    const content = fs.readFileSync(pkgPath, 'utf-8');
+    const pkg = JSON.parse(content);
+    pkg.dependencies['@umijs/tnf'] = `^${version}`;
+    fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
+  }
+
   console.log('commit & tag');
   await $`git commit --all --message "release: ${version}"`;
   await $`git tag ${version}`;
