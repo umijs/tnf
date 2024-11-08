@@ -1,7 +1,7 @@
 import React, { createFileRoute } from '@umijs/tnf/router';
-import ItemList from '../../components/item-list';
-import { fetchList } from '../../services/api';
-import type { Params } from '../../types';
+import ItemList from '../components/item-list';
+import { fetchList } from '../services/api';
+import type { Params } from '../types';
 
 export const Route = createFileRoute('/ask/$page')({
   component: AskComponent,

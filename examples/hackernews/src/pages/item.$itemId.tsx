@@ -1,6 +1,6 @@
 import React, { createFileRoute } from '@umijs/tnf/router';
-import ItemPage from '../../components/item-page';
-import { fetchItem } from '../../services';
+import ItemPage from '../components/item-page';
+import { fetchItem } from '../services';
 
 export const Route = createFileRoute('/item/$itemId')({
   component: Item,
