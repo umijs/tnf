@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import React, { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
 import '../global.less';
 import styles from './index.module.less';
@@ -15,43 +16,25 @@ export const Route = createRootRoute({
                 src="https://zos.alipayobjects.com/rmsportal/AsASAiphPWWUJWG.png"
               />
             </Link>
-            <Link
-              activeProps={{ className: styles['active'] }}
-              to="/top/$page"
-              params={{ page: 1 }}
-            >
-              Top
-            </Link>
-            <Link
-              activeProps={{ className: styles['active'] }}
-              to="/new/$page"
-              params={{ page: 1 }}
-            >
-              New
-            </Link>
-            <Link
-              activeProps={{ className: styles['active'] }}
-              to="/show/$page"
-              params={{ page: 1 }}
-            >
-              Show
-            </Link>
-            <Link
-              activeProps={{ className: styles['active'] }}
-              to="/ask/$page"
-              params={{ page: 1 }}
-            >
-              Ask
-            </Link>
-            <Link
-              activeProps={{ className: styles['active'] }}
-              to="/job/$page"
-              params={{ page: 1 }}
-            >
-              Jobs
-            </Link>
+            {(
+              [
+                ['/top/$page', 'Top'],
+                ['/new/$page', 'New'],
+                ['/show/$page', 'Show'],
+                ['/ask/$page', 'Ask'],
+                ['/job/$page', 'Jobs'],
+              ] as const
+            ).map(([to, label]) => {
+              return (
+                <Fragment key={to}>
+                  <Link to={to} preload="intent" params={{ page: 1 }}>
+                    {label}
+                  </Link>
+                </Fragment>
+              );
+            })}
             <span className={styles.github}>
-              Built with{' '}
+              Built with
               <a
                 rel="noopener noreferrer"
                 href="https://github.com/umijs/tnf"

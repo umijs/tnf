@@ -30,7 +30,7 @@ export default function Item({ item }: ItemProps) {
             <span className={styles.host}> ({host(url)})</span>
           </span>
         ) : (
-          <Link to={`/item/$id`} params={{ id }}>
+          <Link to={`/item/$itemId`} params={{ itemId: id }}>
             {title}
           </Link>
         )}
@@ -49,7 +49,7 @@ export default function Item({ item }: ItemProps) {
         {type !== 'job' ? (
           <span className={styles.commentsLink}>
             <span>{' | '}</span>
-            <Link to={`/item/$id`} params={{ id }}>
+            <Link to={`/item/$itemId`} params={{ itemId: id }}>
               {descendants} comments
             </Link>
           </span>

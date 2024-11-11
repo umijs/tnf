@@ -14,6 +14,14 @@ export interface ItemProps {
   kids?: number[];
 }
 
+export interface CommentType {
+  id: number;
+  by: string;
+  time: number;
+  text: string;
+  kids?: number[];
+}
+
 export interface FetchListResult {
   items: ItemProps[];
   maxPage: number;

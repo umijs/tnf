@@ -5,7 +5,7 @@ import styles from './index.module.less';
 
 interface ItemListProps {
   type: keyof Lists;
-  page: number;
+  page?: number;
   maxPage: number;
   items: ItemProps[];
 }
@@ -21,7 +21,7 @@ interface Lists {
 export default function ItemList({
   type,
   items,
-  page,
+  page = 1,
   maxPage,
 }: ItemListProps) {
   return (
