@@ -32,6 +32,19 @@ const ConfigSchema = z.object({
     .object({
       defaultPreload: z.enum(['intent', 'render', 'viewport']).optional(),
       defaultPreloadDelay: z.number().optional(),
+      devtool: z
+        .union([
+          z.object({
+            options: z.object({
+              initialIsOpen: z.boolean().optional(),
+              position: z
+                .enum(['bottom-left', 'bottom-right', 'top-left', 'top-right'])
+                .optional(),
+            }),
+          }),
+          z.literal(false),
+        ])
+        .optional(),
     })
     .optional(),
 });

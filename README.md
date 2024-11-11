@@ -57,7 +57,7 @@ Config is loaded from `.tnfrc.ts` by default.
 - `devServer: { port?: number; host?: string; https?: { hosts?: string[] }; ip?: string }`: The development server configuration.
 - `externals: Record<string, string>`: An object that maps package names to their corresponding paths.
 - `less: { modifyVars?: Record<string, string>; globalVars?: Record<string, string>; math?: 'always' | 'strict' | 'parens-division' | 'parens' | 'strict-legacy' | number; sourceMap?: any; plugins?: (string | [string, Record<string, any>])[];}`: The configuration passed to lessLoader.
-- `router: { defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number }`: The router configuration.
+- `router: { defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false }`: The router configuration.
 
 ## LICENSE
 
