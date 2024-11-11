@@ -1,10 +1,16 @@
 import React, { Link } from '@umijs/tnf/router';
-import type { ItemProps } from '../../types';
+import type { CommentType, ItemProps } from '../../types';
 import { host, timeAgo } from '../../utils';
 import Comment from '../comment';
 import styles from './index.module.less';
 
-export default function ItemPage({ item }: { item: ItemProps }) {
+export default function ItemPage({
+  item,
+  comments,
+}: {
+  item: ItemProps;
+  comments: CommentType[];
+}) {
   if (!item) return null;
   return (
     <>
@@ -26,8 +32,10 @@ export default function ItemPage({ item }: { item: ItemProps }) {
           {item.kids ? `${item.descendants} comments` : 'No comments yet.'}
         </p>
         <div className={styles.commentChildren}>
-          {item.kids
-            ? item.kids.map((id) => <Comment key={id} id={id} />)
+          {comments
+            ? comments.map((item: CommentType) => (
+                <Comment key={item.id} comment={item} />
+              ))
             : null}
         </div>
       </div>
