@@ -4,6 +4,5 @@
     "jsx": "react",
     "rootDir": "./src"
   },
-  "include": ["src", "typings.d.ts"],
-  "autoCodeSplitting": true
+  "include": ["src", "typings.d.ts", "src/.tnf/client.tsx"]
 }
