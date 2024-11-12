@@ -1,10 +1,10 @@
 {
-  "name": "myapp",
   "private": true,
   "scripts": {
-    "build": "tnf build",
     "dev": "tnf dev",
-    "preview": "tnf preview"
+    "build": "tnf build",
+    "preview": "tnf preview",
+    "postinstall": "tnf sync"
   },
   "dependencies": {
     "@types/react": "^18.3.12",

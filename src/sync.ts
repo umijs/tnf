@@ -10,9 +10,9 @@ interface BaseOptions {
   config?: TnfConfig;
 }
 
-interface PrepareOptions extends BaseOptions {}
+interface SyncOptions extends BaseOptions {}
 
-export async function prepare(opts: PrepareOptions) {
+export async function sync(opts: SyncOptions) {
   const { cwd, tmpPath, config } = opts;
 
   fs.rmSync(tmpPath, { recursive: true, force: true });
