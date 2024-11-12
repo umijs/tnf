@@ -20,6 +20,7 @@ export async function dev(opts: DevOpts) {
     devMakoConfig.hmr = {};
   }
   devMakoConfig.devServer = { port: hmrPort, host };
+  devMakoConfig.mode = 'development';
 
   await build({
     ...opts,

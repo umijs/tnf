@@ -59,6 +59,19 @@ Config is loaded from `.tnfrc.ts` by default.
 - `less: { modifyVars?: Record<string, string>; globalVars?: Record<string, string>; math?: 'always' | 'strict' | 'parens-division' | 'parens' | 'strict-legacy' | number; sourceMap?: any; plugins?: (string | [string, Record<string, any>])[];}`: The configuration passed to lessLoader.
 - `router: { defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false }`: The router configuration.
 
+## FAQ
+
+### How to specify a redirect route?
+
+You can use `redirect` function in loader to specify a redirect route.
+
+```tsx
+import { redirect, createFileRoute } from '@umijs/tnf/router';
+const Route = createFileRoute('/foo')({
+  loader: async () => redirect({ to: '/bar' }),
+});
+```
+
 ## LICENSE
 
 [MIT](LICENSE)

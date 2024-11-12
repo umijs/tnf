@@ -46,6 +46,7 @@ export async function build({
   bundleConfig.entry = {
     client: path.join(tmpPath, 'client.tsx'),
   };
+  bundleConfig.mode = 'production';
   bundleConfig.resolve ||= {};
   bundleConfig.resolve.alias = [
     ...(bundleConfig.resolve.alias || []),
