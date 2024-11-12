@@ -1,8 +1,12 @@
 {
   "extends": "@total-typescript/tsconfig/bundler/no-dom",
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "paths": {
+      "create-tnf": ["create-tnf"]
+    }
   },
   "include": ["src"]
 }

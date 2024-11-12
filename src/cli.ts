@@ -15,7 +15,7 @@ async function run(cwd: string) {
   assert(cmd, 'Command is required');
   switch (cmd) {
     case 'create':
-      const { create } = await import('./create.js');
+      const { create } = await import('create-tnf/dist/index.js');
       return create({
         cwd: cwd,
         name: argv._[1] as string | undefined,

@@ -1,0 +1,26 @@
+{
+  "name": "create-tnf",
+  "version": "0.1.2",
+  "description": "A standalone create command for TNF.",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "father build"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "pathe": "^1.1.2"
+  },
+  "devDependencies": {
+    "father": "^4.5.1",
+    "typescript": "^5.6.3"
+  },
+  "keywords": [
+    "tnf",
+    "create",
+    "project"
+  ]
+}
