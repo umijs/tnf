@@ -1,6 +1,6 @@
 import React, { createLazyFileRoute } from '@umijs/tnf/router';
-import ItemList from '../components/item-list';
-import type { FetchListResult } from '../types';
+import ItemList from '../../components/item-list';
+import type { FetchListResult } from '../../types';
 
 export const Route = createLazyFileRoute('/job/$page')({
   component: JobComponent,

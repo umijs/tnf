@@ -28,7 +28,7 @@ export default function ItemList({
     <>
       <div className={styles.nav}>
         {page > 1 ? (
-          <Link to={`/${type}/$page`} params={{ page: page - 1 }}>
+          <Link to={`/${type}/$page`} params={{ page: (page - 1).toString() }}>
             &lt; prev
           </Link>
         ) : (
@@ -36,7 +36,7 @@ export default function ItemList({
         )}
         <span>{`${page}/${maxPage}`}</span>
         {page < maxPage ? (
-          <Link to={`/${type}/$page`} params={{ page: page + 1 }}>
+          <Link to={`/${type}/$page`} params={{ page: (page + 1).toString() }}>
             more &gt;
           </Link>
         ) : (

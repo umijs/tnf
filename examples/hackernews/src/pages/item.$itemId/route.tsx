@@ -1,6 +1,6 @@
 import { createFileRoute } from '@umijs/tnf/router';
-import { fetchItem } from '../../services';
-import type { ItemIdInfo } from '../../types';
+import { fetchItem, fetchItems } from '../../services';
+import type { CommentType, ItemIdInfo } from '../../types';
 
 export const Route = createFileRoute('/item/$itemId')({
   loader: async ({
@@ -9,10 +9,8 @@ export const Route = createFileRoute('/item/$itemId')({
     params: { itemId: string };
   }): Promise<ItemIdInfo> => {
     const item = await fetchItem(params.itemId);
-    const commentPromises = (item.kids || []).map(
-      async (id: number) => await fetchItem(id),
-    );
-    const comments = await Promise.all(commentPromises);
+    const kids = item.kids || [];
+    const comments: CommentType[] = await fetchItems(kids);
     return { item, comments };
   },
 });
