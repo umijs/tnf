@@ -1,13 +1,7 @@
 import React from 'react';
+import type { User } from '../../types';
 import { timeAgo } from '../../utils';
 import styles from './index.module.less';
-
-interface User {
-  id: string;
-  created: number;
-  karma: number;
-  about?: string;
-}
 
 export default function UserPage({ user }: { user: User }) {
   if (!user) return null;
