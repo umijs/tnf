@@ -47,6 +47,85 @@ const ConfigSchema = z.object({
         .optional(),
     })
     .optional(),
+  tailwindcss: z
+    .union([
+      z.object({
+        content: z
+          .union([
+            z.array(
+              z.union([
+                z.string(),
+                z.object({
+                  raw: z.string(),
+                  extension: z.string().optional(),
+                }),
+              ]),
+            ),
+            z.object({
+              files: z.array(
+                z.union([
+                  z.string(),
+                  z.object({
+                    raw: z.string(),
+                    extension: z.string().optional(),
+                  }),
+                ]),
+              ),
+              relative: z.boolean().optional(),
+              extract: z
+                .union([
+                  z.function().args(z.string()).returns(z.array(z.string())),
+                  z.record(
+                    z.string(),
+                    z.function().args(z.string()).returns(z.array(z.string())),
+                  ),
+                ])
+                .optional(),
+              transform: z
+                .union([
+                  z.function().args(z.string()).returns(z.string()),
+                  z.record(
+                    z.string(),
+                    z.function().args(z.string()).returns(z.string()),
+                  ),
+                ])
+                .optional(),
+            }),
+          ])
+          .optional(),
+        important: z.union([z.boolean(), z.string()]).optional(),
+        prefix: z.string().optional(),
+        separator: z.string().optional(),
+        safelist: z
+          .array(
+            z.union([
+              z.string(),
+              z.object({
+                pattern: z.instanceof(RegExp),
+                variants: z.array(z.string()).optional(),
+              }),
+            ]),
+          )
+          .optional(),
+        darkMode: z
+          .union([
+            z.literal('media'),
+            z.literal('class'),
+            z.tuple([z.literal('class'), z.string()]),
+            z.literal('selector'),
+            z.tuple([z.literal('selector'), z.string()]),
+            z.tuple([
+              z.literal('variant'),
+              z.union([z.string(), z.array(z.string())]),
+            ]),
+          ])
+          .optional(),
+        theme: z.record(z.string(), z.any()).optional(),
+        plugins: z.array(z.function()).optional(),
+      }),
+      z.record(z.string(), z.any()),
+    ])
+    .optional(),
 });
 
 export type Config = z.infer<typeof ConfigSchema>;

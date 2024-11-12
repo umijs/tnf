@@ -3,6 +3,7 @@ import chokidar from 'chokidar';
 import path from 'pathe';
 import type { Config } from './config';
 import { FRAMEWORK_NAME } from './constants';
+import { generateTailwindcss } from './fishkit/tailwindcss';
 import { prepare } from './prepare';
 
 export async function build({
@@ -18,11 +19,20 @@ export async function build({
 }) {
   const tmpPath = path.join(cwd, `src/.${FRAMEWORK_NAME}`);
 
+  let tailwindcssPath: string;
+  if (config?.tailwindcss) {
+    tailwindcssPath = await generateTailwindcss({
+      cwd,
+      tmpPath,
+      config: config?.tailwindcss,
+    });
+  }
   const doPrepare = async () => {
     await prepare({
       cwd,
       tmpPath,
       config,
+      tailwindcssPath,
     });
   };
 

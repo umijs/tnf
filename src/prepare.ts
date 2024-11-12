@@ -8,12 +8,13 @@ interface BaseOptions {
   cwd: string;
   tmpPath: string;
   config?: TnfConfig;
+  tailwindcssPath?: string;
 }
 
 interface PrepareOptions extends BaseOptions {}
 
 export async function prepare(opts: PrepareOptions) {
-  const { cwd, tmpPath, config } = opts;
+  const { cwd, tmpPath, config, tailwindcssPath } = opts;
 
   fs.rmSync(tmpPath, { recursive: true, force: true });
   fs.mkdirSync(tmpPath, { recursive: true });
@@ -55,6 +56,7 @@ import {
   createRouter,
 } from '@umijs/tnf/router';
 import { routeTree } from './routeTree.gen';
+${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
 const router = createRouter({
   routeTree,
   defaultPreload: ${config?.router?.defaultPreload ? `'${config.router.defaultPreload}'` : 'false'},
