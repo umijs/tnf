@@ -48,6 +48,12 @@ export async function sync(opts: SyncOptions) {
     },
   } as Config);
 
+  // Check for existing global styles (.css or .less) and set the import path
+  const globalStylesPath = path.join(cwd, 'src/global');
+  const styleExtensions = ['.css', '.less'];
+  const ext = styleExtensions.find(ext => fs.existsSync(`${globalStylesPath}${ext}`));
+  const globalStyleImportPath = ext ? `import '../global${ext}';` : '';
+
   // tailwindcss
   let tailwindcssPath: string | undefined;
   if (config?.tailwindcss && !opts.runAgain) {
@@ -71,6 +77,7 @@ import {
 } from '@umijs/tnf/router';
 import { routeTree } from './routeTree.gen';
 ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
+${globalStyleImportPath}
 const router = createRouter({
   routeTree,
   defaultPreload: ${config?.router?.defaultPreload ? `'${config.router.defaultPreload}'` : 'false'},
