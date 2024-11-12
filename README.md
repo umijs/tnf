@@ -45,7 +45,7 @@ $ pnpm preview
 - `tnf dev`: Start the development server.
 - `tnf generate/g <type> <name>`: Generate a new page (or component and other types in the future).
 - `tnf preview`: Preview the product after building the project.
-- `tnf sync`: Sync the project to the temporary directory.
+- `tnf sync --mode=<mode>`: Sync the project to the temporary directory.
 
 ## API
 

@@ -3,18 +3,21 @@ import type { Config } from '@tanstack/router-generator';
 import fs from 'fs';
 import path from 'pathe';
 import type { Config as TnfConfig } from './config';
+import { generateTailwindcss } from './fishkit/tailwindcss';
 
 interface BaseOptions {
   cwd: string;
   tmpPath: string;
   config?: TnfConfig;
-  tailwindcssPath?: string;
+  mode: 'development' | 'production';
 }
 
-interface SyncOptions extends BaseOptions {}
+interface SyncOptions extends BaseOptions {
+  runAgain?: boolean;
+}
 
 export async function sync(opts: SyncOptions) {
-  const { cwd, tmpPath, config, tailwindcssPath } = opts;
+  const { cwd, tmpPath, config, mode } = opts;
 
   fs.rmSync(tmpPath, { recursive: true, force: true });
   fs.mkdirSync(tmpPath, { recursive: true });
@@ -44,6 +47,17 @@ export async function sync(opts: SyncOptions) {
       enableCodeSplitting: true,
     },
   } as Config);
+
+  // tailwindcss
+  let tailwindcssPath: string | undefined;
+  if (config?.tailwindcss && !opts.runAgain) {
+    tailwindcssPath = await generateTailwindcss({
+      cwd,
+      tmpPath,
+      config: config?.tailwindcss,
+      mode,
+    });
+  }
 
   // generate client entry
   fs.writeFileSync(

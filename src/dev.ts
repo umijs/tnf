@@ -26,6 +26,7 @@ export async function dev(opts: DevOpts) {
     ...opts,
     config: opts.config,
     devMakoConfig,
+    mode: 'development',
     watch: true,
   });
 }

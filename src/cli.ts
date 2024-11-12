@@ -25,20 +25,21 @@ async function run(cwd: string) {
     case 'build':
       const { build } = await import('./build.js');
       return build({
-        cwd,
         config: await loadConfig({ cwd }),
+        cwd,
+        mode: 'production',
       });
     case 'dev':
       const { dev } = await import('./dev.js');
       return dev({
-        cwd,
         config: await loadConfig({ cwd }),
+        cwd,
       });
     case 'preview':
       const { preview } = await import('./preview.js');
       return preview({
-        cwd,
         config: await loadConfig({ cwd }),
+        cwd,
       });
     case 'generate':
     case 'g':
@@ -58,6 +59,7 @@ async function run(cwd: string) {
         cwd,
         tmpPath,
         config: await loadConfig({ cwd }),
+        mode: argv.mode || 'development',
       });
     default:
       throw new Error(`Unknown command: ${cmd}`);
