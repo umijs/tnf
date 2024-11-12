@@ -1,4 +1,5 @@
 import assert from 'assert';
+import path from 'pathe';
 import yargsParser from 'yargs-parser';
 import { loadConfig } from './config.js';
 import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants.js';
@@ -49,6 +50,14 @@ async function run(cwd: string) {
         cwd,
         type,
         name,
+      });
+    case 'sync':
+      const { sync } = await import('./sync.js');
+      const tmpPath = path.join(cwd, `src/.${FRAMEWORK_NAME}`);
+      return sync({
+        cwd,
+        tmpPath,
+        config: await loadConfig({ cwd }),
       });
     default:
       throw new Error(`Unknown command: ${cmd}`);

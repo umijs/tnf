@@ -11,9 +11,9 @@ interface BaseOptions {
   tailwindcssPath?: string;
 }
 
-interface PrepareOptions extends BaseOptions {}
+interface SyncOptions extends BaseOptions {}
 
-export async function prepare(opts: PrepareOptions) {
+export async function sync(opts: SyncOptions) {
   const { cwd, tmpPath, config, tailwindcssPath } = opts;
 
   fs.rmSync(tmpPath, { recursive: true, force: true });

@@ -32,3 +32,15 @@ export interface FetchListResult {
 export interface Params {
   page: string;
 }
+
+export interface User {
+  id: string;
+  created: number;
+  karma: number;
+  about?: string;
+}
+
+export interface ItemIdInfo {
+  item: ItemProps;
+  comments: CommentType[];
+}

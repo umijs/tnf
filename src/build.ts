@@ -4,7 +4,7 @@ import path from 'pathe';
 import type { Config } from './config';
 import { FRAMEWORK_NAME } from './constants';
 import { generateTailwindcss } from './fishkit/tailwindcss';
-import { prepare } from './prepare';
+import { sync } from './sync';
 
 export async function build({
   cwd,
@@ -27,8 +27,9 @@ export async function build({
       config: config?.tailwindcss,
     });
   }
-  const doPrepare = async () => {
-    await prepare({
+
+  const doSync = async () => {
+    await sync({
       cwd,
       tmpPath,
       config,
@@ -36,7 +37,7 @@ export async function build({
     });
   };
 
-  await doPrepare();
+  await doSync();
 
   if (watch) {
     const pagesDir = path.join(cwd, 'src/pages');
@@ -46,7 +47,7 @@ export async function build({
       })
       .on('all', async (event, path) => {
         console.log(`File ${path} has been ${event}`);
-        await doPrepare();
+        await doSync();
       });
   }
 
