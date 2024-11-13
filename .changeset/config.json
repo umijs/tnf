@@ -15,5 +15,10 @@
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"
   },
-  "ignore": ["@examples/hackernews", "@examples/normal", "@examples/with-antd4"]
+  "ignore": [
+    "@examples/hackernews",
+    "@examples/normal",
+    "@examples/normal",
+    "@examples/with-antd4"
+  ]
 }
