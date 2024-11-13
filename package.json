@@ -1,6 +1,12 @@
 {
   "name": "@umijs/tnf",
   "version": "0.1.2",
+  "homepage": "https://github.com/umijs/tnf",
+  "bugs": "https://github.com/umijs/tnf/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/umijs/tnf"
+  },
   "scripts": {
     "build": "father build",
     "changeset": "tsx scripts/changeset.ts && changeset",
@@ -9,6 +15,7 @@
     "dev": "father dev",
     "format": "prettier --write .",
     "release": "tsx scripts/release.ts",
+    "release:create-tnf": "pnpm --filter create-tnf release",
     "test": "vitest",
     "test:e2e": "tsx scripts/e2e.ts"
   },
