@@ -1,6 +1,7 @@
 import type { BuildParams } from '@umijs/mako';
 import chokidar from 'chokidar';
 import path from 'pathe';
+import { PluginHookType } from './plugin/plugin_manager';
 import { sync } from './sync/sync';
 import type { Context } from './types';
 
@@ -58,6 +59,12 @@ export async function build({
     },
     root: cwd,
     watch: !!watch,
+  });
+  await context.pluginManager.apply({
+    hook: 'buildEnd',
+    args: [],
+    type: PluginHookType.Parallel,
+    pluginContext: context.pluginContext,
   });
 }
 

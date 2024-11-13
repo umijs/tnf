@@ -3,6 +3,7 @@ import { type ChildProcess, spawn } from 'child_process';
 import fs from 'fs-extra';
 import module from 'module';
 import path from 'pathe';
+import { Mode } from '../types';
 import type { SyncOptions } from './sync';
 
 interface Paths {
@@ -41,10 +42,10 @@ function getTailwindBinPath(cwd: string): string {
 async function generateFile(opts: {
   binPath: string;
   paths: Paths;
-  mode: 'development' | 'production';
+  mode: Mode;
 }): Promise<void> {
   const { binPath, paths, mode } = opts;
-  const isProduction = mode === 'production';
+  const isProduction = mode === Mode.Production;
 
   return new Promise((resolve, reject) => {
     tailwindProcess = spawn(

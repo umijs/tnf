@@ -4,6 +4,7 @@ import {
 } from 'c12';
 import { z } from 'zod';
 import { CONFIG_FILE } from './constants';
+import { PluginSchema } from './plugin/types';
 
 const ConfigSchema = z.object({
   externals: z.record(z.string()).optional(),
@@ -28,6 +29,7 @@ const ConfigSchema = z.object({
       plugins: z.array(z.any()).optional(),
     })
     .optional(),
+  plugins: z.array(PluginSchema).optional(),
   router: z
     .object({
       defaultPreload: z.enum(['intent', 'render', 'viewport']).optional(),

@@ -1,24 +1,37 @@
 import assert from 'assert';
 import path from 'pathe';
 import yargsParser from 'yargs-parser';
-import { loadConfig } from './config.js';
-import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants.js';
-import {
-  checkVersion,
-  setNoDeprecation,
-  setNodeTitle,
-} from './fishkit/node.js';
-import type { Context } from './types/index.js';
+import { loadConfig } from './config';
+import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants';
+import { checkVersion, setNoDeprecation, setNodeTitle } from './fishkit/node';
+import { PluginManager } from './plugin/plugin_manager';
+import { type Context, Mode } from './types';
 
 async function buildContext(cwd: string): Promise<Context> {
   const argv = yargsParser(process.argv.slice(2));
-  const cmd = argv._[0];
-  const isDev = cmd === 'development';
+  const command = argv._[0];
+  const isDev = command === 'dev';
+  const config = await loadConfig({ cwd });
+  const pluginManager = new PluginManager(config.plugins || []);
+  const pluginContext = {
+    command: command as string | undefined,
+    config,
+    cwd,
+    // TODO: diff config and userConfig
+    userConfig: config,
+    // TODO: debug
+    // TODO: error
+    // TODO: info
+    // TODO: warn
+    // TODO: watcher
+  };
   return {
     argv,
-    config: await loadConfig({ cwd }),
+    config,
+    pluginManager,
+    pluginContext,
     cwd,
-    mode: isDev ? 'development' : 'production',
+    mode: isDev ? Mode.Development : Mode.Production,
     paths: {
       tmpPath: path.join(cwd, `.${FRAMEWORK_NAME}`),
     },
