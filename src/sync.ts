@@ -119,10 +119,3 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
   console.log('Prepared');
 }
-
-function getStyleImportPath(basePath: string) {
-  const ext = supportedExtensions.find((ext) =>
-    fs.existsSync(`${basePath}${ext}`),
-  );
-  return ext ? `import '${basePath}${ext}';` : '';
-}
