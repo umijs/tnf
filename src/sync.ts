@@ -48,13 +48,23 @@ export async function sync(opts: SyncOptions) {
     },
   } as Config);
 
+  // Check for existing style files (.css or .less) and set import paths
+  const supportedExtensions = ['.css', '.less'];
+  function getStyleImportPath(basePath) {
+    const ext = supportedExtensions.find((ext) =>
+      fs.existsSync(path.join(basePath + ext)),
+    );
+    return ext ? `import '${basePath}${ext}';` : '';
+  }
+  const globalStylePath = path.join(cwd, 'src/global');
+  const globalStyleImportPath = getStyleImportPath(globalStylePath);
+
   // tailwindcss
   let tailwindcssPath: string | undefined;
   if (config?.tailwindcss && !opts.runAgain) {
     tailwindcssPath = await generateTailwindcss({
       cwd,
       tmpPath,
-      config: config?.tailwindcss,
       mode,
     });
   }
@@ -70,6 +80,7 @@ import {
   createRouter,
 } from '@umijs/tnf/router';
 import { routeTree } from './routeTree.gen';
+${globalStyleImportPath}
 ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
 const router = createRouter({
   routeTree,
@@ -102,5 +113,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   `,
   );
 
-  console.log('Prepared');
+  console.log('Synced');
 }
