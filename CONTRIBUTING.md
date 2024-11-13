@@ -84,3 +84,20 @@ Release create-tnf package:
 ```bash
 $ pnpm release:create-tnf
 ```
+
+## Code Style
+
+We use [Prettier](https://prettier.io/) to format the code, please run `pnpm format` to format the code. And we also have some other rules:
+
+- Do not use specifiers for `fs` and `path` modules.
+- Do use `pathe` instead of `path` module.
+
+```ts
+// bad
+import { writeFile } from 'fs';
+import { join } from 'path';
+
+// good
+import fs from 'fs';
+import path from 'pathe';
+```
