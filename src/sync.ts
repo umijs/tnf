@@ -65,7 +65,6 @@ export async function sync(opts: SyncOptions) {
     tailwindcssPath = await generateTailwindcss({
       cwd,
       tmpPath,
-      config: config?.tailwindcss,
       mode,
     });
   }
