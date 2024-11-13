@@ -70,3 +70,17 @@ $ pnpm changeset
 Based on the modified package name, select the type to be published, usually choosing `patch`.Then enter `changelog`.
 
 After the code is merged into the main branch, it will be sent to GitHub CI to automatically change the version number of the corresponding package.
+
+## Release
+
+Release tnf package:
+
+```bash
+$ pnpm release
+```
+
+Release create-tnf package:
+
+```bash
+$ pnpm release:create-tnf
+```

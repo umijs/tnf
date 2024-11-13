@@ -4,3 +4,5 @@
 /examples/*/src/.tailwindcss
 /examples/*/dist
 /examples/*/node_modules
+/create-tnf/node_modules
+/create-tnf/dist

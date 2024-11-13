@@ -1,6 +1,6 @@
 import { intro, isCancel, outro, select, text } from '@clack/prompts';
 import fs from 'fs';
-import path from 'pathe';
+import path from 'path';
 
 export async function create({
   cwd,
@@ -12,6 +12,7 @@ export async function create({
   template?: string;
 }) {
   intro('Creating a new project...');
+
   const templatesPath = path.join(__dirname, '../templates');
   const templateList = fs
     .readdirSync(templatesPath)

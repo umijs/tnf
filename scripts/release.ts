@@ -30,7 +30,7 @@ import 'zx/globals';
   );
 
   console.log('update templates');
-  const templateDir = path.join(__dirname, '../templates');
+  const templateDir = path.join(__dirname, '../create-tnf/templates');
   const templateDirs = fs
     .readdirSync(templateDir)
     .filter((dir) => fs.statSync(path.join(templateDir, dir)).isDirectory());

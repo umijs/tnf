@@ -40,7 +40,6 @@ $ pnpm preview
 
 ## Commands
 
-- `tnf create <project-name> --template=<template-name>`: Create a new project with the given template.
 - `tnf build`: Build the project.
 - `tnf dev`: Start the development server.
 - `tnf generate/g <type> <name>`: Generate a new page (or component and other types in the future).
