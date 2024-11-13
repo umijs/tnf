@@ -32,6 +32,11 @@ export function writeTypes({ context }: SyncOptions) {
       "@": ["../src"],
       "@/*": ["../src/*"]
     },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
     "rootDirs": [".."],
     "lib": ["esnext", "dom", "dom.iterable"],
     "jsx": "react-jsx",

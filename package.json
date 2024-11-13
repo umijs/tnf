@@ -87,6 +87,7 @@
     "serve-handler": "^6.1.6",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
+    "typescript-plugin-css-modules": "^5.1.0",
     "vitest": "^2.1.4",
     "zx": "^8.2.0"
   },
