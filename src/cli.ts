@@ -46,7 +46,7 @@ async function run(cwd: string) {
         name,
       });
     case 'sync':
-      const { sync } = await import('./sync.js');
+      const { sync } = await import('./sync/sync.js');
       const tmpPath = path.join(cwd, `src/.${FRAMEWORK_NAME}`);
       return sync({
         cwd,

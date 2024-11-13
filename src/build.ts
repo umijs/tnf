@@ -3,7 +3,7 @@ import chokidar from 'chokidar';
 import path from 'pathe';
 import type { Config } from './config';
 import { FRAMEWORK_NAME } from './constants';
-import { sync } from './sync';
+import { sync } from './sync/sync';
 
 export async function build({
   cwd,
