@@ -114,5 +114,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   `,
   );
 
-  console.log('Prepared');
+  console.log('Synced');
 }

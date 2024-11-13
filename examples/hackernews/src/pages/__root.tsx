@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 import React, { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
-import '../global.less';
-import styles from './index.module.less';
+import styles from './__root.module.less';
 
 export const Route = createRootRoute({
   component: () => {
