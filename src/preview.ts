@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { resolve } from 'pathe';
 import sirv from 'sirv';
 import type { Config } from './config';
 import { createServer } from './fishkit/server';

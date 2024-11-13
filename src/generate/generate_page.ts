@@ -1,24 +1,14 @@
 import assert from 'assert';
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'pathe';
 // @ts-ignore
 import randomColor from 'random-color';
+import type { GenerateOptions } from './generate';
 
-interface GenerateOptions {
-  cwd: string;
-  type: string;
-  name: string;
-}
-
-export function generate(opts: GenerateOptions) {
-  if (opts.type === 'page') {
-    return generatePage(opts);
-  }
-}
-
-function generatePage(opts: GenerateOptions) {
+export async function generatePage(opts: GenerateOptions) {
   const pagesDir = path.join(opts.cwd, 'src/pages');
-  const pageName = opts.name;
+  const pageName = opts.argv._[0] as string | undefined;
+  assert(pageName, 'Page name is required');
   const pagePath = path.join(pagesDir, `${pageName}.tsx`);
   const styleModulePath = path.join(pagesDir, `${pageName}.module.less`);
 
@@ -52,8 +42,8 @@ function ${componentName}() {
 }
 `;
 
-  fs.writeFileSync(pagePath, pageContent);
-  fs.writeFileSync(styleModulePath, styleContent);
+  await fs.writeFile(pagePath, pageContent);
+  await fs.writeFile(styleModulePath, styleContent);
 
   console.log(`Generated page at: ${pagePath}`);
   console.log(`Generated styles at: ${styleModulePath}`);
