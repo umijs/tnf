@@ -11,7 +11,10 @@ export function writeClientEntry({
   globalStyleImportPath: string;
   tailwindcssPath: string | undefined;
 }) {
-  const { tmpPath, config } = opts;
+  const {
+    paths: { tmpPath },
+    config,
+  } = opts.context;
 
   fs.writeFileSync(
     path.join(tmpPath, 'client.tsx'),

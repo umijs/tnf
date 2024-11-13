@@ -1,31 +1,23 @@
 import type { BuildParams } from '@umijs/mako';
 import chokidar from 'chokidar';
 import path from 'pathe';
-import type { Config } from './config';
-import { FRAMEWORK_NAME } from './constants';
 import { sync } from './sync/sync';
+import type { Context } from './types';
 
 export async function build({
-  cwd,
-  config,
+  context,
   devMakoConfig,
   watch,
-  mode,
 }: {
-  cwd: string;
-  config?: Config;
+  context: Context;
   devMakoConfig?: BuildParams['config'];
   watch?: boolean;
-  mode: 'development' | 'production';
 }) {
-  const tmpPath = path.join(cwd, `src/.${FRAMEWORK_NAME}`);
+  const { cwd, config } = context;
 
   const doSync = async () => {
     await sync({
-      cwd,
-      tmpPath,
-      config,
-      mode,
+      context,
     });
   };
 
@@ -47,7 +39,7 @@ export async function build({
   // @ts-ignore https://github.com/umijs/mako/pull/1679
   const bundleConfig: BuildParams['config'] = config || {};
   bundleConfig.entry = {
-    client: path.join(tmpPath, 'client.tsx'),
+    client: path.join(context.paths.tmpPath, 'client.tsx'),
   };
   bundleConfig.mode = 'production';
   bundleConfig.resolve ||= {};

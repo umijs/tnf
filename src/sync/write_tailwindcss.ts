@@ -88,10 +88,16 @@ async function generateFile(opts: {
   });
 }
 
-export async function writeTailwindcss(
-  opts: SyncOptions,
-): Promise<string | undefined> {
-  const { cwd, tmpPath, config, mode, runAgain } = opts;
+export async function writeTailwindcss({
+  context,
+  runAgain,
+}: SyncOptions): Promise<string | undefined> {
+  const {
+    cwd,
+    paths: { tmpPath },
+    config,
+    mode,
+  } = context;
 
   if (!config?.tailwindcss || runAgain) return;
 

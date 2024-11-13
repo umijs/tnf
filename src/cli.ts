@@ -8,47 +8,44 @@ import {
   setNoDeprecation,
   setNodeTitle,
 } from './fishkit/node.js';
+import type { Context } from './types/index.js';
 
-async function run(cwd: string) {
+async function buildContext(cwd: string): Promise<Context> {
   const argv = yargsParser(process.argv.slice(2));
   const cmd = argv._[0];
+  const isBuild = cmd === 'build';
+  return {
+    argv,
+    config: await loadConfig({ cwd }),
+    cwd,
+    mode: isBuild ? 'production' : 'development',
+    paths: {
+      tmpPath: path.join(cwd, `.${FRAMEWORK_NAME}`),
+    },
+  };
+}
+
+async function run(cwd: string) {
+  const context = await buildContext(cwd);
+  const cmd = context.argv._[0];
   assert(cmd, 'Command is required');
   switch (cmd) {
     case 'build':
       const { build } = await import('./build.js');
-      return build({
-        config: await loadConfig({ cwd }),
-        cwd,
-        mode: 'production',
-      });
+      return build({ context });
     case 'dev':
       const { dev } = await import('./dev.js');
-      return dev({
-        config: await loadConfig({ cwd }),
-        cwd,
-      });
+      return dev({ context });
     case 'preview':
       const { preview } = await import('./preview.js');
-      return preview({
-        config: await loadConfig({ cwd }),
-        cwd,
-      });
+      return preview({ context });
     case 'generate':
     case 'g':
       const { generate } = await import('./generate/generate.js');
-      return generate({
-        cwd,
-        argv,
-      });
+      return generate({ context });
     case 'sync':
       const { sync } = await import('./sync/sync.js');
-      const tmpPath = path.join(cwd, `src/.${FRAMEWORK_NAME}`);
-      return sync({
-        cwd,
-        tmpPath,
-        config: await loadConfig({ cwd }),
-        mode: argv.mode || 'development',
-      });
+      return sync({ context });
     default:
       throw new Error(`Unknown command: ${cmd}`);
   }

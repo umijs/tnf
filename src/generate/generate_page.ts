@@ -3,11 +3,11 @@ import fs from 'fs-extra';
 import path from 'pathe';
 // @ts-ignore
 import randomColor from 'random-color';
-import type { GenerateOptions } from './generate';
+import type { Context } from '../types';
 
-export async function generatePage(opts: GenerateOptions) {
-  const pagesDir = path.join(opts.cwd, 'src/pages');
-  const pageName = opts.argv._[0] as string | undefined;
+export async function generatePage({ context }: { context: Context }) {
+  const pagesDir = path.join(context.cwd, 'src/pages');
+  const pageName = context.argv._[0] as string | undefined;
   assert(pageName, 'Page name is required');
   const pagePath = path.join(pagesDir, `${pageName}.tsx`);
   const styleModulePath = path.join(pagesDir, `${pageName}.module.less`);
