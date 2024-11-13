@@ -1,4 +1,3 @@
-import React from 'react';
 import { createFileRoute, useLoaderData } from '@umijs/tnf/router';
 
 export const Route = createFileRoute('/foo')({

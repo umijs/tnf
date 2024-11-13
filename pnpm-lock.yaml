@@ -209,9 +209,6 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
     devDependencies:
-      '@total-typescript/tsconfig':
-        specifier: ^1.0.4
-        version: 1.0.4
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -228,9 +225,6 @@ importers:
         specifier: workspace:*
         version: link:../..
     devDependencies:
-      '@total-typescript/tsconfig':
-        specifier: ^1.0.4
-        version: 1.0.4
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -274,46 +268,6 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.14)
     devDependencies:
-      '@total-typescript/tsconfig':
-        specifier: ^1.0.4
-        version: 1.0.4
-      tailwindcss:
-        specifier: ^3.4.14
-        version: 3.4.14
-      typescript:
-        specifier: ^5.6.3
-        version: 5.6.3
-
-  examples/shadcn-manual:
-    dependencies:
-      '@types/react':
-        specifier: ^18.3.12
-        version: 18.3.12
-      '@types/react-dom':
-        specifier: ^18.3.1
-        version: 18.3.1
-      '@umijs/tnf':
-        specifier: workspace:*
-        version: link:../..
-      class-variance-authority:
-        specifier: ^0.7.0
-        version: 0.7.0
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
-      lucide-react:
-        specifier: ^0.456.0
-        version: 0.456.0(react@18.3.1)
-      tailwind-merge:
-        specifier: ^2.5.4
-        version: 2.5.4
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.14)
-    devDependencies:
-      '@total-typescript/tsconfig':
-        specifier: ^1.0.4
-        version: 1.0.4
       tailwindcss:
         specifier: ^3.4.14
         version: 3.4.14
@@ -333,9 +287,6 @@ importers:
         specifier: workspace:*
         version: link:../..
     devDependencies:
-      '@total-typescript/tsconfig':
-        specifier: ^1.0.4
-        version: 1.0.4
       tailwindcss:
         specifier: ^3.4.14
         version: 3.4.14
@@ -361,9 +312,6 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
     devDependencies:
-      '@total-typescript/tsconfig':
-        specifier: ^1.0.4
-        version: 1.0.4
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
