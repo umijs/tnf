@@ -11,13 +11,14 @@
     "build": "father build",
     "changeset": "tsx scripts/changeset.ts && changeset",
     "check": "prettier --check .",
-    "ci": "npm run check && npm run build && npm run test --run && npm run test:e2e && father doctor",
+    "ci": "npm run check && npm run build && npm run tsc && npm run test --run && npm run test:e2e && father doctor",
     "dev": "father dev",
     "format": "prettier --write .",
     "release": "tsx scripts/release.ts",
     "release:create-tnf": "pnpm --filter create-tnf release",
     "test": "vitest",
-    "test:e2e": "tsx scripts/e2e.ts"
+    "test:e2e": "tsx scripts/e2e.ts",
+    "tsc": "tsc --noEmit"
   },
   "bin": {
     "tnf": "bin/tnf.js"
