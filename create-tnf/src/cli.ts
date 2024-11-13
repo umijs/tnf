@@ -1,4 +1,3 @@
-import assert from 'assert';
 import yargsParser from 'yargs-parser';
 import { create } from './create.js';
 
