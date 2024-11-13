@@ -48,13 +48,18 @@ export async function sync(opts: SyncOptions) {
     },
   } as Config);
 
-  // Check for existing global styles (.css or .less) and set the import path
-  const globalStylesPath = path.join(cwd, 'src/global');
-  const styleExtensions = ['.css', '.less'];
-  const ext = styleExtensions.find((ext) =>
-    fs.existsSync(`${globalStylesPath}${ext}`),
-  );
-  const globalStyleImportPath = ext ? `import '../global${ext}';` : '';
+  // Check for existing style files (.css or .less) and set import paths
+  const supportedExtensions = ['.css', '.less'];
+  function getStyleImportPath(basePath) {
+    const ext = supportedExtensions.find((ext) =>
+      fs.existsSync(path.join(basePath + ext)),
+    );
+    return ext ? `import '${basePath}${ext}';` : '';
+  }
+  const globalStylePath = path.join(cwd, 'src/global');
+  const overridesStylePath = path.join(cwd, 'src/overrides');
+  const globalStyleImportPath = getStyleImportPath(globalStylePath);
+  const overridesStyleImportPath = getStyleImportPath(overridesStylePath);
 
   // tailwindcss
   let tailwindcssPath: string | undefined;
@@ -78,8 +83,9 @@ import {
   createRouter,
 } from '@umijs/tnf/router';
 import { routeTree } from './routeTree.gen';
-${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
 ${globalStyleImportPath}
+${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
+${overridesStyleImportPath}
 const router = createRouter({
   routeTree,
   defaultPreload: ${config?.router?.defaultPreload ? `'${config.router.defaultPreload}'` : 'false'},
@@ -112,4 +118,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   );
 
   console.log('Prepared');
+}
+
+function getStyleImportPath(basePath: string) {
+  const ext = supportedExtensions.find((ext) =>
+    fs.existsSync(`${basePath}${ext}`),
+  );
+  return ext ? `import '${basePath}${ext}';` : '';
 }
