@@ -40,7 +40,7 @@ export function writeTypes({ context }: SyncOptions) {
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,
-    "s": true,
+    "strict": true,
     "target": "esnext"
   },
   "include": [
