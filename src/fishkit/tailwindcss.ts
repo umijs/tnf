@@ -22,7 +22,6 @@ interface TailwindConfig {
 interface GenerateTailwindcssOpts {
   cwd: string;
   tmpPath: string;
-  config: Config['tailwindcss'];
   mode: 'development' | 'production';
 }
 
@@ -69,44 +68,29 @@ function getTailwindBinPath(opts: { cwd: string }): string {
 export async function generateTailwindcss(
   opts: GenerateTailwindcssOpts,
 ): Promise<string> {
-  const { cwd, tmpPath, config, mode } = opts;
+  const { cwd, tmpPath, mode } = opts;
   const rootPath = path.join(tmpPath, 'tailwindcss');
 
   // 设置文件路径
   const paths = {
-    input: path.join(rootPath, 'tailwindDirectives.css'),
+    input: path.join(cwd, 'src/tailwind.css'),
     output: path.join(rootPath, 'tailwind.css'),
-    config: path.join(rootPath, 'tailwind.config.js'),
+    config: path.join(cwd, 'tailwind.config.js'),
   };
 
-  // 默认 Tailwind 配置
-  const defaultConfig: TailwindConfig = {
-    content: [
-      './src/pages/**/*.{js,ts,jsx,tsx}',
-      './src/components/**/*.{js,ts,jsx,tsx}',
-    ],
-  };
+  if (!fs.existsSync(paths.input)) {
+    console.log(
+      'Enabling feature tailwindcss requires input file src/tailwind.css',
+    );
+    return '';
+  }
 
-  const mergedConfig = { ...defaultConfig, ...config };
-
-  // 确保目录存在
-  fs.mkdirpSync(path.dirname(paths.input));
-
-  // 写入 Tailwind 指令文件
-  fs.writeFileSync(
-    paths.input,
-    `
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-    `.trim(),
-  );
-
-  // 写入配置文件
-  fs.writeFileSync(
-    paths.config,
-    `export default ${JSON.stringify(mergedConfig, null, 2)}`,
-  );
+  if (!fs.existsSync(paths.config)) {
+    console.log(
+      'Enabling feature tailwindcss requires config file tailwind.config.js',
+    );
+    return '';
+  }
 
   // 生成 CSS 文件
   await generateFile({
