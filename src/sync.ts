@@ -57,9 +57,7 @@ export async function sync(opts: SyncOptions) {
     return ext ? `import '${basePath}${ext}';` : '';
   }
   const globalStylePath = path.join(cwd, 'src/global');
-  const overridesStylePath = path.join(cwd, 'src/overrides');
   const globalStyleImportPath = getStyleImportPath(globalStylePath);
-  const overridesStyleImportPath = getStyleImportPath(overridesStylePath);
 
   // tailwindcss
   let tailwindcssPath: string | undefined;
@@ -85,7 +83,6 @@ import {
 import { routeTree } from './routeTree.gen';
 ${globalStyleImportPath}
 ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
-${overridesStyleImportPath}
 const router = createRouter({
   routeTree,
   defaultPreload: ${config?.router?.defaultPreload ? `'${config.router.defaultPreload}'` : 'false'},
