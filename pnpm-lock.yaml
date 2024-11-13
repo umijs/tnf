@@ -171,13 +171,19 @@ importers:
       '@clack/prompts':
         specifier: ^0.7.0
         version: 0.7.0
-      pathe:
-        specifier: ^1.1.2
-        version: 1.1.2
+      '@types/yargs-parser':
+        specifier: ^21.0.3
+        version: 21.0.3
+      yargs-parser:
+        specifier: ^21.1.1
+        version: 21.1.1
     devDependencies:
       father:
         specifier: ^4.5.1
         version: 4.5.1(@babel/core@7.26.0)(@types/node@22.9.0)(styled-components@6.1.13)(webpack@5.96.1)
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.2
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
