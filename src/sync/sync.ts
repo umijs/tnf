@@ -19,8 +19,10 @@ export interface SyncOptions extends BaseOptions {
 export async function sync(opts: SyncOptions) {
   const { tmpPath } = opts;
 
-  fs.rmSync(tmpPath, { recursive: true, force: true });
-  fs.mkdirSync(tmpPath, { recursive: true });
+  if (!opts.runAgain) {
+    fs.rmSync(tmpPath, { recursive: true, force: true });
+    fs.mkdirSync(tmpPath, { recursive: true });
+  }
 
   await writeRouteTree(opts);
   const globalStyleImportPath = writeGlobalStyle(opts);
