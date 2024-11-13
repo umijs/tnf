@@ -8,7 +8,6 @@ import {
   setNoDeprecation,
   setNodeTitle,
 } from './fishkit/node.js';
-import { generate } from './generate';
 
 async function run(cwd: string) {
   const argv = yargsParser(process.argv.slice(2));
@@ -40,6 +39,7 @@ async function run(cwd: string) {
       const name = argv._[2] as string;
       assert(type, 'Type is required');
       assert(name, 'Name is required');
+      const { generate } = await import('./generate/generate.js');
       return generate({
         cwd,
         type,
