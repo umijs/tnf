@@ -1,17 +1,12 @@
 import { resolve } from 'pathe';
 import sirv from 'sirv';
-import type { Config } from './config';
 import { createServer } from './fishkit/server';
+import type { Context } from './types';
 
-export interface PreviewOpts {
-  cwd: string;
-  config?: Config;
-}
-
-export async function preview(opts: PreviewOpts) {
-  const devServer = opts.config?.devServer || {};
+export async function preview({ context }: { context: Context }) {
+  const devServer = context.config?.devServer || {};
   const { app } = await createServer({ devServer });
-  const distDir = resolve(opts.cwd, 'dist');
+  const distDir = resolve(context.cwd, 'dist');
 
   app.use(
     '/',

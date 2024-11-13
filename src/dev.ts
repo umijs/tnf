@@ -1,15 +1,10 @@
 import type { BuildParams } from '@umijs/mako';
 import { build } from './build';
-import type { Config } from './config';
 import { createServer } from './fishkit/server';
+import type { Context } from './types';
 
-export interface DevOpts {
-  cwd: string;
-  config?: Config;
-}
-
-export async function dev(opts: DevOpts) {
-  const devServer = opts.config?.devServer || {};
+export async function dev({ context }: { context: Context }) {
+  const devServer = context.config?.devServer || {};
   const { hmrPort, host } = await createServer({ devServer, hmr: true });
 
   // build mako config
@@ -23,10 +18,8 @@ export async function dev(opts: DevOpts) {
   devMakoConfig.mode = 'development';
 
   await build({
-    ...opts,
-    config: opts.config,
+    context,
     devMakoConfig,
-    mode: 'development',
     watch: true,
   });
 }

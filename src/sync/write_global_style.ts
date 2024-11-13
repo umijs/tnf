@@ -11,8 +11,8 @@ export function getStyleImportPath(basePath: string) {
   return ext ? `import '${basePath}${ext}';` : '';
 }
 
-export function writeGlobalStyle(opts: SyncOptions) {
-  const { cwd } = opts;
+export function writeGlobalStyle({ context }: SyncOptions) {
+  const { cwd } = context;
   const globalStylePath = path.join(cwd, 'src/global');
   return getStyleImportPath(globalStylePath);
 }

@@ -2,8 +2,11 @@ import { type Config, generator } from '@tanstack/router-generator';
 import path from 'pathe';
 import type { SyncOptions } from './sync';
 
-export async function writeRouteTree(opts: SyncOptions) {
-  const { cwd, tmpPath } = opts;
+export async function writeRouteTree({ context }: SyncOptions) {
+  const {
+    cwd,
+    paths: { tmpPath },
+  } = context;
   await generator({
     routeFileIgnorePrefix: '-',
     routesDirectory: path.join(cwd, 'src/pages'),

@@ -1,7 +1,6 @@
 /node_modules
 /dist
 /examples/**/src/.tnf
-/examples/**/src/.tailwindcss
 /examples/**/dist
 /examples/**/node_modules
 /create-tnf/node_modules
