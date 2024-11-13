@@ -1,8 +1,4 @@
 {
-  "extends": "@total-typescript/tsconfig/bundler/dom",
-  "compilerOptions": {
-    "jsx": "react",
-    "rootDir": "./src"
-  },
-  "include": ["src", "typings.d.ts", "src/.tnf/client.tsx"]
+  "extends": "./.tnf/tsconfig.json",
+  "compilerOptions": {}
 }

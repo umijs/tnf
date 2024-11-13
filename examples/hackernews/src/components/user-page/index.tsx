@@ -1,4 +1,3 @@
-import React from 'react';
 import type { User } from '../../types';
 import { timeAgo } from '../../utils';
 import styles from './index.module.less';

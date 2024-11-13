@@ -1,4 +1,4 @@
-import React, { Link } from '@umijs/tnf/router';
+import { Link } from '@umijs/tnf/router';
 import type { CommentType } from '../../types';
 import { timeAgo } from '../../utils';
 import styles from './index.module.less';

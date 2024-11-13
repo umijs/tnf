@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import React, { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
+import { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
 import styles from './__root.module.less';
 
 export const Route = createRootRoute({

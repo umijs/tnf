@@ -12,7 +12,6 @@ export function timeAgo(time) {
   } else if (between < 86400) {
     return pluralize(~~(between / 3600), ' hour');
   }
-
   return pluralize(~~(between / 86400), ' day');
 }
 

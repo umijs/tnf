@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
 
 export const Route = createRootRoute({

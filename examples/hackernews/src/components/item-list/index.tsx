@@ -1,4 +1,4 @@
-import React, { Link } from '@umijs/tnf/router';
+import { Link } from '@umijs/tnf/router';
 import type { ItemProps } from '../../types';
 import Item from '../item';
 import styles from './index.module.less';

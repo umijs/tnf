@@ -1,4 +1,4 @@
-import React, { Link } from '@umijs/tnf/router';
+import { Link } from '@umijs/tnf/router';
 import { host, timeAgo } from '../../utils';
 import styles from './index.module.less';
 

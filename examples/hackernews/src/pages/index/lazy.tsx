@@ -1,4 +1,4 @@
-import React, { createLazyFileRoute } from '@umijs/tnf/router';
+import { createLazyFileRoute } from '@umijs/tnf/router';
 import ItemList from '../../components/item-list';
 import type { FetchListResult, Params } from '../../types';
 

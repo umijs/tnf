@@ -1,4 +1,4 @@
-import React, { Link } from '@umijs/tnf/router';
+import { Link } from '@umijs/tnf/router';
 import type { CommentType, ItemProps } from '../../types';
 import { host, timeAgo } from '../../utils';
 import Comment from '../comment';

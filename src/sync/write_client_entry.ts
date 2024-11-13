@@ -1,5 +1,5 @@
-import fs from 'fs';
 import path from 'pathe';
+import { writeFileSync } from './fs';
 import type { SyncOptions } from './sync';
 
 export function writeClientEntry({
@@ -16,7 +16,7 @@ export function writeClientEntry({
     config,
   } = opts.context;
 
-  fs.writeFileSync(
+  writeFileSync(
     path.join(tmpPath, 'client.tsx'),
     `
 import React from 'react';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { createFileRoute } from '@umijs/tnf/router';
 import styles from './index.module.less';
 

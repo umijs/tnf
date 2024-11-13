@@ -4,6 +4,7 @@ import { writeClientEntry } from './write_client_entry';
 import { writeGlobalStyle } from './write_global_style';
 import { writeRouteTree } from './write_route_tree';
 import { writeTailwindcss } from './write_tailwindcss';
+import { writeTypes } from './write_types';
 
 export interface SyncOptions {
   context: Context;
@@ -19,6 +20,7 @@ export async function sync(opts: SyncOptions) {
     fs.mkdirSync(tmpPath, { recursive: true });
   }
 
+  await writeTypes({ context });
   await writeRouteTree({ context });
   const globalStyleImportPath = writeGlobalStyle({ context });
   const tailwindcssPath = await writeTailwindcss({ context });

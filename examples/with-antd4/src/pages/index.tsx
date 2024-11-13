@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { createFileRoute } from '@umijs/tnf/router';
 import MyButton from '../components/MyButton';
 import styles from './index.module.less';

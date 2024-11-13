@@ -13,12 +13,12 @@ import type { Context } from './types/index.js';
 async function buildContext(cwd: string): Promise<Context> {
   const argv = yargsParser(process.argv.slice(2));
   const cmd = argv._[0];
-  const isBuild = cmd === 'build';
+  const isDev = cmd === 'development';
   return {
     argv,
     config: await loadConfig({ cwd }),
     cwd,
-    mode: isBuild ? 'production' : 'development',
+    mode: isDev ? 'development' : 'production',
     paths: {
       tmpPath: path.join(cwd, `.${FRAMEWORK_NAME}`),
     },

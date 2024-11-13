@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet, createRootRoute } from '@umijs/tnf/router';
 import 'antd/dist/antd.less';
 
