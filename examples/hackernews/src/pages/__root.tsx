@@ -34,7 +34,7 @@ export const Route = createRootRoute({
               );
             })}
             <span className={styles.github}>
-              Built with
+              Built with{' '}
               <a
                 rel="noopener noreferrer"
                 href="https://github.com/umijs/tnf"

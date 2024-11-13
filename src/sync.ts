@@ -3,17 +3,21 @@ import type { Config } from '@tanstack/router-generator';
 import fs from 'fs';
 import path from 'pathe';
 import type { Config as TnfConfig } from './config';
+import { generateTailwindcss } from './fishkit/tailwindcss';
 
 interface BaseOptions {
   cwd: string;
   tmpPath: string;
   config?: TnfConfig;
+  mode: 'development' | 'production';
 }
 
-interface PrepareOptions extends BaseOptions {}
+interface SyncOptions extends BaseOptions {
+  runAgain?: boolean;
+}
 
-export async function prepare(opts: PrepareOptions) {
-  const { cwd, tmpPath, config } = opts;
+export async function sync(opts: SyncOptions) {
+  const { cwd, tmpPath, config, mode } = opts;
 
   fs.rmSync(tmpPath, { recursive: true, force: true });
   fs.mkdirSync(tmpPath, { recursive: true });
@@ -44,6 +48,17 @@ export async function prepare(opts: PrepareOptions) {
     },
   } as Config);
 
+  // tailwindcss
+  let tailwindcssPath: string | undefined;
+  if (config?.tailwindcss && !opts.runAgain) {
+    tailwindcssPath = await generateTailwindcss({
+      cwd,
+      tmpPath,
+      config: config?.tailwindcss,
+      mode,
+    });
+  }
+
   // generate client entry
   fs.writeFileSync(
     path.join(tmpPath, 'client.tsx'),
@@ -55,6 +70,7 @@ import {
   createRouter,
 } from '@umijs/tnf/router';
 import { routeTree } from './routeTree.gen';
+${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
 const router = createRouter({
   routeTree,
   defaultPreload: ${config?.router?.defaultPreload ? `'${config.router.defaultPreload}'` : 'false'},
