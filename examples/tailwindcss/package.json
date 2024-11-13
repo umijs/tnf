@@ -1,5 +1,5 @@
 {
-  "name": "@examples/normal",
+  "name": "@examples/tailwindcss",
   "private": true,
   "scripts": {
     "build": "tnf build",
@@ -12,7 +12,6 @@
     "@umijs/tnf": "workspace:*"
   },
   "devDependencies": {
-    "@total-typescript/tsconfig": "^1.0.4",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
   }
