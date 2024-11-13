@@ -1,73 +1,30 @@
-import { intro, isCancel, outro, select, text } from '@clack/prompts';
-import fs from 'fs';
-import path from 'pathe';
+import assert from 'assert';
+import yargsParser from 'yargs-parser';
+import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants.js';
+import { create } from './create.js';
+import {
+  checkVersion,
+  setNoDeprecation,
+  setNodeTitle,
+} from './fishkit/node.js';
 
-export async function create({
-  cwd,
-  name,
-  template,
-}: {
-  cwd: string;
-  name?: string;
-  template?: string;
-}) {
-  intro('Creating a new project...');
+async function run(cwd: string) {
+  const argv = yargsParser(process.argv.slice(1));
+  const cmd = argv._[0];
+  assert(cmd, 'Command is required');
 
-  const templatesPath = path.join(__dirname, '../../templates');
-  const templateList = fs
-    .readdirSync(templatesPath)
-    .filter((file) =>
-      fs.statSync(path.join(templatesPath, file)).isDirectory(),
-    );
-  const selectedTemplate =
-    template ||
-    (await select({
-      message: 'Select a template:',
-      options: templateList.map((template) => ({
-        label: template,
-        value: template,
-      })),
-    }));
-  if (isCancel(selectedTemplate)) {
-    outro('Aborted');
-    return;
-  }
-  const projectName = await (async () => {
-    if (name) {
-      const error = validate(name);
-      if (error) {
-        throw new Error(error);
-      }
-      return name;
-    }
-    return await text({
-      message: 'Project name:',
-      initialValue: 'myapp',
-      validate,
-    });
-    function validate(value: string) {
-      if (!value) {
-        return `Project name is required but got ${value}`;
-      }
-      if (fs.existsSync(path.join(cwd, value))) {
-        return `Project ${path.join(cwd, value)} already exists`;
-      }
-    }
-  })();
-  if (isCancel(projectName)) {
-    outro('Aborted');
-    return;
-  }
-  if (fs.existsSync(path.join(cwd, projectName))) {
-    throw new Error('Project already exists');
-  }
-  const templatePath = path.join(templatesPath, selectedTemplate as string);
-  const projectPath = path.join(cwd, projectName);
-  fs.cpSync(templatePath, projectPath, { recursive: true });
-  outro(`Project created in ${projectPath}.`);
-  console.log(`Now run:
-
-    cd ${projectPath}
-    npm install
-    npm run build`);
+  return create({
+    cwd: cwd,
+    name: argv._[1] as string | undefined,
+    template: argv.template,
+  });
 }
+
+setNoDeprecation();
+checkVersion(MIN_NODE_VERSION);
+setNodeTitle(FRAMEWORK_NAME);
+
+run(process.cwd()).catch((err) => {
+  console.error(err.message);
+  process.exit(1);
+});

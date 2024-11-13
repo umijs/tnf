@@ -1,14 +1,17 @@
 {
-  "name": "create-tnf",
+  "name": "@umijs/create-tnf",
   "version": "0.1.2",
   "description": "A standalone create command for TNF.",
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "bin": {
+    "create-tnf": "bin/create-tnf.js"
+  },
   "scripts": {
     "build": "father build"
   },
   "files": [
-    "dist"
+    "bin",
+    "dist",
+    "templates"
   ],
   "dependencies": {
     "@clack/prompts": "^0.7.0",
