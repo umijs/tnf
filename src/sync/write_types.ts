@@ -41,7 +41,12 @@ export function writeTypes({ context }: SyncOptions) {
     "moduleResolution": "bundler",
     "noEmit": true,
     "strictNullChecks": true,
-    "target": "esnext"
+    "target": "esnext",
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
   },
   "include": [
     "client.tsx",
