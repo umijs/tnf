@@ -1,6 +1,8 @@
 import fs from 'fs-extra';
 import path from 'pathe';
+import { setConfig } from '../config/config';
 import type { Context } from '../types';
+import GeneratorHelper from './utils';
 
 export async function generateTailwindcss({ context }: { context: Context }) {
   const cwd = context.cwd;
@@ -14,6 +16,8 @@ export async function generateTailwindcss({ context }: { context: Context }) {
       );
     }
   }
+
+  setConfig({ cwd, name: 'tailwindcss', value: true });
 
   const tailwindConfig = `/** @type {import('tailwindcss').Config} */
 export default {
@@ -41,6 +45,15 @@ export default {
 
     console.log(`Generated file at: ${tailwindConfigPath}`);
     console.log(`Generated file at: ${tailwindCSSPath}`);
+
+    const helper = new GeneratorHelper({
+      cwd,
+    });
+
+    helper.addDevDeps({
+      tailwindcss: '^3',
+    });
+    helper.installDeps();
   } catch (error) {
     throw new Error(`Failed to write files: ${error}`);
   }
