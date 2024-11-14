@@ -110,17 +110,39 @@ export async function writeTailwindcss({
   };
 
   if (!fs.existsSync(paths.input)) {
-    console.log(
-      'Enabling feature tailwindcss requires input file src/tailwind.css',
+    paths.input = path.join(rootPath, 'tailwindDirectives.css');
+  }
+
+  // 当 tailwindDirectives.css 也不存在时，尝试生成
+  if (!fs.existsSync(paths.input)) {
+    await fs.ensureDir(path.dirname(paths.input));
+    await fs.writeFile(
+      paths.input,
+      `@tailwind base;
+@tailwind components;
+@tailwind utilities;
+`,
     );
-    return;
   }
 
   if (!fs.existsSync(paths.config)) {
-    console.log(
-      'Enabling feature tailwindcss requires config file tailwind.config.js',
+    paths.config = path.join(rootPath, 'tailwind.config.js');
+  }
+
+  // 当 tailwind.config.js 也不存在时，尝试生成
+  if (!fs.existsSync(paths.config)) {
+    await fs.ensureDir(path.dirname(paths.config));
+    await fs.writeFile(
+      paths.config,
+      `/** @type {import('tailwindcss').Config} */
+export default{
+content: ['./src/**/*.{js,ts,jsx,tsx}'],
+theme: {
+  extend: {},
+},
+plugins: [],
+};`,
     );
-    return;
   }
 
   await generateFile({
