@@ -24,7 +24,7 @@ export function writeTypes({ context }: SyncOptions) {
   checkTsconfig(fs.readFileSync(userTsconfigPath, 'utf-8'));
 
   const tsconfigPath = path.join(tmpPath, 'tsconfig.json');
-  // TODO: generate paths from aliases
+  // TODO: generate paths from aliases in user config
   const tsconfigContent = `
 {
   "compilerOptions": {

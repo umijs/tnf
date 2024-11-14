@@ -110,23 +110,17 @@ Return current project directory.
 
 ### ctx.debug
 
-> Not implemented
-
 - Type: `(message: string) => void`
 
 Print debug information.
 
 ### ctx.error
 
-> Not implemented
-
 - Type: `(message: string) => void`
 
 Print error information.
 
 ### ctx.info
-
-> Not implemented
 
 - Type: `(message: string) => void`
 
@@ -139,8 +133,6 @@ Print information.
 Return current user config.
 
 ### ctx.warn
-
-> Not implemented
 
 - Type: `(message: string) => void`
 

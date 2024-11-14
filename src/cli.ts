@@ -3,6 +3,7 @@ import path from 'pathe';
 import yargsParser from 'yargs-parser';
 import { loadConfig } from './config/config';
 import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants';
+import { debug, error, info, warn } from './fishkit/logger';
 import { checkVersion, setNoDeprecation, setNodeTitle } from './fishkit/node';
 import { PluginManager } from './plugin/plugin_manager';
 import { type Context, Mode } from './types';
@@ -19,10 +20,10 @@ async function buildContext(cwd: string): Promise<Context> {
     cwd,
     // TODO: diff config and userConfig
     userConfig: config,
-    // TODO: debug
-    // TODO: error
-    // TODO: info
-    // TODO: warn
+    debug,
+    error,
+    info,
+    warn,
     // TODO: watcher
   };
   return {
