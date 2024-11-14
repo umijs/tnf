@@ -1,6 +1,32 @@
-import { configSchema } from '@tanstack/router-generator';
 import { z } from 'zod';
 import { PluginSchema } from '../plugin/types';
+
+// why no use { configSchema } from '@tanstack/router-generator';
+// configSchema has default
+const RouterGeneratorConfig = z
+  .object({
+    routeFileIgnorePrefix: z.string().optional(),
+    routeFileIgnorePattern: z.string().optional(),
+    routesDirectory: z.string().optional(),
+    generatedRouteTree: z.string().optional(),
+    quoteStyle: z.enum(['single', 'double']).optional(),
+    semicolons: z.boolean().optional(),
+    disableTypes: z.boolean().optional(),
+    addExtensions: z.boolean().optional(),
+    disableLogging: z.boolean().optional(),
+    disableManifestGeneration: z.boolean().optional(),
+    apiBase: z.string().optional(),
+    routeTreeFileHeader: z.array(z.string()).optional(),
+    routeTreeFileFooter: z.array(z.string()).optional(),
+    indexToken: z.string().optional(),
+    routeToken: z.string().optional(),
+    experimental: z
+      .object({
+        enableCodeSplitting: z.boolean().optional(),
+      })
+      .optional(),
+  })
+  .optional();
 
 export const ConfigSchema = z.object({
   externals: z.record(z.string()).optional(),
@@ -43,7 +69,7 @@ export const ConfigSchema = z.object({
           z.literal(false),
         ])
         .optional(),
-      convention: configSchema,
+      convention: RouterGeneratorConfig,
     })
     .optional(),
   tailwindcss: z.boolean().optional(),
