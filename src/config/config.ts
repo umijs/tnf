@@ -69,7 +69,10 @@ export function list(config: Config, name?: string) {
   console.log(`  Configs:`);
   console.log();
   if (name) {
-    if (!config[name as keyof Config]) {
+    if (
+      !config[name as keyof Config] &&
+      config[name as keyof Config] !== false
+    ) {
       // current key not existed
       throw new Error(`key '${name}' not found`);
     }
