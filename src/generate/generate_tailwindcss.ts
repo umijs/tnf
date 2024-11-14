@@ -4,6 +4,17 @@ import type { Context } from '../types';
 
 export async function generateTailwindcss({ context }: { context: Context }) {
   const cwd = context.cwd;
+  const tailwindConfigPath = path.join(cwd, 'tailwind.config.js');
+  const tailwindCSSPath = path.join(cwd, 'src/tailwind.css');
+
+  if (!context.argv.force) {
+    if (fs.existsSync(tailwindConfigPath) || fs.existsSync(tailwindCSSPath)) {
+      throw new Error(
+        'Tailwind files already exist. Use --force to overwrite.',
+      );
+    }
+  }
+
   const tailwindConfig = `/** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -14,7 +25,8 @@ export default {
     extend: {},
   },
   plugins: [],
-}`;
+}
+`;
 
   const tailwindCSS = `@tailwind base;
 @tailwind components;
@@ -23,37 +35,13 @@ export default {
 
   fs.ensureDirSync(path.join(cwd, 'src'));
 
-  const tailwindConfigPath = path.join(cwd, 'tailwind.config.js');
-  const tailwindCSSPath = path.join(cwd, 'src/tailwind.css');
-
-  const results = await Promise.all([
-    writeFileWithConfirmation(tailwindConfigPath, tailwindConfig),
-    writeFileWithConfirmation(tailwindCSSPath, tailwindCSS),
-  ]);
-
-  results.forEach((result) => console.log(result.message));
-}
-
-async function writeFileWithConfirmation(
-  filePath: string,
-  content: string,
-): Promise<{
-  message: string;
-}> {
-  if (fs.existsSync(filePath)) {
-    return {
-      message: `Skipped writing to ${filePath}`,
-    };
-  }
-
   try {
-    await fs.writeFile(filePath, content);
-    return {
-      message: `Generated file at: ${filePath}`,
-    };
+    await fs.writeFile(tailwindConfigPath, tailwindConfig);
+    await fs.writeFile(tailwindCSSPath, tailwindCSS);
+
+    console.log(`Generated file at: ${tailwindConfigPath}`);
+    console.log(`Generated file at: ${tailwindCSSPath}`);
   } catch (error) {
-    return {
-      message: `Failed to write file: ${error}`,
-    };
+    throw new Error(`Failed to write files: ${error}`);
   }
 }
