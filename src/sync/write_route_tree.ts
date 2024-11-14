@@ -5,8 +5,11 @@ import type { SyncOptions } from './sync';
 export async function writeRouteTree({ context }: SyncOptions) {
   const {
     cwd,
+    config,
     paths: { tmpPath },
   } = context;
+  const { router } = config;
+
   await generator({
     routeFileIgnorePrefix: '-',
     routesDirectory: path.join(cwd, 'src/pages'),
@@ -30,5 +33,6 @@ export async function writeRouteTree({ context }: SyncOptions) {
     experimental: {
       enableCodeSplitting: true,
     },
+    ...(router?.convention || {}),
   } as Config);
 }

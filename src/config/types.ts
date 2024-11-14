@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { PluginSchema } from '../plugin/types';
+import { configSchema } from '@tanstack/router-generator';
 
 export const ConfigSchema = z.object({
   externals: z.record(z.string()).optional(),
@@ -42,6 +43,7 @@ export const ConfigSchema = z.object({
           z.literal(false),
         ])
         .optional(),
+      convention: configSchema,
     })
     .optional(),
   tailwindcss: z.boolean().optional(),
