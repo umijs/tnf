@@ -5,8 +5,8 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { Mode } from '../types';
 import type { Bundler } from './bundler';
 
-let _hmrPort = 8000;
-let _host = 'localhost';
+let _hmrPort: number;
+let _host: string;
 
 export default {
   build: async (opts) => {
@@ -35,7 +35,6 @@ export default {
         host: _host,
       };
     }
-    console.log('config', config);
 
     const mako = await import('@umijs/mako');
     await mako.build({
