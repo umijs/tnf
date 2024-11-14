@@ -3,6 +3,7 @@ import { PluginSchema } from '../plugin/types';
 
 export const ConfigSchema = z.object({
   alias: z.array(z.tuple([z.string(), z.string()])).optional(),
+  bundler: z.enum(['webpack', 'mako']).optional(),
   externals: z.record(z.string()).optional(),
   devServer: z
     .object({
