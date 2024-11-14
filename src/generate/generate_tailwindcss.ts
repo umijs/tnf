@@ -1,4 +1,3 @@
-import { confirm } from '@clack/prompts';
 import fs from 'fs-extra';
 import path from 'pathe';
 import type { Context } from '../types';
@@ -32,16 +31,8 @@ export default {
   const tailwindCSSPath = path.join(cwd, 'src/tailwind.css');
 
   const results = await Promise.all([
-    writeFileWithConfirmation(
-      tailwindConfigPath,
-      tailwindConfig,
-      'Tailwind config file already exists, do you want to overwrite?',
-    ),
-    writeFileWithConfirmation(
-      tailwindCSSPath,
-      tailwindCSS,
-      'Tailwind CSS file already exists, do you want to overwrite?',
-    ),
+    writeFileWithConfirmation(tailwindConfigPath, tailwindConfig),
+    writeFileWithConfirmation(tailwindCSSPath, tailwindCSS),
   ]);
 
   results
@@ -52,19 +43,12 @@ export default {
 async function writeFileWithConfirmation(
   filePath: string,
   content: string,
-  confirmMessage: string,
 ): Promise<FileOperationResult> {
   if (fs.existsSync(filePath)) {
-    const shouldOverwrite = await confirm({
-      message: confirmMessage,
-    });
-
-    if (!shouldOverwrite) {
-      return {
-        success: false,
-        message: `Skipped writing to ${filePath}`,
-      };
-    }
+    return {
+      success: false,
+      message: `Skipped writing to ${filePath}`,
+    };
   }
 
   try {
