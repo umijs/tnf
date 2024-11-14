@@ -6,16 +6,15 @@ import type { Context } from './types';
 
 export async function dev({ context }: { context: Context }) {
   const devServer = context.config?.devServer || {};
-  const { hmrPort, host, server, app } = await createServer({
+  const { port, host, server, app } = await createServer({
     devServer,
-    hmr: true,
   });
   const bundler = createBundler({ bundler: BundlerType.MAKO });
   await bundler.configDevServer({
-    hmrPort,
-    host,
-    server,
     app,
+    host,
+    port,
+    server,
   });
   await build({
     context,

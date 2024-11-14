@@ -1,6 +1,7 @@
 import type { BuildParams } from '@umijs/mako';
 import assert from 'assert';
 import proxy from 'express-http-proxy';
+import { getPort } from 'get-port-please';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { Mode } from '../types';
 import type { Bundler } from './bundler';
@@ -45,9 +46,11 @@ export default {
   },
 
   configDevServer: async (opts) => {
-    const { hmrPort, host } = opts;
-    assert(hmrPort, 'hmrPort is required');
+    const { port, host } = opts;
+    assert(port, 'port is required');
     assert(host, 'host is required');
+
+    const hmrPort = await getPort(port + 1);
     _hmrPort = hmrPort;
     _host = host;
 

@@ -10,7 +10,6 @@ import { createHttpsServer } from './https';
 
 export interface ServerOpts {
   devServer: Config['devServer'];
-  hmr?: boolean;
 }
 
 export async function createServer(opts: ServerOpts) {
@@ -21,7 +20,6 @@ export async function createServer(opts: ServerOpts) {
     ip,
   } = opts.devServer || {};
   const _port = await getPort(port);
-  const hmrPort = opts.hmr ? await getPort(_port + 1) : 0;
   const app = express();
 
   // cors
@@ -66,7 +64,7 @@ export async function createServer(opts: ServerOpts) {
     console.log(`Server is running on ${protocol}//${host}:${_port}`);
   });
 
-  return { server, app, hmrPort, port: _port, ip, host };
+  return { server, app, port: _port, ip, host };
 }
 
 function uniq(arr: string[]) {

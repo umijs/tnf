@@ -31,7 +31,7 @@ export interface BundlerBuildOptions {
 }
 
 export interface BundlerDevOptions {
-  hmrPort: number;
+  port: number;
   host: string;
   server: any;
   app: Express;
