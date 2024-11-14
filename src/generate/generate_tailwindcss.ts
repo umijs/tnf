@@ -23,7 +23,8 @@ export default {
 
   const tailwindCSS = `@tailwind base;
 @tailwind components;
-@tailwind utilities;`;
+@tailwind utilities;
+`;
 
   fs.ensureDirSync(path.join(cwd, 'src'));
 
