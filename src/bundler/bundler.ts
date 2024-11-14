@@ -42,10 +42,10 @@ export function createBundler(opts: BundlerOpts): Bundler {
     // TODO: why need double .default?
     if (opts.bundler === BundlerType.MAKO) {
       // @ts-expect-error
-      return (await import('./bundler-mako.js')).default.default;
+      return (await import('./bundler_mako.js')).default.default;
     } else if (opts.bundler === BundlerType.WEBPACK) {
       // @ts-expect-error
-      return (await import('./bundler-webpack.js')).default.default;
+      return (await import('./bundler_webpack.js')).default.default;
     } else {
       throw new Error(`Unsupported bundler ${opts.bundler}`);
     }
