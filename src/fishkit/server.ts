@@ -6,7 +6,7 @@ import proxy from 'express-http-proxy';
 import { getPort } from 'get-port-please';
 import http from 'http';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { type Config } from '../config';
+import type { Config } from '../config/types';
 import { DEFAULT_PORT } from '../constants';
 import { createHttpsServer } from './https';
 

@@ -1,5 +1,5 @@
 import type yargsParser from 'yargs-parser';
-import type { Config } from '../config';
+import type { Config } from '../config/types';
 import type { PluginManager } from '../plugin/plugin_manager';
 import type { Plugin } from '../plugin/types';
 

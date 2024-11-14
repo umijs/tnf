@@ -1,7 +1,7 @@
 import assert from 'assert';
 import path from 'pathe';
 import yargsParser from 'yargs-parser';
-import { loadConfig } from './config';
+import { loadConfig } from './config/config';
 import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants';
 import { checkVersion, setNoDeprecation, setNodeTitle } from './fishkit/node';
 import { PluginManager } from './plugin/plugin_manager';

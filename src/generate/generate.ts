@@ -1,4 +1,3 @@
-import type yargsParser from 'yargs-parser';
 import type { Context } from '../types';
 import { generatePage } from './generate_page';
 

@@ -90,7 +90,7 @@ $ pnpm release:create-tnf
 We use [Prettier](https://prettier.io/) to format the code, please run `pnpm format` to format the code. And we also have some other rules:
 
 - Do not use specifiers for `fs` and `path` modules.
-- Do use `pathe` instead of `path` module.
+- Do use `pathe` instead of `path` module for windows compatibility.
 
 ```ts
 // bad
