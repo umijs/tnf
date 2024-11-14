@@ -1,8 +1,8 @@
 import fs from 'fs-extra';
 import path from 'pathe';
 import { setConfig } from '../config/config';
+import { PackageManager } from '../fishkit/npm';
 import type { Context } from '../types';
-import GeneratorHelper from './utils';
 
 export async function generateTailwindcss({ context }: { context: Context }) {
   const cwd = context.cwd;
@@ -46,14 +46,14 @@ export default {
     console.log(`Generated file at: ${tailwindConfigPath}`);
     console.log(`Generated file at: ${tailwindCSSPath}`);
 
-    const helper = new GeneratorHelper({
+    const pm = new PackageManager({
       cwd,
     });
 
-    helper.addDevDeps({
+    pm.addDevDeps({
       tailwindcss: '^3',
     });
-    helper.installDeps();
+    pm.installDeps();
   } catch (error) {
     throw new Error(`Failed to write files: ${error}`);
   }
