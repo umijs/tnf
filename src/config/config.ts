@@ -5,7 +5,8 @@ import {
 import { updateConfig } from 'c12/update';
 import pc from 'picocolors';
 import { CONFIG_FILE } from '../constants';
-import type { Config, Context } from './types';
+import type { Context } from '../types';
+import type { Config } from './types';
 import { ConfigSchema } from './types';
 
 interface ConfigOpts {
