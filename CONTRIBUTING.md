@@ -113,3 +113,15 @@ describe('test', () => {
 // good
 test('test', () => {});
 ```
+
+- Api, commands and config in README.md should be ordered alphabetically.
+
+```ts
+// bad
+- `tnf foo`
+- `tnf bar`
+
+// good
+- `tnf bar`
+- `tnf foo`
+```

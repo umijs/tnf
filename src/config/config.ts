@@ -138,6 +138,7 @@ export async function setConfig({
     },
   });
 }
+
 export async function config({ context }: { context: Context }) {
   const { _ } = context.argv;
   const [, command, name, value] = _;

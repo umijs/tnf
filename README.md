@@ -51,11 +51,11 @@ $ pnpm preview
 ## Commands
 
 - `tnf build`: Build the project.
+- `tnf config list/get/set/remove [name] [value]`: Manage the config.
 - `tnf dev`: Start the development server.
 - `tnf generate/g <type> <name>`: Generate a new page (or component and other types in the future).
 - `tnf preview`: Preview the product after building the project.
 - `tnf sync --mode=<mode>`: Sync the project to the temporary directory.
-- `tnf config [ list | get | set | remove ] [name] [value]`: Quickly view and modify configurations through the command line.
 
 ## API
 
