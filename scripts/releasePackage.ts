@@ -17,11 +17,12 @@ import 'zx/globals';
   console.log('Publishing package...');
   await $`cd ${pkgDir} && npm publish`;
 
-  console.log('Adding to git...');
-  await $`pnpm install`;
   const newVersion = require(path.join(pkgDir, 'package.json')).version;
-  await $`git add ${pkgDir}`;
-  await $`git commit -m "release: ${pkg}@${newVersion}" -n`;
+
+  // console.log('Adding to git...');
+  // await $`pnpm install`;
+  // await $`git add ${pkgDir}`;
+  // await $`git commit -m "release: ${pkg}@${newVersion}" -n`;
 
   console.log('Pushing to git...');
   await $`git push`;
