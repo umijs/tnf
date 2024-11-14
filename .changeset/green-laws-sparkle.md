@@ -2,4 +2,4 @@
 '@umijs/tnf': patch
 ---
 
-generate Adds the tailwindcss command
+feat: add generate tailwindcss
