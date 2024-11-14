@@ -101,3 +101,15 @@ import { join } from 'path';
 import fs from 'fs';
 import path from 'pathe';
 ```
+
+- Do use `test()` instead of `describe` + `it()` for test cases.
+
+```ts
+// bad
+describe('test', () => {
+  it('test', () => {});
+});
+
+// good
+test('test', () => {});
+```
