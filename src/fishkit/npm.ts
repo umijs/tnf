@@ -1,4 +1,4 @@
-import { sync } from 'cross-spawn';
+import { spawnSync } from 'child_process';
 import { existsSync, readFileSync } from 'fs';
 import fs from 'fs-extra';
 import path from 'pathe';
@@ -48,11 +48,15 @@ export const installWithNpmClient = ({
   cwd?: string;
 }): void => {
   const { NODE_ENV: _, ...env } = process.env;
-  const npm = sync(npmClient, [npmClient === 'yarn' ? '' : 'install'], {
+
+  const args = npmClient === 'yarn' ? [] : ['install'];
+
+  const npm = spawnSync(npmClient, args, {
     stdio: 'inherit',
     cwd,
     env,
   });
+
   if (npm.error) {
     throw npm.error;
   }

@@ -17,8 +17,6 @@ export async function generateTailwindcss({ context }: { context: Context }) {
     }
   }
 
-  setConfig({ cwd, name: 'tailwindcss', value: true });
-
   const tailwindConfig = `/** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -53,7 +51,10 @@ export default {
     pm.addDevDeps({
       tailwindcss: '^3',
     });
+
     pm.installDeps();
+
+    setConfig({ cwd, name: 'tailwindcss', value: true });
   } catch (error) {
     throw new Error(`Failed to write files: ${error}`);
   }

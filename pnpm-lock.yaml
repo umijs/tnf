@@ -29,9 +29,6 @@ importers:
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.17
-      '@types/cross-spawn':
-        specifier: ^6.0.6
-        version: 6.0.6
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.0
@@ -71,9 +68,6 @@ importers:
       cors:
         specifier: ^2.8.5
         version: 2.8.5
-      cross-spawn:
-        specifier: ^7.0.5
-        version: 7.0.5
       express:
         specifier: ^4.21.1
         version: 4.21.1
@@ -3226,12 +3220,6 @@ packages:
 
   /@types/cors@2.8.17:
     resolution: {integrity: sha512-8CGDvrBj1zgo2qE+oS3pOCyYNqCPryMWY2bGfwA0dcfopWGgxs+78df0Rs3rc9THP4JkOhLsAa+15VdpAqkcUA==}
-    dependencies:
-      '@types/node': 22.9.0
-    dev: false
-
-  /@types/cross-spawn@6.0.6:
-    resolution: {integrity: sha512-fXRhhUkG4H3TQk5dBhQ7m/JDdSNHKwR2BBia62lhwEIq9xGiQKLxd6LymNhn47SjXhsUEPmxi+PKw2OkW4LLjA==}
     dependencies:
       '@types/node': 22.9.0
     dev: false
