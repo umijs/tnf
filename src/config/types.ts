@@ -1,6 +1,6 @@
+import { configSchema } from '@tanstack/router-generator';
 import { z } from 'zod';
 import { PluginSchema } from '../plugin/types';
-import { configSchema } from '@tanstack/router-generator';
 
 export const ConfigSchema = z.object({
   externals: z.record(z.string()).optional(),
