@@ -59,6 +59,9 @@ async function run(cwd: string) {
     case 'sync':
       const { sync } = await import('./sync/sync.js');
       return sync({ context });
+    case 'config':
+      const { config } = await import('./config/config.js');
+      return config({ context });
     default:
       throw new Error(`Unknown command: ${cmd}`);
   }
