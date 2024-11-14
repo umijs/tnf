@@ -18,7 +18,8 @@
   "ignore": [
     "@examples/hackernews",
     "@examples/normal",
-    "@examples/normal",
+    "@examples/shadcn-cli",
+    "@examples/tailwindcss",
     "@examples/with-antd4"
   ]
 }
