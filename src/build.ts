@@ -1,29 +1,26 @@
-import type { BuildParams } from '@umijs/mako';
 import chokidar from 'chokidar';
 import path from 'pathe';
+import { BundlerType, createBundler } from './bundler/bundler';
 import { PluginHookType } from './plugin/plugin_manager';
 import { sync } from './sync/sync';
-import type { Context } from './types';
+import { type Context } from './types';
 
 export async function build({
   context,
-  devMakoConfig,
   watch,
 }: {
   context: Context;
-  devMakoConfig?: BuildParams['config'];
   watch?: boolean;
 }) {
-  const { cwd, config } = context;
+  const { cwd, config, mode } = context;
 
-  const doSync = async () => {
+  // sync
+  const runSync = async () => {
     await sync({
       context,
     });
   };
-
-  await doSync();
-
+  await runSync();
   if (watch) {
     const pagesDir = path.join(cwd, 'src/pages');
     chokidar
@@ -32,34 +29,34 @@ export async function build({
       })
       .on('all', async (event, path) => {
         console.log(`File ${path} has been ${event}`);
-        await doSync();
+        await runSync();
       });
   }
 
-  const mako = await import('@umijs/mako');
-  // @ts-ignore https://github.com/umijs/mako/pull/1679
-  const bundleConfig: BuildParams['config'] = config || {};
-  bundleConfig.entry = {
-    client: path.join(context.paths.tmpPath, 'client.tsx'),
-  };
-  bundleConfig.mode = 'production';
-  bundleConfig.resolve ||= {};
-  bundleConfig.resolve.alias = [
-    ...(bundleConfig.resolve.alias || []),
-    ['@', path.join(cwd, 'src')],
-    ['react', resolveLib('react')],
-    ['react-dom', resolveLib('react-dom')],
-    ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
-    ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
-  ];
-  await mako.build({
-    config: {
-      ...bundleConfig,
-      ...devMakoConfig,
+  // build
+  const bundler = createBundler({ bundler: BundlerType.MAKO });
+  await bundler.build({
+    bundlerConfig: {
+      entry: {
+        client: path.join(context.paths.tmpPath, 'client.tsx'),
+      },
+      mode,
+      alias: [
+        ['@', path.join(cwd, 'src')],
+        ['react', resolveLib('react')],
+        ['react-dom', resolveLib('react-dom')],
+        ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
+        ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
+        ...(config.alias || []),
+      ],
+      less: config.less,
+      externals: config.externals,
     },
-    root: cwd,
-    watch: !!watch,
+    cwd,
+    watch,
   });
+
+  // build end
   await context.pluginManager.apply({
     hook: 'buildEnd',
     args: [],

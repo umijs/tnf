@@ -2,10 +2,8 @@ import compression from 'compression';
 import history from 'connect-history-api-fallback';
 import cors from 'cors';
 import express from 'express';
-import proxy from 'express-http-proxy';
 import { getPort } from 'get-port-please';
 import http from 'http';
-import { createProxyMiddleware } from 'http-proxy-middleware';
 import type { Config } from '../config/types';
 import { DEFAULT_PORT } from '../constants';
 import { createHttpsServer } from './https';
@@ -45,30 +43,6 @@ export async function createServer(opts: ServerOpts) {
     }),
   );
 
-  let wsProxy;
-  if (opts.hmr) {
-    // proxy ws to mako server
-    wsProxy = createProxyMiddleware({
-      target: `http://127.0.0.1:${hmrPort}`,
-      ws: true,
-    });
-    app.use('/__/hmr-ws', wsProxy);
-    app.use(
-      proxy(`http://127.0.0.1:${hmrPort}`, {
-        proxyReqOptDecorator: function (proxyReqOpts: any) {
-          proxyReqOpts.agent = false;
-          return proxyReqOpts;
-        },
-        filter: function (req: any, res: any) {
-          return req.method == 'GET' || req.method == 'HEAD';
-        },
-        skipToNextHandlerFilter: function (proxyRes: any) {
-          return proxyRes.statusCode !== 200;
-        },
-      }),
-    );
-  }
-
   // create server
   let server;
   if (https) {
@@ -91,11 +65,6 @@ export async function createServer(opts: ServerOpts) {
     const protocol = https ? 'https:' : 'http:';
     console.log(`Server is running on ${protocol}//${host}:${_port}`);
   });
-
-  if (opts.hmr) {
-    // prevent first websocket auto disconnected
-    server.on('upgrade', wsProxy!.upgrade);
-  }
 
   return { server, app, hmrPort, port: _port, ip, host };
 }
