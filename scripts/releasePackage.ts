@@ -10,9 +10,9 @@ import 'zx/globals';
   console.log('Building package...');
   await $`cd ${pkgDir} && npm run build`;
 
-  console.log('Bumping version...');
-  const npmVersion = argv.minor ? 'minor' : 'patch';
-  await $`cd ${pkgDir} && npm version ${npmVersion}`;
+  // console.log('Bumping version...');
+  // const npmVersion = argv.minor ? 'minor' : 'patch';
+  // await $`cd ${pkgDir} && npm version ${npmVersion}`;
 
   console.log('Publishing package...');
   await $`cd ${pkgDir} && npm publish`;
@@ -21,7 +21,7 @@ import 'zx/globals';
   await $`pnpm install`;
   const newVersion = require(path.join(pkgDir, 'package.json')).version;
   await $`git add ${pkgDir}`;
-  await $`git commit -m "release: ${pkg}@${newVersion}"`;
+  await $`git commit -m "release: ${pkg}@${newVersion}" -n`;
 
   console.log('Pushing to git...');
   await $`git push`;

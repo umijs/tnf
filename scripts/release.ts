@@ -19,15 +19,16 @@ import 'zx/globals';
   await $`father doctor`;
 
   console.log('bump version');
-  const currentVersion = require('../package.json').version;
-  console.log('current version', currentVersion);
-  const version = await question('Enter the new version: ');
+  // const currentVersion = require('../package.json').version;
+  // console.log('current version', currentVersion);
+  // const version = await question('Enter the new version: ');
   const pkg = require('../package.json');
-  pkg.version = version;
-  fs.writeFileSync(
-    path.join(__dirname, '../package.json'),
-    JSON.stringify(pkg, null, 2) + '\n',
-  );
+  const version = pkg.version;
+  // pkg.version = version;
+  // fs.writeFileSync(
+  //   path.join(__dirname, '../package.json'),
+  //   JSON.stringify(pkg, null, 2) + '\n',
+  // );
 
   console.log('update templates');
   const templateDir = path.join(__dirname, '../create-tnf/templates');
@@ -43,7 +44,7 @@ import 'zx/globals';
   }
 
   console.log('commit & tag');
-  await $`git commit --all --message "release: ${version}"`;
+  await $`git commit --all --message "release: ${version}" -n`;
   await $`git tag ${version}`;
 
   console.log('publish');
