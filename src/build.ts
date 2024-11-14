@@ -41,14 +41,7 @@ export async function build({
         client: path.join(context.paths.tmpPath, 'client.tsx'),
       },
       mode,
-      alias: [
-        ['@', path.join(cwd, 'src')],
-        ['react', resolveLib('react')],
-        ['react-dom', resolveLib('react-dom')],
-        ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
-        ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
-        ...(config.alias || []),
-      ],
+      alias: config.alias,
       less: config.less,
       externals: config.externals,
     },
@@ -63,8 +56,4 @@ export async function build({
     type: PluginHookType.Parallel,
     pluginContext: context.pluginContext,
   });
-}
-
-function resolveLib(lib: string) {
-  return path.dirname(require.resolve(`${lib}/package.json`));
 }

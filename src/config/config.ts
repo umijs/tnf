@@ -3,6 +3,7 @@ import {
   watchConfig as watchC12Config,
 } from 'c12';
 import { updateConfig } from 'c12/update';
+import path from 'pathe';
 import pc from 'picocolors';
 import { CONFIG_FILE } from '../constants';
 import type { Context } from '../types';
@@ -21,7 +22,20 @@ export async function loadConfig(opts: ConfigOpts): Promise<Config> {
   if (!result.success) {
     throw new Error(`Invalid configuration: ${result.error.message}`);
   }
-  return result.data;
+  const config = result.data;
+  config.alias = [
+    ['@', path.join(opts.cwd, 'src')],
+    ['react', resolveLib('react')],
+    ['react-dom', resolveLib('react-dom')],
+    ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
+    ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
+    ...(config.alias || []),
+  ];
+  return config;
+}
+
+function resolveLib(lib: string) {
+  return path.dirname(require.resolve(`${lib}/package.json`));
 }
 
 export function watchConfig(opts: ConfigOpts) {

@@ -1,22 +1,56 @@
 import fs from 'fs';
-import JSON from 'json5';
+import JSON5 from 'json5';
 import path from 'pathe';
 import { FRAMEWORK_NAME } from '../constants';
 import { writeFileSync } from './fs';
 import type { SyncOptions } from './sync';
 
 function checkTsconfig(content: string) {
-  const json = JSON.parse(content);
+  const json = JSON5.parse(content);
   const extendsPath = `./.${FRAMEWORK_NAME}/tsconfig.json`;
   if (json.extends !== extendsPath) {
     throw new Error(`tsconfig.json is not extending ${extendsPath}`);
   }
 }
 
+export function generatePathsFromAlias(
+  targetDir: string,
+  alias: [string, string][],
+) {
+  const paths: Record<string, string[]> = {};
+  for (const [key, val] of alias) {
+    const relativeVal = relativePath(val);
+    paths[key] = [relativeVal];
+    const isDir = fs.statSync(val).isDirectory();
+    if (isDir) {
+      paths[addSlashStarPrefix(key)] = [addSlashStarPrefix(relativeVal)];
+    }
+  }
+
+  function relativePath(val: string) {
+    const relativeVal = path.relative(targetDir, val);
+    if (relativeVal.startsWith('..')) {
+      return relativeVal;
+    }
+    return `./${relativeVal}`;
+  }
+
+  function addSlashStarPrefix(key: string) {
+    if (key.endsWith('/')) {
+      return `${key}*`;
+    } else {
+      return `${key}/*`;
+    }
+  }
+
+  return paths;
+}
+
 export function writeTypes({ context }: SyncOptions) {
   const {
     paths: { tmpPath },
     cwd,
+    config,
   } = context;
 
   // check user tsconfig
@@ -24,44 +58,36 @@ export function writeTypes({ context }: SyncOptions) {
   checkTsconfig(fs.readFileSync(userTsconfigPath, 'utf-8'));
 
   const tsconfigPath = path.join(tmpPath, 'tsconfig.json');
-  // TODO: generate paths from aliases in user config
-  const tsconfigContent = `
-{
-  "compilerOptions": {
-    "paths": {
-      "@": ["../src"],
-      "@/*": ["../src/*"]
+  const paths = generatePathsFromAlias(tmpPath, config.alias || []);
+  const tsconfig = {
+    compilerOptions: {
+      paths,
+      rootDirs: ['..'],
+      lib: ['esnext', 'dom', 'dom.iterable'],
+      jsx: 'react-jsx',
+      verbatimModuleSyntax: true,
+      isolatedModules: true,
+      module: 'esnext',
+      moduleResolution: 'bundler',
+      noEmit: true,
+      strictNullChecks: true,
+      target: 'esnext',
     },
-    "rootDirs": [".."],
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "noEmit": true,
-    "strictNullChecks": true,
-    "target": "esnext"
-  },
-  "include": [
-    "client.tsx",
-    "types/css.d.ts",
-    "../.tnfrc.ts",
-    "../typings.d.ts",
-    "../src/**/*.js",
-    "../src/**/*.ts",
-    "../src/**/*.tsx",
-    "../tests/**/*.js",
-    "../tests/**/*.ts",
-    "../tests/**/*.tsx"
-  ],
-  "exclude": [
-    "../node_modules/**",
-    "../dist/**"
-  ]
-}
-  `;
-  writeFileSync(tsconfigPath, tsconfigContent);
+    include: [
+      'client.tsx',
+      'types/css.d.ts',
+      '../.tnfrc.ts',
+      '../typings.d.ts',
+      '../src/**/*.js',
+      '../src/**/*.ts',
+      '../src/**/*.tsx',
+      '../tests/**/*.js',
+      '../tests/**/*.ts',
+      '../tests/**/*.tsx',
+    ],
+    exclude: ['../node_modules/**', '../dist/**'],
+  };
+  writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2) + '\n');
 
   // generate types
   const typesPath = path.join(tmpPath, 'types/css.d.ts');
