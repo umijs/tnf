@@ -1,6 +1,7 @@
 import fs from 'fs';
 import JSON from 'json5';
 import path from 'pathe';
+import 'zx/globals';
 import { FRAMEWORK_NAME } from '../constants';
 import { writeFileSync } from './fs';
 import type { SyncOptions } from './sync';
@@ -10,6 +11,23 @@ function checkTsconfig(content: string) {
   const extendsPath = `./.${FRAMEWORK_NAME}/tsconfig.json`;
   if (json.extends !== extendsPath) {
     throw new Error(`tsconfig.json is not extending ${extendsPath}`);
+  }
+}
+
+async function checkCssModulesPlugin(pluginName: string = '') {
+  try {
+    let pkgPath = './package.json';
+    let pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+    let exist = pkg.devDependencies[pluginName];
+
+    if (!exist) {
+      console.log(`Updated ${pkgPath}`);
+      await $`pnpm add -D ${pluginName}`;
+      console.log(`Installed with pnpm`);
+    }
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
   }
 }
 
@@ -23,6 +41,10 @@ export function writeTypes({ context }: SyncOptions) {
   const userTsconfigPath = path.join(cwd, 'tsconfig.json');
   checkTsconfig(fs.readFileSync(userTsconfigPath, 'utf-8'));
 
+  // check css module plugin
+  let pluginName = 'typescript-plugin-css-modules';
+  checkCssModulesPlugin(pluginName);
+
   const tsconfigPath = path.join(tmpPath, 'tsconfig.json');
   // TODO: generate paths from aliases
   const tsconfigContent = `
@@ -32,6 +54,11 @@ export function writeTypes({ context }: SyncOptions) {
       "@": ["../src"],
       "@/*": ["../src/*"]
     },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
     "rootDirs": [".."],
     "lib": ["esnext", "dom", "dom.iterable"],
     "jsx": "react-jsx",
