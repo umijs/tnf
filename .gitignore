@@ -1,8 +1,7 @@
 /node_modules
 /dist
-/examples/*/.tnf
-/examples/*/dist
-/examples/*/node_modules
+/examples/**/.tnf
+/examples/**/dist
+/examples/**/node_modules
 /create-tnf/node_modules
 /create-tnf/dist
-.tnf
