@@ -51,6 +51,7 @@
     "@umijs/mako": "^0.9.4",
     "c12": "^2.0.1",
     "chokidar": "^4.0.1",
+    "click-to-react-component": "1.1.0",
     "compression": "^1.7.5",
     "connect-history-api-fallback": "^2.0.0",
     "cors": "^2.8.5",

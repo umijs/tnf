@@ -12,6 +12,7 @@ export function writeClientEntry({
   tailwindcssPath: string | undefined;
 }) {
   const {
+    cwd,
     paths: { tmpPath },
     config,
   } = opts.context;
@@ -46,9 +47,22 @@ const TanStackRouterDevtools =
           default: res.TanStackRouterDevtools,
         })),
       )
+const ClickToComponent =
+  process.env.NODE_ENV === 'production'
+    ? () => null
+    : React.lazy(() =>
+        import('click-to-react-component').then((res) => ({
+          default: res.ClickToComponent,
+        })),
+      )
+const pathModifier = (path) => {
+  return path.startsWith('${cwd}') ? path : '${cwd}/' + path;
+}
+  
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <>
     <RouterProvider router={router} />
+    <ClickToComponent editor="${config?.clickToComponent?.editor || 'vscode'}" pathModifier={pathModifier} />
     ${
       config?.router?.devtool !== false
         ? `<TanStackRouterDevtools router={router} initialIsOpen=${config?.router?.devtool?.options?.initialIsOpen || '{false}'} position=${config?.router?.devtool?.options?.position || '"bottom-left"'} />`

@@ -75,6 +75,11 @@ export const ConfigSchema = z.object({
     })
     .optional(),
   tailwindcss: z.boolean().optional(),
+  clickToComponent: z
+    .object({
+      editor: z.string().optional(),
+    })
+    .optional(),
 });
 
 export type Config = z.infer<typeof ConfigSchema>;
