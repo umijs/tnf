@@ -9,6 +9,7 @@ interface BundlerOpts {
 export enum BundlerType {
   MAKO = 'mako',
   WEBPACK = 'webpack',
+  VITE = 'vite',
 }
 
 export interface Bundler {
@@ -46,6 +47,9 @@ export function createBundler(opts: BundlerOpts): Bundler {
     } else if (opts.bundler === BundlerType.WEBPACK) {
       // @ts-expect-error
       return (await import('./bundler_webpack.js')).default.default;
+    } else if (opts.bundler === BundlerType.VITE) {
+      // @ts-expect-error
+      return (await import('./bundler_vite.js')).default.default;
     } else {
       throw new Error(`Unsupported bundler ${opts.bundler}`);
     }
