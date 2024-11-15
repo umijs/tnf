@@ -29,12 +29,16 @@ export default {
         },
         mode: bundlerConfig.mode,
         build: {
-          assetsDir: '',
           rollupOptions: {
             output: {
               entryFileNames: '[name].js',
-              chunkFileNames: '[name].js',
-              assetFileNames: '[name].[ext]'
+              chunkFileNames: '[name].css',
+              assetFileNames: (assetInfo: any) => {
+                if (assetInfo.name && /\.(js|css)$/.test(assetInfo.name)) {
+                  return '[name].[ext]';
+                }
+                return '[name]-[hash].[ext]';
+              }
             },
             input: bundlerConfig.entry,
           }
