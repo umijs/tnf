@@ -31,7 +31,8 @@
   ],
   "exports": {
     "./package.json": "./package.json",
-    "./router": "./client/router.js"
+    "./router": "./client/router.js",
+    ".": "./dist/index.js"
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",

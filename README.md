@@ -60,6 +60,7 @@ $ pnpm preview
 ## API
 
 - `@umijs/tnf/router`: The router module, reexported from `@tanstack/react-router`.
+- `@umijs/tnf`: The entry of tnf, including `defineConfig`, ...
 
 ## Config
 

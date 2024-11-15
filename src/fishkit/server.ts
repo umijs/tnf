@@ -12,7 +12,13 @@ export interface ServerOpts {
   devServer: Config['devServer'];
 }
 
-export async function createServer(opts: ServerOpts) {
+export async function createServer(opts: ServerOpts): Promise<{
+  server: http.Server;
+  app: express.Application;
+  port: number;
+  ip?: string;
+  host: string;
+}> {
   const {
     port = DEFAULT_PORT,
     host = 'localhost',

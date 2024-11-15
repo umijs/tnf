@@ -1,4 +1,4 @@
-import type { Express } from 'express';
+import express from 'express';
 import type { Config } from '../config/types';
 import type { Mode } from '../types';
 
@@ -34,7 +34,7 @@ export interface BundlerDevOptions {
   port: number;
   host: string;
   server: any;
-  app: Express;
+  app: express.Application;
 }
 
 export function createBundler(opts: BundlerOpts): Bundler {
