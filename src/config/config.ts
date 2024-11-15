@@ -29,6 +29,10 @@ export async function loadConfig(opts: ConfigOpts): Promise<Config> {
     ['react-dom', resolveLib('react-dom')],
     ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
     ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
+    [
+      'click-to-react-component',
+      path.dirname(require.resolve('click-to-react-component')),
+    ],
     ...(config.alias || []),
   ];
   return config;
