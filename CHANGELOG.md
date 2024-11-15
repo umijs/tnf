@@ -1,5 +1,11 @@
 # @umijs/tnf
 
+## 0.1.4
+
+### Patch Changes
+
+- [`6783570`](https://github.com/umijs/tnf/commit/678357055882c5a5a7a411e9d4c823ece9325927) Thanks [@sorrycc](https://github.com/sorrycc)! - fix tsconfig paths
+
 ## 0.1.3
 
 ### Patch Changes
