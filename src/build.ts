@@ -33,8 +33,12 @@ export async function build({
       });
   }
 
-  // build
-  const bundler = createBundler({ bundler: BundlerType.MAKO });
+  const bundlerType = config.bundler
+    ? BundlerType[config.bundler.toUpperCase() as keyof typeof BundlerType]
+    : BundlerType.MAKO;
+  const bundler = createBundler({
+    bundler: bundlerType,
+  });
   await bundler.build({
     bundlerConfig: {
       entry: {
