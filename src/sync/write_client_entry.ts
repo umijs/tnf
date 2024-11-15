@@ -61,7 +61,7 @@ const pathModifier = (path) => {
   
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <>
-    <RouterProvider router={router}  />
+    <RouterProvider router={router} />
     <ClickToComponent editor="${config?.clickToComponent?.editor || 'vscode'}" pathModifier={pathModifier} />
     ${
       config?.router?.devtool !== false
