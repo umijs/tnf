@@ -76,9 +76,12 @@ export const ConfigSchema = z.object({
     .optional(),
   tailwindcss: z.boolean().optional(),
   clickToComponent: z
-    .object({
-      editor: z.string().optional(),
-    })
+    .union([
+      z.object({
+        editor: z.enum(['vscode', 'vscode-insiders', 'cursor']).optional(),
+      }),
+      z.literal(false),
+    ])
     .optional(),
 });
 
