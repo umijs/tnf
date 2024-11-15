@@ -1,6 +1,6 @@
-import type { Bundler } from './bundler';
 import path from 'path';
 import { pathToFileURL } from 'url';
+import type { Bundler } from './bundler';
 
 export default {
   build: async (opts) => {
@@ -8,7 +8,7 @@ export default {
     try {
       // 直接定位到 vite 包的 ESM 入口
       const viteModulePath = pathToFileURL(
-        path.join(cwd, 'node_modules', 'vite', 'dist', 'node', 'index.js')
+        path.join(cwd, 'node_modules', 'vite', 'dist', 'node', 'index.js'),
       ).href;
 
       const { build } = await import(viteModulePath).catch((e) => {
@@ -38,14 +38,14 @@ export default {
                   return '[name].[ext]';
                 }
                 return '[name]-[hash].[ext]';
-              }
+              },
             },
             input: bundlerConfig.entry,
-          }
+          },
         },
         css: {
           preprocessorOptions: {
-            less: bundlerConfig.less
+            less: bundlerConfig.less,
           },
         },
       });
