@@ -14,12 +14,12 @@ function checkTsconfig(content: string) {
   }
 }
 
-async function installTypescriptPluginCssModules(context: { cwd: string }) {
+function installTypescriptPluginCssModules(context: { cwd: string }) {
   const pm = new PackageManager({ cwd: context.cwd });
-  pm.addDevDeps({ 'typescript-plugin-css-modules': '^5.1.0' });
 
-  await pm.installDeps().catch(() => {
-    throw new Error('Failed to install typescript-plugin-css-modules');
+  pm.installSpecifiedDeps({
+    pkg: 'typescript-plugin-css-modules@^5.1.0',
+    isDev: true,
   });
 }
 
@@ -67,7 +67,7 @@ export async function writeTypes({ context }: SyncOptions) {
   const userTsconfigPath = path.join(cwd, 'tsconfig.json');
   checkTsconfig(fs.readFileSync(userTsconfigPath, 'utf-8'));
 
-  await installTypescriptPluginCssModules(context);
+  installTypescriptPluginCssModules(context);
 
   const tsconfigPath = path.join(tmpPath, 'tsconfig.json');
   const paths = generatePathsFromAlias(tmpPath, config.alias || []);
