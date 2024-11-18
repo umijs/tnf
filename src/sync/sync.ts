@@ -3,6 +3,8 @@ import type { Context } from '../types';
 import { writeClientEntry } from './write_client_entry';
 import { writeGlobalStyle } from './write_global_style';
 import { writeRouteTree } from './write_route_tree';
+import { writeRouter } from './write_router';
+import { writeServerEntry } from './write_server_entry';
 import { writeTailwindcss } from './write_tailwindcss';
 import { writeTypes } from './write_types';
 
@@ -24,6 +26,10 @@ export async function sync(opts: SyncOptions) {
   await writeRouteTree({ context });
   const globalStyleImportPath = writeGlobalStyle({ context });
   const tailwindcssPath = await writeTailwindcss({ context });
+  writeRouter({ opts });
+  if (context.config?.ssr) {
+    writeServerEntry({ opts });
+  }
   writeClientEntry({
     opts,
     globalStyleImportPath,

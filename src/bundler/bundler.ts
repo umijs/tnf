@@ -17,8 +17,10 @@ export interface Bundler {
 }
 
 export interface BundlerConfig {
+  clean?: boolean;
   entry: Record<string, string>;
   mode: Mode;
+  platform?: 'node' | 'browser';
   alias?: Config['alias'];
   externals?: Config['externals'];
   less?: Config['less'];

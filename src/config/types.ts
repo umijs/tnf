@@ -74,6 +74,7 @@ export const ConfigSchema = z.object({
       convention: RouterGeneratorConfig,
     })
     .optional(),
+  ssr: z.object({}).optional(),
   tailwindcss: z.boolean().optional(),
   clickToComponent: z
     .union([

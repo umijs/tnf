@@ -17,28 +17,38 @@ export function writeClientEntry({
     config,
   } = opts.context;
 
-  writeFileSync(
-    path.join(tmpPath, 'client.tsx'),
-    `
+  if (config?.ssr) {
+    writeFileSync(
+      path.join(tmpPath, 'client.tsx'),
+      `
+import ReactDOM from 'react-dom/client';
+import {
+  RouterProvider,
+} from '@umijs/tnf/router';
+import { createRouter } from './router';
+${globalStyleImportPath}
+${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
+const router = createRouter();
+const hydrateRoot = ReactDOM.hydrateRoot(document, <html><body><RouterProvider router={router} /><script src="/client.js"></script></body></html>);
+hydrateRoot.onRecoverableError = (error, errorInfo) => {
+  console.log('Hydration error:', error);
+  console.log('Error info:', errorInfo);
+};
+    `,
+    );
+  } else {
+    writeFileSync(
+      path.join(tmpPath, 'client.tsx'),
+      `
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   RouterProvider,
-  createRouter,
 } from '@umijs/tnf/router';
-import { routeTree } from './routeTree.gen';
+import { createRouter } from './router';
 ${globalStyleImportPath}
 ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
-const router = createRouter({
-  routeTree,
-  defaultPreload: ${config?.router?.defaultPreload ? `'${config.router.defaultPreload}'` : 'false'},
-  defaultPreloadDelay: ${config?.router?.defaultPreloadDelay || 50},
-});
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
-  }
-}
+const router = createRouter();
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
     ? () => null
@@ -46,7 +56,7 @@ const TanStackRouterDevtools =
         import('@tanstack/router-devtools').then((res) => ({
           default: res.TanStackRouterDevtools,
         })),
-      )
+      );
 const ClickToComponent =
   process.env.NODE_ENV === 'production'
     ? () => null
@@ -54,10 +64,10 @@ const ClickToComponent =
         import('click-to-react-component').then((res) => ({
           default: res.ClickToComponent,
         })),
-      )
+      );
 const pathModifier = (path) => {
   return path.startsWith('${cwd}') ? path : '${cwd}/' + path;
-}
+};
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <>
     <RouterProvider router={router} />
@@ -73,6 +83,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     }
   </>
 );
-  `,
-  );
+    `,
+    );
+  }
 }
