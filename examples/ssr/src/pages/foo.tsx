@@ -11,7 +11,7 @@ export const Route = createFileRoute('/foo')({
 
 function Foo() {
   const { users } = useLoaderData({
-    from: '/foo',
+    from: '/foo'
   });
   return (
     <div>
