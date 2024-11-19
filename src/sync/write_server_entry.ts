@@ -17,9 +17,9 @@ import {
   createMemoryHistory,
 } from '@umijs/tnf/router';
 import { createRouter } from './router';
+import { StartServer } from '@tanstack/start/server'
 const router = createRouter();
 export async function render(request: Request, response: any) {
-  const router = createRouter();
   const memoryHistory = createMemoryHistory({
     initialEntries: [request.url],
   });
@@ -27,7 +27,9 @@ export async function render(request: Request, response: any) {
     history: memoryHistory,
   });
   await router.load();
-  const appHtml = ReactDOMServer.renderToPipeableStream(<html><body><RouterProvider router={router} /><script src="/client.js"></script></body></html>);
+  const appHtml = ReactDOMServer.renderToPipeableStream(<StartServer router={router} />, {
+    bootstrapScripts: ['/client.js'],
+  });
   response.statusCode = router.hasNotFoundMatch() ? 404 : 200;
   response.setHeader('Content-Type', 'text/html');
   appHtml.pipe(response);

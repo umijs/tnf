@@ -26,10 +26,12 @@ import {
   RouterProvider,
 } from '@umijs/tnf/router';
 import { createRouter } from './router';
+import { StartClient } from '@tanstack/start';
+
 ${globalStyleImportPath}
 ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
 const router = createRouter();
-const hydrateRoot = ReactDOM.hydrateRoot(document, <html><body><RouterProvider router={router} /><script src="/client.js"></script></body></html>);
+const hydrateRoot = ReactDOM.hydrateRoot(document, <StartClient router={router} />);
 hydrateRoot.onRecoverableError = (error, errorInfo) => {
   console.log('Hydration error:', error);
   console.log('Error info:', errorInfo);
