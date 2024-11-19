@@ -1,11 +1,9 @@
 import { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
-import { Meta } from '@tanstack/start'
- 
+import { Meta } from '@tanstack/start';
 
 export const Route = createRootRoute({
-  component: RootComponent
+  component: RootComponent,
 });
-
 
 function RootComponent() {
   return (
@@ -14,17 +12,17 @@ function RootComponent() {
         <Meta />
       </head>
       <body>
-      <div>Hello</div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/foo">Foo</Link>
-        </li>
-      </ul>
-      <Outlet />
+        <div>Hello</div>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/foo">Foo</Link>
+          </li>
+        </ul>
+        <Outlet />
       </body>
     </html>
-  )
+  );
 }
