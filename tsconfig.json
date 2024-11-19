@@ -12,7 +12,6 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "lib": ["es2022"],
-
     "outDir": "./dist",
     "rootDir": "./src",
     "declaration": true,
