@@ -26,7 +26,7 @@ import {
   RouterProvider,
 } from '@umijs/tnf/router';
 import { createRouter } from './router';
-import { StartClient } from '@tanstack/start'
+import { StartClient } from '@tanstack/start';
 
 ${globalStyleImportPath}
 ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
