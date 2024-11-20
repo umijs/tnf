@@ -67,7 +67,7 @@ export async function create({
   outro(`Project created in ${projectPath}.`);
   console.log(`Now run:
 
-    cd ${projectPath}
+    cd ${projectName}
     npm install
     npm run build`);
 }
