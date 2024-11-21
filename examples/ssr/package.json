@@ -7,7 +7,6 @@
     "preview": "tnf preview"
   },
   "dependencies": {
-    "@tanstack/start": "^1.82.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@umijs/tnf": "workspace:*"

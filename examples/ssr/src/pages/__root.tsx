@@ -1,5 +1,5 @@
 import { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
-import { Meta } from '@tanstack/start';
+import { Meta } from '@umijs/tnf/ssr';
 
 export const Route = createRootRoute({
   component: RootComponent,

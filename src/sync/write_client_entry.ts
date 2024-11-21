@@ -20,14 +20,9 @@ export function writeClientEntry({
   if (config?.ssr) {
     writeFileSync(
       path.join(tmpPath, 'client.tsx'),
-      `
-import ReactDOM from 'react-dom/client';
-import {
-  RouterProvider,
-} from '@umijs/tnf/router';
+      `import ReactDOM from 'react-dom/client';
 import { createRouter } from './router';
-import { StartClient } from '@tanstack/start';
-
+import { StartClient } from '@umijs/tnf/ssr';
 ${globalStyleImportPath}
 ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
 const router = createRouter();
@@ -35,8 +30,7 @@ const hydrateRoot = ReactDOM.hydrateRoot(document, <StartClient router={router} 
 hydrateRoot.onRecoverableError = (error, errorInfo) => {
   console.log('Hydration error:', error);
   console.log('Error info:', errorInfo);
-};
-    `,
+};`,
     );
   } else {
     writeFileSync(

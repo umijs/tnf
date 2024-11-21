@@ -12,13 +12,12 @@ export function writeServerEntry({ opts }: { opts: SyncOptions }) {
     `
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import {
-  RouterProvider,
-  createMemoryHistory,
-} from '@umijs/tnf/router';
+import { createMemoryHistory } from '@umijs/tnf/router';
 import { createRouter } from './router';
-import { StartServer } from '@tanstack/start/server'
+import { StartServer } from '@umijs/tnf/ssr';
+
 const router = createRouter();
+
 export async function render(request: Request, response: any) {
   const memoryHistory = createMemoryHistory({
     initialEntries: [request.url],
