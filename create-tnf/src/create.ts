@@ -2,6 +2,8 @@ import { intro, isCancel, outro, select, text } from '@clack/prompts';
 import fs from 'fs';
 import path from 'path';
 
+const CANCEL_TEXT = '\x1b[31mOperation cancelled.\x1b[0m';
+
 export async function create({
   cwd,
   name,
@@ -19,19 +21,22 @@ export async function create({
     .filter((file) =>
       fs.statSync(path.join(templatesPath, file)).isDirectory(),
     );
+
   const selectedTemplate =
     template ||
     (await select({
-      message: 'Select a template:',
+      message: 'Which template would you like?',
       options: templateList.map((template) => ({
         label: template,
         value: template,
       })),
     }));
+
   if (isCancel(selectedTemplate)) {
-    outro('Aborted');
+    outro(CANCEL_TEXT);
     return;
   }
+
   const projectName = await (async () => {
     if (name) {
       const error = validate(name);
@@ -40,27 +45,33 @@ export async function create({
       }
       return name;
     }
+
     return await text({
-      message: 'Project name:',
+      message: 'Please enter a name for your new project:',
       initialValue: 'myapp',
       validate,
     });
+
     function validate(value: string) {
       if (!value) {
         return `Project name is required but got ${value}`;
       }
+
       if (fs.existsSync(path.join(cwd, value))) {
         return `Project ${path.join(cwd, value)} already exists`;
       }
     }
   })();
+
   if (isCancel(projectName)) {
-    outro('Aborted');
+    outro(CANCEL_TEXT);
     return;
   }
+
   if (fs.existsSync(path.join(cwd, projectName))) {
     throw new Error('Project already exists');
   }
+
   const templatePath = path.join(templatesPath, selectedTemplate as string);
   const projectPath = path.join(cwd, projectName);
   fs.cpSync(templatePath, projectPath, { recursive: true });
