@@ -19,6 +19,7 @@
     "@examples/hackernews",
     "@examples/normal",
     "@examples/shadcn-cli",
+    "@examples/ssr",
     "@examples/tailwindcss",
     "@examples/with-antd4"
   ]

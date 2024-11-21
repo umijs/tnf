@@ -1,4 +1,5 @@
 import { chromium } from '@playwright/test';
+import assert from 'assert';
 import { exec } from 'child_process';
 import http from 'http';
 import path from 'path';
@@ -27,9 +28,7 @@ async function runE2E() {
     const page = await browser.newPage();
     await page.goto(`http://localhost:${port}`);
     const content = await page.textContent('body');
-    if (!content) {
-      throw new Error('Page content not found');
-    }
+    assert(content?.includes('Hello'), 'Page content should include "Hello"');
 
     console.log('E2E tests passed!');
     process.exit(0);

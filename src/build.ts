@@ -3,7 +3,7 @@ import path from 'pathe';
 import { BundlerType, createBundler } from './bundler/bundler';
 import { PluginHookType } from './plugin/plugin_manager';
 import { sync } from './sync/sync';
-import { type Context } from './types';
+import { type Context, Mode } from './types';
 
 export async function build({
   context,
@@ -35,19 +35,38 @@ export async function build({
 
   // build
   const bundler = createBundler({ bundler: BundlerType.MAKO });
+  const baseBundleConfig = {
+    mode,
+    alias: config.alias,
+    externals: config.externals,
+  };
+  // client
   await bundler.build({
     bundlerConfig: {
+      ...baseBundleConfig,
       entry: {
         client: path.join(context.paths.tmpPath, 'client.tsx'),
       },
-      mode,
-      alias: config.alias,
       less: config.less,
-      externals: config.externals,
     },
     cwd,
     watch,
   });
+  // server
+  if (config.ssr) {
+    await bundler.build({
+      bundlerConfig: {
+        ...baseBundleConfig,
+        entry: {
+          server: path.join(context.paths.tmpPath, 'server.tsx'),
+        },
+        platform: 'node',
+        clean: false,
+      },
+      cwd,
+      watch,
+    });
+  }
 
   // build end
   await context.pluginManager.apply({

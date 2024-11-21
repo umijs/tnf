@@ -15,13 +15,15 @@ export default {
 
     // build config
     const config = {
+      clean: bundlerConfig.clean,
       entry: bundlerConfig.entry,
+      externals: bundlerConfig.externals,
+      less: bundlerConfig.less,
       mode: bundlerConfig.mode,
+      platform: bundlerConfig.platform,
       resolve: {
         alias: bundlerConfig.alias,
       },
-      externals: bundlerConfig.externals,
-      less: bundlerConfig.less,
     } as BuildParams['config'];
 
     const isDev = bundlerConfig.mode === Mode.Development;
@@ -35,6 +37,9 @@ export default {
         port: _hmrPort,
         host: _host,
       };
+    }
+    if (config.platform === 'node') {
+      config.cjs = true;
     }
 
     const mako = await import('@umijs/mako');

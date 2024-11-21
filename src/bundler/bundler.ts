@@ -17,8 +17,10 @@ export interface Bundler {
 }
 
 export interface BundlerConfig {
+  clean?: boolean;
   entry: Record<string, string>;
   mode: Mode;
+  platform?: 'node' | 'browser';
   alias?: Config['alias'];
   externals?: Config['externals'];
   less?: Config['less'];
@@ -39,13 +41,10 @@ export interface BundlerDevOptions {
 
 export function createBundler(opts: BundlerOpts): Bundler {
   async function getBundler() {
-    // TODO: why need double .default?
     if (opts.bundler === BundlerType.MAKO) {
-      // @ts-expect-error
-      return (await import('./bundler_mako.js')).default.default;
+      return (await import('./bundler_mako.js')).default;
     } else if (opts.bundler === BundlerType.WEBPACK) {
-      // @ts-expect-error
-      return (await import('./bundler_webpack.js')).default.default;
+      return (await import('./bundler_webpack.js')).default;
     } else {
       throw new Error(`Unsupported bundler ${opts.bundler}`);
     }
