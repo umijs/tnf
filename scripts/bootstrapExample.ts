@@ -81,6 +81,25 @@ export const Route = createRootRoute({
 });
     `.trimStart(),
     );
+    fs.mkdirSync(path.join(exampleDir, 'public'));
+    fs.writeFileSync(
+      path.join(exampleDir, 'public', 'index.html'),
+      `
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/client.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="/client.js"></script>
+  </body>
+</html>
+    `.trimStart(),
+    );
 
     // add ignore in .changeset/config.json
     const changesetConfig = JSON.parse(
