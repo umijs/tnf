@@ -341,6 +341,22 @@ importers:
         specifier: ^5.6.3
         version: 5.6.3
 
+  examples/with-antdx:
+    dependencies:
+      '@types/react':
+        specifier: ^18.3.12
+        version: 18.3.12
+      '@types/react-dom':
+        specifier: ^18.3.1
+        version: 18.3.1
+      '@umijs/tnf':
+        specifier: workspace:*
+        version: link:../..
+    devDependencies:
+      typescript:
+        specifier: ^5.6.3
+        version: 5.6.3
+
 packages:
 
   /@alloc/quick-lru@5.2.0:
