@@ -2,6 +2,7 @@
   "name": "@examples/ssr",
   "private": true,
   "scripts": {
+    "start": "node server.js",
     "build": "tnf build",
     "dev": "tnf dev",
     "preview": "tnf preview"

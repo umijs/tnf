@@ -5,9 +5,7 @@ import jsesc from 'jsesc';
 import Context from './Context';
 import { AfterEachMatch } from './utils/serialization';
 
-export function StartServer<TRouter extends AnyRouter>(props: {
-  router: TRouter;
-}) {
+export function Server<TRouter extends AnyRouter>(props: { router: TRouter }) {
   props.router.AfterEachMatch = AfterEachMatch;
   props.router.serializer = (value) =>
     jsesc(value, {

@@ -14,7 +14,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { createMemoryHistory } from '@umijs/tnf/router';
 import { createRouter } from './router';
-import { StartServer } from '@umijs/tnf/ssr';
+import { Server } from '@umijs/tnf/ssr';
 
 const router = createRouter();
 
@@ -26,7 +26,7 @@ export async function render(request: Request, response: any) {
     history: memoryHistory,
   });
   await router.load();
-  const appHtml = ReactDOMServer.renderToPipeableStream(<StartServer router={router} />, {
+  const appHtml = ReactDOMServer.renderToPipeableStream(<Server router={router} />, {
     bootstrapScripts: ['/client.js'],
   });
   response.statusCode = router.hasNotFoundMatch() ? 404 : 200;

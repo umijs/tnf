@@ -33,7 +33,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./router": "./client/router.js",
-    "./ssr": "./ssr/index.js",
+    "./ssr": "./client/ssr/ssr.js",
     ".": "./dist/index.js"
   },
   "dependencies": {
