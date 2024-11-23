@@ -22,6 +22,12 @@ export const PluginSchema = z.object({
       z.union([z.any(), z.promise(z.any()), z.null()]),
     )
     .optional(),
+  configureServer: z
+    .function(
+      z.tuple([z.object({ middlewares: z.any() })]),
+      z.union([z.any(), z.promise(z.any()), z.null()]),
+    )
+    .optional(),
 });
 
 export type Plugin = z.infer<typeof PluginSchema>;

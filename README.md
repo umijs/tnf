@@ -19,7 +19,8 @@ Tnf, ~~the north face~~, the next framework. Tnf is focused on simple, performan
 - Tailwind CSS support built-in.
 - [Framework unified plugin system](./docs/plugin.md) which is compatible with umi and other frameworks.
 - [ ] Security built-in. Including doctor rules which is used in Ant Group.
-- [ ] Support SSR, API routes and server functions.
+- Support SSR.
+- [ ] Support API routes and server functions.
 - [ ] AI based generator and other features.
 - [ ] Rust based for heavy computation tasks.
 - [ ] Easy to integrate with popular libraries.
@@ -59,8 +60,9 @@ $ pnpm preview
 
 ## API
 
-- `@umijs/tnf/router`: The router module, reexported from `@tanstack/react-router`.
 - `@umijs/tnf`: The entry of tnf, including `defineConfig`, ...
+- `@umijs/tnf/router`: The router module, reexported from `@tanstack/react-router`.
+- `@umijs/tnf/ssr`: The ssr module, including `Meta`, `Client` and `Server`.
 
 ## Config
 
@@ -72,7 +74,7 @@ Config is loaded from `.tnfrc.ts` by default.
 - `devServer: { port?: number; host?: string; https?: { hosts?: string[] }; ip?: string }`: The development server configuration.
 - `externals: Record<string, string>`: An object that maps package names to their corresponding paths.
 - `less: { modifyVars?: Record<string, string>; globalVars?: Record<string, string>; math?: 'always' | 'strict' | 'parens-division' | 'parens' | 'strict-legacy' | number; sourceMap?: any; plugins?: (string | [string, Record<string, any>])[];}`: The configuration passed to lessLoader.
-- `router: { defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false; convention?: [@tanstack/router-generator](https://github.com/TanStack/router/blob/main/packages/router-generator/src/config.ts#L22C14-L22C26).Config }`: The router configuration.
+- `router: { defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false; convention?: any }`: The router configuration. Checkout [@tanstack/router-generator](https://github.com/TanStack/router/blob/cc05ad8/packages/router-generator/src/config.ts#L22-L67) for convention config.
 - `ssr: {}`: The ssr configuration.
 - `tailwindcss: boolean`: Turn on/off tailwindcss. Need to be used in conjunction with `src/tailwind.css` and `tailwind.config.js`.
 
@@ -88,6 +90,12 @@ const Route = createFileRoute('/foo')({
   loader: async () => redirect({ to: '/bar' }),
 });
 ```
+
+## CREDITS
+
+This project is inspired by:
+
+- [@tanstack/router](https://github.com/TanStack/router) for the router and ssr.
 
 ## LICENSE
 

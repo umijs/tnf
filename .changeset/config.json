@@ -21,6 +21,7 @@
     "@examples/shadcn-cli",
     "@examples/ssr",
     "@examples/tailwindcss",
-    "@examples/with-antd4"
+    "@examples/with-antd4",
+    "@examples/with-antdx"
   ]
 }

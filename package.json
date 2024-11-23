@@ -8,6 +8,7 @@
     "url": "https://github.com/umijs/tnf"
   },
   "scripts": {
+    "bootstrap:examples": "tsx scripts/bootstrapExample.ts",
     "build": "father build",
     "changeset": "tsx scripts/changeset.ts && changeset",
     "check": "prettier --check .",
@@ -32,6 +33,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./router": "./client/router.js",
+    "./ssr": "./client/ssr/ssr.js",
     ".": "./dist/index.js"
   },
   "dependencies": {
@@ -61,6 +63,7 @@
     "fs-extra": "^11.1.0",
     "get-port-please": "^3.1.2",
     "http-proxy-middleware": "^3.0.3",
+    "jsesc": "^3.0.2",
     "json5": "^2.2.3",
     "magicast": "^0.3.5",
     "pathe": "^1.1.2",
@@ -70,6 +73,7 @@
     "react-dom": "^18.3.1",
     "sirv": "^3.0.0",
     "spdy": "^4.0.2",
+    "tiny-invariant": "^1.3.3",
     "yargs-parser": "^21.1.1",
     "zod": "^3.23.8"
   },
@@ -82,6 +86,7 @@
     "@playwright/test": "^1.48.2",
     "@total-typescript/tsconfig": "^1.0.4",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/jsesc": "^3.0.3",
     "father": "^4.5.1",
     "git-repo-info": "^2.1.1",
     "husky": "^9.1.6",
