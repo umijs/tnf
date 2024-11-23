@@ -8,6 +8,7 @@
     "url": "https://github.com/umijs/tnf"
   },
   "scripts": {
+    "bootstrap:examples": "tsx scripts/bootstrapExample.ts",
     "build": "father build",
     "changeset": "tsx scripts/changeset.ts && changeset",
     "check": "prettier --check .",

@@ -10,6 +10,9 @@ import { createHttpsServer } from './https';
 
 export interface ServerOpts {
   devServer: Config['devServer'];
+  configureServer?: (opts: {
+    middlewares: express.Application;
+  }) => void | (() => void);
 }
 
 export async function createServer(opts: ServerOpts): Promise<{
@@ -27,6 +30,14 @@ export async function createServer(opts: ServerOpts): Promise<{
   } = opts.devServer || {};
   const _port = await getPort(port);
   const app = express();
+
+  const context = {
+    middlewares: app,
+  };
+  let configureServerFn;
+  if (opts.configureServer) {
+    configureServerFn = opts.configureServer(context);
+  }
 
   // cors
   app.use(
@@ -46,6 +57,8 @@ export async function createServer(opts: ServerOpts): Promise<{
       index: '/',
     }),
   );
+
+  configureServerFn?.();
 
   // create server
   let server;

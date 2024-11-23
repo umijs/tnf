@@ -5,3 +5,4 @@
 /examples/*/node_modules
 /create-tnf/node_modules
 /create-tnf/dist
+.DS_Store
