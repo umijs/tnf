@@ -34,9 +34,7 @@ Called when config resolved.
 
 ### configureServer
 
-> Not implemented
-
-- Type: `(server: DevServer) => void | Promise<void>`
+- Type: `(server: { middlewares: express.Application }) => void | Promise<void>`
 
 Can register pre or post middleware, or save server instance for other hooks.
 
