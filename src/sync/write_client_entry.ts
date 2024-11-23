@@ -22,16 +22,12 @@ export function writeClientEntry({
       path.join(tmpPath, 'client.tsx'),
       `
 import ReactDOM from 'react-dom/client';
-import {
-  RouterProvider,
-} from '@umijs/tnf/router';
 import { createRouter } from './router';
-import { StartClient } from '@tanstack/start';
-
+import { Client } from '@umijs/tnf/ssr';
 ${globalStyleImportPath}
 ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
 const router = createRouter();
-const hydrateRoot = ReactDOM.hydrateRoot(document, <StartClient router={router} />);
+const hydrateRoot = ReactDOM.hydrateRoot(document, <Client router={router} />);
 hydrateRoot.onRecoverableError = (error, errorInfo) => {
   console.log('Hydration error:', error);
   console.log('Error info:', errorInfo);

@@ -19,7 +19,8 @@ Tnf, ~~the north face~~, the next framework. Tnf is focused on simple, performan
 - Tailwind CSS support built-in.
 - [Framework unified plugin system](./docs/plugin.md) which is compatible with umi and other frameworks.
 - [ ] Security built-in. Including doctor rules which is used in Ant Group.
-- [ ] Support SSR, API routes and server functions.
+- Support SSR.
+- [ ] Support API routes and server functions.
 - [ ] AI based generator and other features.
 - [ ] Rust based for heavy computation tasks.
 - [ ] Easy to integrate with popular libraries.
@@ -59,8 +60,9 @@ $ pnpm preview
 
 ## API
 
-- `@umijs/tnf/router`: The router module, reexported from `@tanstack/react-router`.
 - `@umijs/tnf`: The entry of tnf, including `defineConfig`, ...
+- `@umijs/tnf/router`: The router module, reexported from `@tanstack/react-router`.
+- `@umijs/tnf/ssr`: The ssr module, including `Meta`, `Client` and `Server`.
 
 ## Config
 
@@ -88,6 +90,12 @@ const Route = createFileRoute('/foo')({
   loader: async () => redirect({ to: '/bar' }),
 });
 ```
+
+## CREDITS
+
+This project is inspired by:
+
+- [@tanstack/router](https://github.com/TanStack/router) for the router and ssr.
 
 ## LICENSE
 
