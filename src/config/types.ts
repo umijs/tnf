@@ -72,6 +72,7 @@ export const ConfigSchema = z.object({
         ])
         .optional(),
       convention: RouterGeneratorConfig,
+      simplifyRoute: z.boolean().optional(),
     })
     .optional(),
   ssr: z.object({}).optional(),
