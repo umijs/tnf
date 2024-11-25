@@ -5,6 +5,7 @@ import https from 'https';
 import path from 'pathe';
 import pc from 'picocolors';
 import spdy from 'spdy';
+import * as logger from './logger';
 
 export interface HttpsServerOptions {
   key?: string;
@@ -37,22 +38,22 @@ export async function resolveHttpsConfig(httpsConfig: HttpsServerOptions) {
     // use mkcert -help instead of mkcert --version for checking if mkcert is installed, cause mkcert --version does not exists in Linux
     await execa('mkcert', ['-help']);
   } catch (e) {
-    console.error('[HTTPS] The mkcert has not been installed.');
-    console.info('[HTTPS] Please follow the guide to install manually.');
+    logger.error('[HTTPS] The mkcert has not been installed.');
+    logger.info('[HTTPS] Please follow the guide to install manually.');
     switch (process.platform) {
       case 'darwin':
-        console.log(pc.green('$ brew install mkcert'));
-        console.log(pc.gray('# If you use firefox, please install nss.'));
-        console.log(pc.green('$ brew install nss'));
-        console.log(pc.green('$ mkcert -install'));
+        logger.info(pc.green('$ brew install mkcert'));
+        logger.info(pc.gray('# If you use firefox, please install nss.'));
+        logger.info(pc.green('$ brew install nss'));
+        logger.info(pc.green('$ mkcert -install'));
         break;
       case 'win32':
-        console.log(
+        logger.info(
           pc.green('Checkout https://github.com/FiloSottile/mkcert#windows'),
         );
         break;
       case 'linux':
-        console.log(
+        logger.info(
           pc.green('Checkout https://github.com/FiloSottile/mkcert#linux'),
         );
         break;
@@ -74,7 +75,7 @@ export async function resolveHttpsConfig(httpsConfig: HttpsServerOptions) {
     !fs.existsSync(json) ||
     !hasHostsChanged(json, hosts!)
   ) {
-    console.log('[HTTPS] Generating cert and key files...');
+    logger.info('[HTTPS] Generating cert and key files...');
     await execa('mkcert', ['-cert-file', cert, '-key-file', key, ...hosts!]);
     fs.writeFileSync(json, JSON.stringify({ hosts }), 'utf-8');
   }
@@ -105,7 +106,7 @@ export async function createHttpsServer(
   app: RequestListener,
   httpsConfig: HttpsServerOptions,
 ) {
-  console.log('[HTTPS] Starting service in https mode...');
+  logger.info('[HTTPS] Starting service in https mode...');
   const { key, cert } = await resolveHttpsConfig(httpsConfig);
   const createServer = (
     httpsConfig.http2 === false ? https.createServer : spdy.createServer

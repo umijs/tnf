@@ -1,4 +1,5 @@
 import fs from 'fs';
+import * as logger from '../fishkit/logger';
 import type { Context } from '../types';
 import { writeClientEntry } from './write_client_entry';
 import { writeGlobalStyle } from './write_global_style';
@@ -36,5 +37,5 @@ export async function sync(opts: SyncOptions) {
     tailwindcssPath,
   });
 
-  console.log('Synced');
+  logger.info('Synced');
 }

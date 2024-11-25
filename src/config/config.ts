@@ -6,6 +6,7 @@ import { updateConfig } from 'c12/update';
 import path from 'pathe';
 import pc from 'picocolors';
 import { CONFIG_FILE } from '../constants';
+import * as logger from '../fishkit/logger';
 import type { Context } from '../types';
 import type { Config } from './types';
 import { ConfigSchema } from './types';
@@ -48,7 +49,7 @@ export function watchConfig(opts: ConfigOpts) {
     onUpdate({ oldConfig, newConfig, getDiff }) {
       const result = ConfigSchema.safeParse(newConfig);
       if (!result.success) {
-        console.error(`Invalid configuration: ${result.error.message}`);
+        logger.error(`Invalid configuration: ${result.error.message}`);
         return;
       }
       console.log('onUpdate', oldConfig, result.data, getDiff());

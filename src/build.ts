@@ -1,9 +1,10 @@
 import chokidar from 'chokidar';
 import path from 'pathe';
 import { BundlerType, createBundler } from './bundler/bundler';
+import * as logger from './fishkit/logger';
 import { PluginHookType } from './plugin/plugin_manager';
 import { sync } from './sync/sync';
-import { type Context, Mode } from './types';
+import { type Context } from './types';
 
 export async function build({
   context,
@@ -28,7 +29,7 @@ export async function build({
         ignoreInitial: true,
       })
       .on('all', async (event, path) => {
-        console.log(`File ${path} has been ${event}`);
+        logger.info(`File ${path} has been ${event}`);
         await runSync();
       });
   }

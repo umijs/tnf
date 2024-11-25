@@ -7,6 +7,7 @@ import http from 'http';
 import type { Config } from '../config/types';
 import { DEFAULT_PORT } from '../constants';
 import { createHttpsServer } from './https';
+import * as logger from './logger';
 
 export interface ServerOpts {
   devServer: Config['devServer'];
@@ -80,7 +81,7 @@ export async function createServer(opts: ServerOpts): Promise<{
 
   server.listen(_port, () => {
     const protocol = https ? 'https:' : 'http:';
-    console.log(`Server is running on ${protocol}//${host}:${_port}`);
+    logger.info(`Server is running on ${protocol}//${host}:${_port}`);
   });
 
   return { server, app, port: _port, ip, host };

@@ -3,6 +3,7 @@ import fs from 'fs-extra';
 import path from 'pathe';
 // @ts-ignore
 import randomColor from 'random-color';
+import * as logger from '../fishkit/logger';
 import type { Context } from '../types';
 
 export async function generatePage({ context }: { context: Context }) {
@@ -45,6 +46,6 @@ function ${componentName}() {
   await fs.writeFile(pagePath, pageContent);
   await fs.writeFile(styleModulePath, styleContent);
 
-  console.log(`Generated page at: ${pagePath}`);
-  console.log(`Generated styles at: ${styleModulePath}`);
+  logger.info(`Generated page at: ${pagePath}`);
+  logger.info(`Generated styles at: ${styleModulePath}`);
 }
