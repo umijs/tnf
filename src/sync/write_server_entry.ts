@@ -7,6 +7,19 @@ export function writeServerEntry({ opts }: { opts: SyncOptions }) {
     paths: { tmpPath },
   } = opts.context;
 
+  const renderMode = opts.context.config.ssr?.renderMode || 'stream';
+  const renderer =
+    renderMode === 'stream'
+      ? `
+const appHtml = ReactDOMServer.renderToPipeableStream(<Server router={router} />, {
+  bootstrapScripts: ['/client.js'],
+});
+appHtml.pipe(response);
+    `
+      : `
+const appHtml = ReactDOMServer.renderToString(<Server router={router} />);
+response.end(appHtml + '<script src="/client.js"></script>');
+    `;
   writeFileSync(
     path.join(tmpPath, 'server.tsx'),
     `
@@ -26,12 +39,9 @@ export async function render(request: Request, response: any) {
     history: memoryHistory,
   });
   await router.load();
-  const appHtml = ReactDOMServer.renderToPipeableStream(<Server router={router} />, {
-    bootstrapScripts: ['/client.js'],
-  });
   response.statusCode = router.hasNotFoundMatch() ? 404 : 200;
   response.setHeader('Content-Type', 'text/html');
-  appHtml.pipe(response);
+  ${renderer}
 }
   `,
   );

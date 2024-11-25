@@ -75,7 +75,7 @@ Config is loaded from `.tnfrc.ts` by default.
 - `externals: Record<string, string>`: An object that maps package names to their corresponding paths.
 - `less: { modifyVars?: Record<string, string>; globalVars?: Record<string, string>; math?: 'always' | 'strict' | 'parens-division' | 'parens' | 'strict-legacy' | number; sourceMap?: any; plugins?: (string | [string, Record<string, any>])[];}`: The configuration passed to lessLoader.
 - `router: { defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false; convention?: any }`: The router configuration. Checkout [@tanstack/router-generator](https://github.com/TanStack/router/blob/cc05ad8/packages/router-generator/src/config.ts#L22-L67) for convention config.
-- `ssr: {}`: The ssr configuration.
+- `ssr: { renderMode?: 'stream' | 'string' }`: The ssr configuration.
 - `tailwindcss: boolean`: Turn on/off tailwindcss. Need to be used in conjunction with `src/tailwind.css` and `tailwind.config.js`.
 
 ## FAQ
