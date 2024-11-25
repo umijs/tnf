@@ -22,6 +22,8 @@ export async function build({
     });
   };
   await runSync();
+
+  // sync with watch
   if (watch) {
     const pagesDir = path.join(cwd, 'src/pages');
     chokidar
@@ -41,33 +43,35 @@ export async function build({
     alias: config.alias,
     externals: config.externals,
   };
+
+  // bundler configs
+  const bundlerConfigs = [];
   // client
-  await bundler.build({
-    bundlerConfig: {
-      ...baseBundleConfig,
-      entry: {
-        client: path.join(context.paths.tmpPath, 'client.tsx'),
-      },
-      less: config.less,
+  bundlerConfigs.push({
+    ...baseBundleConfig,
+    entry: {
+      client: path.join(context.paths.tmpPath, 'client.tsx'),
     },
-    cwd,
-    watch,
+    less: config.less,
   });
   // server
   if (config.ssr) {
-    await bundler.build({
-      bundlerConfig: {
-        ...baseBundleConfig,
-        entry: {
-          server: path.join(context.paths.tmpPath, 'server.tsx'),
-        },
-        platform: 'node',
-        clean: false,
+    bundlerConfigs.push({
+      ...baseBundleConfig,
+      entry: {
+        server: path.join(context.paths.tmpPath, 'server.tsx'),
       },
-      cwd,
-      watch,
+      platform: 'node' as const,
+      clean: false,
     });
   }
+
+  // build
+  await bundler.build({
+    bundlerConfigs,
+    cwd,
+    watch,
+  });
 
   // build end
   await context.pluginManager.apply({

@@ -27,7 +27,7 @@ export interface BundlerConfig {
 }
 
 export interface BundlerBuildOptions {
-  bundlerConfig: BundlerConfig;
+  bundlerConfigs: BundlerConfig[];
   cwd: string;
   watch?: boolean;
 }

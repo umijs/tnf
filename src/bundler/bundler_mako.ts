@@ -11,43 +11,45 @@ let _host: string;
 
 export default {
   build: async (opts) => {
-    const { bundlerConfig, cwd, watch } = opts;
+    const { bundlerConfigs, cwd, watch } = opts;
 
-    // build config
-    const config = {
-      clean: bundlerConfig.clean,
-      entry: bundlerConfig.entry,
-      externals: bundlerConfig.externals,
-      less: bundlerConfig.less,
-      mode: bundlerConfig.mode,
-      platform: bundlerConfig.platform,
-      resolve: {
-        alias: bundlerConfig.alias,
-      },
-    } as BuildParams['config'];
+    for (const bundlerConfig of bundlerConfigs) {
+      // build config
+      const config = {
+        clean: bundlerConfig.clean,
+        entry: bundlerConfig.entry,
+        externals: bundlerConfig.externals,
+        less: bundlerConfig.less,
+        mode: bundlerConfig.mode,
+        platform: bundlerConfig.platform,
+        resolve: {
+          alias: bundlerConfig.alias,
+        },
+      } as BuildParams['config'];
 
-    const isDev = bundlerConfig.mode === Mode.Development;
-    if (isDev) {
-      if (process.env.HMR === 'none') {
-        config.hmr = false;
-      } else {
-        config.hmr = {};
+      const isDev = bundlerConfig.mode === Mode.Development;
+      if (isDev) {
+        if (process.env.HMR === 'none') {
+          config.hmr = false;
+        } else {
+          config.hmr = {};
+        }
+        config.devServer = {
+          port: _hmrPort,
+          host: _host,
+        };
       }
-      config.devServer = {
-        port: _hmrPort,
-        host: _host,
-      };
-    }
-    if (config.platform === 'node') {
-      config.cjs = true;
-    }
+      if (config.platform === 'node') {
+        config.cjs = true;
+      }
 
-    const mako = await import('@umijs/mako');
-    await mako.build({
-      config,
-      root: cwd,
-      watch: Boolean(watch),
-    });
+      const mako = await import('@umijs/mako');
+      await mako.build({
+        config,
+        root: cwd,
+        watch: Boolean(watch),
+      });
+    }
   },
 
   configDevServer: async (opts) => {
