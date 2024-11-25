@@ -9,11 +9,11 @@ export async function dev({ context }: { context: Context }) {
   const devServer = context.config?.devServer || {};
   const { port, host, server, app } = await createServer({
     devServer,
-    configureServer: () => {
+    configureServer: (server) => {
       context.pluginManager.apply({
         hook: 'configureServer',
-        args: [],
-        type: PluginHookType.Series,
+        args: [server],
+        type: PluginHookType.Parallel,
         pluginContext: context.pluginContext,
       });
     },

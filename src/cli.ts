@@ -6,6 +6,7 @@ import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants';
 import { debug, error, info, warn } from './fishkit/logger';
 import * as logger from './fishkit/logger';
 import { checkVersion, setNoDeprecation, setNodeTitle } from './fishkit/node';
+import { mock } from './funplugins/mock/mock';
 import { PluginManager } from './plugin/plugin_manager';
 import { type Context, Mode } from './types';
 
@@ -14,7 +15,8 @@ async function buildContext(cwd: string): Promise<Context> {
   const command = argv._[0];
   const isDev = command === 'dev';
   const config = await loadConfig({ cwd });
-  const pluginManager = new PluginManager(config.plugins || []);
+  const plugins = [...(config.plugins || []), mock({ paths: ['mock'], cwd })];
+  const pluginManager = new PluginManager(plugins);
   const pluginContext = {
     command: command as string | undefined,
     config,

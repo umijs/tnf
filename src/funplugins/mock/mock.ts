@@ -1,14 +1,18 @@
 import type { Plugin } from '../../plugin/types';
-
-interface MockOptions {
-  paths: string[];
-}
+import { createMockMiddleware } from './createMockMiddleware';
+import { getMockData } from './getMockData';
+import type { MockOptions } from './types';
 
 export function mock(opts: MockOptions): Plugin {
   return {
     name: 'mock',
     configureServer(server) {
-      // server.middlewares.use(mockMiddleware(opts.paths));
+      const mocks = getMockData(opts);
+      server.middlewares.use(
+        createMockMiddleware({
+          mocks,
+        }),
+      );
     },
   };
 }
