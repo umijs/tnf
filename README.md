@@ -68,15 +68,80 @@ $ pnpm preview
 
 Config is loaded from `.tnfrc.ts` by default.
 
-- `alias: [string, string][]`: An array of alias pairs.
-- `bundler: 'webpack' | 'mako'`: The bundler to use, default is `mako`.
-- `clickToComponent: { editor?: 'vscode' | 'vscode-insiders' | 'cursor' } | false`: Click the component to open in the editor.
-- `devServer: { port?: number; host?: string; https?: { hosts?: string[] }; ip?: string }`: The development server configuration.
-- `externals: Record<string, string>`: An object that maps package names to their corresponding paths.
-- `less: { modifyVars?: Record<string, string>; globalVars?: Record<string, string>; math?: 'always' | 'strict' | 'parens-division' | 'parens' | 'strict-legacy' | number; sourceMap?: any; plugins?: (string | [string, Record<string, any>])[];}`: The configuration passed to lessLoader.
-- `router: { defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false; convention?: any }`: The router configuration. Checkout [@tanstack/router-generator](https://github.com/TanStack/router/blob/cc05ad8/packages/router-generator/src/config.ts#L22-L67) for convention config.
-- `ssr: { renderMode?: 'stream' | 'string' }`: The ssr configuration.
-- `tailwindcss: boolean`: Turn on/off tailwindcss. Need to be used in conjunction with `src/tailwind.css` and `tailwind.config.js`.
+### alias
+
+- Type: `[string, string][]`
+- Default: `[]`
+
+Alias is used to replace the values in `import` statements. These values are passed to bundlers and TypeScript automatically.
+
+```ts
+export default {
+  alias: [
+    ['foo', './src/foo'],
+  ],
+}
+```
+
+NOTICE: You will need to run `tnf dev` to have the alias configuration in `tsconfig.json` automatically generated.
+
+### bundler
+
+- Type: `'webpack' | 'mako'`
+- Default: `'mako'`
+
+The bundler to use.
+
+NOTICE: webpack bundler is not implemented yet.
+
+### clickToComponent
+
+- Type: `{ editor?: 'vscode' | 'vscode-insiders' | 'cursor' } | false`
+- Default: `false`
+
+Click the component to open in the editor.
+
+### devServer
+
+- Type: `{ port?: number; host?: string; https?: { hosts?: string[] }; ip?: string }`
+- Default: `{ port: 8000, host: 'localhost' }`
+
+The development server configuration.
+
+### externals
+
+- Type: `Record<string, string>`
+- Default: `{}`
+
+An object that maps package names to their corresponding paths.
+
+### less
+
+- Type: `{ modifyVars?: Record<string, string>; globalVars?: Record<string, string>; math?: 'always' | 'strict' | 'parens-division' | 'parens' | 'strict-legacy' | number; sourceMap?: any; plugins?: (string | [string, Record<string, any>])[];}`
+- Default: `{}`
+
+The configuration passed to lessLoader.
+
+### router
+
+- Type: `{ defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false; convention?: any }`
+- Default: `{ defaultPreload: 'intent', defaultPreloadDelay: 100 }`
+
+The router configuration. Checkout [@tanstack/router-generator](https://github.com/TanStack/router/blob/cc05ad8/packages/router-generator/src/config.ts#L22-L67) for convention config.
+
+### ssr
+
+- Type: `{ renderMode?: 'stream' | 'string' }`
+- Default: `{ renderMode: 'stream' }`
+
+The ssr configuration.
+
+### tailwindcss
+
+- Type: `boolean`
+- Default: `false`
+
+The tailwindcss configuration. Need to be used together with `src/tailwind.css` and `tailwind.config.js`.
 
 ## FAQ
 

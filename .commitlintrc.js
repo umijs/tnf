@@ -13,7 +13,8 @@ module.exports = {
       'revert',
       'style',
       'test',
-      'example'
+      'example',
+      'dep'
     ]]
   }
 };

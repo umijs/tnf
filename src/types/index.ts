@@ -7,7 +7,6 @@ interface ContextPaths {
   tmpPath: string;
 }
 
-// TODO: fix any
 interface PluginContext {
   command: string | undefined;
   config: Config;
