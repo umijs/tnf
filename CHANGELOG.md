@@ -5,17 +5,11 @@
 ### Patch Changes
 
 - [`3aac455`](https://github.com/umijs/tnf/commit/3aac4554a53453080b43c93bb2ee447d09079bc9) Thanks [@sorrycc](https://github.com/sorrycc)! - feat(plugin): add configureServer hook
-
 - [`c70bc97`](https://github.com/umijs/tnf/commit/c70bc97242ae75f66f3a896580195af6a6f219c4) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: support config ssr render mode
-
 - [`9072730`](https://github.com/umijs/tnf/commit/9072730adeed491805e17376bdbd1aa78ab30c19) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: add defineConfig api
-
 - [#53](https://github.com/umijs/tnf/pull/53) [`e6ed386`](https://github.com/umijs/tnf/commit/e6ed386304b3b19691adf147c702ceedb784410b) Thanks [@QDyanbing](https://github.com/QDyanbing)! - support clickToComponent
-
 - [`8841c62`](https://github.com/umijs/tnf/commit/8841c628c4b464667342b9550069a5865d2eda22) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: support mock
-
 - [#64](https://github.com/umijs/tnf/pull/64) [`9812357`](https://github.com/umijs/tnf/commit/9812357b34f00b11fd2ce3c6e29247fe4198a0f8) Thanks [@QDyanbing](https://github.com/QDyanbing)! - refactor(ssr): extract StartClient, StartServer and Meta from @tanstack/start
-
 - [`8b79132`](https://github.com/umijs/tnf/commit/8b791324dc16da0e512bf61e327a5682824f4f0e) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: basic ssr
 
 ## 0.1.4
