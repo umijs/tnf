@@ -3,6 +3,7 @@ import { type ChildProcess, spawn } from 'child_process';
 import fs from 'fs-extra';
 import module from 'module';
 import path from 'pathe';
+import * as logger from '../fishkit/logger';
 import { Mode } from '../types';
 import type { SyncOptions } from './sync';
 
@@ -96,29 +97,29 @@ export async function writeTailwindcss({
   const {
     cwd,
     paths: { tmpPath },
-    config,
     mode,
   } = context;
+  if (runAgain) return;
 
-  if (!config?.tailwindcss || runAgain) return;
-
-  const rootPath = path.join(tmpPath, 'tailwindcss');
   const paths: Paths = {
     input: path.join(cwd, 'src/tailwind.css'),
-    output: path.join(rootPath, 'tailwind.css'),
+    output: path.join(tmpPath, 'tailwindcss/tailwind.css'),
     config: path.join(cwd, 'tailwind.config.js'),
   };
-
-  if (!fs.existsSync(paths.input)) {
-    console.log(
-      'Enabling feature tailwindcss requires input file src/tailwind.css',
-    );
+  if (!fs.existsSync(paths.config)) {
     return;
   }
 
-  if (!fs.existsSync(paths.config)) {
-    console.log(
-      'Enabling feature tailwindcss requires config file tailwind.config.js',
+  if (!fs.existsSync(paths.input)) {
+    logger.error(
+      `\`src/tailwind.css\` is missing when using tailwindcss. Please create it.
+
+example:
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+      `,
     );
     return;
   }

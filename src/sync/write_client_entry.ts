@@ -26,6 +26,7 @@ import { createRouter } from './router';
 import { Client } from '@umijs/tnf/ssr';
 ${globalStyleImportPath}
 ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
+
 const router = createRouter();
 const hydrateRoot = ReactDOM.hydrateRoot(document, <Client router={router} />);
 hydrateRoot.onRecoverableError = (error, errorInfo) => {

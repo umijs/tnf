@@ -136,13 +136,6 @@ The router configuration. Checkout [@tanstack/router-generator](https://github.c
 
 The ssr configuration.
 
-### tailwindcss
-
-- Type: `boolean`
-- Default: `false`
-
-The tailwindcss configuration. Need to be used together with `src/tailwind.css` and `tailwind.config.js`.
-
 ## FAQ
 
 ### How to specify a redirect route?

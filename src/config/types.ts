@@ -31,6 +31,14 @@ const RouterGeneratorConfig = z
 export const ConfigSchema = z.object({
   alias: z.array(z.tuple([z.string(), z.string()])).optional(),
   bundler: z.enum(['webpack', 'mako']).optional(),
+  clickToComponent: z
+    .union([
+      z.object({
+        editor: z.enum(['vscode', 'vscode-insiders', 'cursor']).optional(),
+      }),
+      z.literal(false),
+    ])
+    .optional(),
   externals: z.record(z.string()).optional(),
   devServer: z
     .object({
@@ -78,15 +86,6 @@ export const ConfigSchema = z.object({
     .object({
       renderMode: z.enum(['stream', 'string']).optional(),
     })
-    .optional(),
-  tailwindcss: z.boolean().optional(),
-  clickToComponent: z
-    .union([
-      z.object({
-        editor: z.enum(['vscode', 'vscode-insiders', 'cursor']).optional(),
-      }),
-      z.literal(false),
-    ])
     .optional(),
 });
 
