@@ -106,22 +106,26 @@ export async function writeTailwindcss({
     output: path.join(tmpPath, 'tailwindcss/tailwind.css'),
     config: path.join(cwd, 'tailwind.config.js'),
   };
+
+  // Enable tailwindcss only if the config file exists
   if (!fs.existsSync(paths.config)) {
     return;
   }
 
+  // Generate input file if it doesn't exist
   if (!fs.existsSync(paths.input)) {
-    logger.error(
-      `\`src/tailwind.css\` is missing when using tailwindcss. Please create it.
-
-example:
-
+    fs.ensureDirSync(path.dirname(paths.input));
+    fs.writeFileSync(
+      paths.input,
+      `
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-      `,
+    `.trimStart(),
     );
-    return;
+    logger.info(
+      `Created \`src/tailwind.css\` file. Please customize it before using tailwindcss.`,
+    );
   }
 
   await generateFile({
