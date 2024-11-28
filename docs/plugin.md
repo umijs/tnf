@@ -30,15 +30,11 @@ Called when build end.
 
 ### config
 
-> Not implemented
-
 - Type: `(config: UserConfig, env: { command: string }) => UserConfig | Promise<UserConfig> | null`
 
 Return an object that will be deeply merged into the existing config, or directly modify the config object.
 
 ### configResolved
-
-> Not implemented
 
 - Type: `(config: ResolvedConfig) => void | Promise<void>`
 

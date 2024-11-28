@@ -2,6 +2,7 @@ import assert from 'assert';
 import path from 'pathe';
 import yargsParser from 'yargs-parser';
 import { loadConfig } from './config/config';
+import { ConfigSchema } from './config/types';
 import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants';
 import { debug, error, info, warn } from './fishkit/logger';
 import * as logger from './fishkit/logger';
@@ -17,9 +18,31 @@ async function buildContext(cwd: string): Promise<Context> {
   const config = await loadConfig({ cwd });
   const plugins = [...(config.plugins || []), mock({ paths: ['mock'], cwd })];
   const pluginManager = new PluginManager(plugins);
+
+  // hook: config
+  const resolvedConfig = await pluginManager.apply({
+    hook: 'config',
+    args: [{ command, mode: isDev ? Mode.Development : Mode.Production }],
+    type: PluginHookType.SeriesMerge,
+    memo: config,
+    pluginContext: {},
+  });
+  // validate resolvedConfig
+  const result = ConfigSchema.safeParse(resolvedConfig);
+  if (!result.success) {
+    throw new Error(`Invalid configuration: ${result.error.message}`);
+  }
+  // hook: configResolved
+  await pluginManager.apply({
+    hook: 'configResolved',
+    args: [resolvedConfig],
+    type: PluginHookType.Series,
+    pluginContext: {},
+  });
+
   const pluginContext = {
     command: command as string | undefined,
-    config,
+    config: resolvedConfig,
     cwd,
     // TODO: diff config and userConfig
     userConfig: config,

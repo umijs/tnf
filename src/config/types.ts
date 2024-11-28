@@ -28,65 +28,72 @@ const RouterGeneratorConfig = z
   })
   .optional();
 
-export const ConfigSchema = z.object({
-  alias: z.array(z.tuple([z.string(), z.string()])).optional(),
-  bundler: z.enum(['webpack', 'mako']).optional(),
-  clickToComponent: z
-    .union([
-      z.object({
-        editor: z.enum(['vscode', 'vscode-insiders', 'cursor']).optional(),
-      }),
-      z.literal(false),
-    ])
-    .optional(),
-  externals: z.record(z.string()).optional(),
-  devServer: z
-    .object({
-      port: z.number().optional(),
-      https: z
-        .object({
-          hosts: z.array(z.string()).optional(),
-        })
-        .optional(),
-      ip: z.string().optional(),
-      host: z.string().optional(),
-    })
-    .optional(),
-  less: z
-    .object({
-      modifyVars: z.any().optional(),
-      globalVars: z.any().optional(),
-      math: z.any().optional(),
-      sourceMap: z.any(),
-      plugins: z.array(z.any()).optional(),
-    })
-    .optional(),
-  plugins: z.array(PluginSchema).optional(),
-  router: z
-    .object({
-      defaultPreload: z.enum(['intent', 'render', 'viewport']).optional(),
-      defaultPreloadDelay: z.number().optional(),
-      devtool: z
-        .union([
-          z.object({
-            options: z.object({
-              initialIsOpen: z.boolean().optional(),
-              position: z
-                .enum(['bottom-left', 'bottom-right', 'top-left', 'top-right'])
-                .optional(),
+export const ConfigSchema = z
+  .object({
+    alias: z.array(z.tuple([z.string(), z.string()])).optional(),
+    bundler: z.enum(['webpack', 'mako']).optional(),
+    clickToComponent: z
+      .union([
+        z.object({
+          editor: z.enum(['vscode', 'vscode-insiders', 'cursor']).optional(),
+        }),
+        z.literal(false),
+      ])
+      .optional(),
+    externals: z.record(z.string()).optional(),
+    devServer: z
+      .object({
+        port: z.number().optional(),
+        https: z
+          .object({
+            hosts: z.array(z.string()).optional(),
+          })
+          .optional(),
+        ip: z.string().optional(),
+        host: z.string().optional(),
+      })
+      .optional(),
+    less: z
+      .object({
+        modifyVars: z.any().optional(),
+        globalVars: z.any().optional(),
+        math: z.any().optional(),
+        sourceMap: z.any(),
+        plugins: z.array(z.any()).optional(),
+      })
+      .optional(),
+    plugins: z.array(PluginSchema).optional(),
+    router: z
+      .object({
+        defaultPreload: z.enum(['intent', 'render', 'viewport']).optional(),
+        defaultPreloadDelay: z.number().optional(),
+        devtool: z
+          .union([
+            z.object({
+              options: z.object({
+                initialIsOpen: z.boolean().optional(),
+                position: z
+                  .enum([
+                    'bottom-left',
+                    'bottom-right',
+                    'top-left',
+                    'top-right',
+                  ])
+                  .optional(),
+              }),
             }),
-          }),
-          z.literal(false),
-        ])
-        .optional(),
-      convention: RouterGeneratorConfig,
-    })
-    .optional(),
-  ssr: z
-    .object({
-      renderMode: z.enum(['stream', 'string']).optional(),
-    })
-    .optional(),
-});
+            z.literal(false),
+          ])
+          .optional(),
+        convention: RouterGeneratorConfig,
+      })
+      .optional(),
+    ssr: z
+      .object({
+        renderMode: z.enum(['stream', 'string']).optional(),
+      })
+      .optional(),
+  })
+  .strict();
 
 export type Config = z.infer<typeof ConfigSchema>;

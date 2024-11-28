@@ -13,7 +13,7 @@ export async function dev({ context }: { context: Context }) {
       context.pluginManager.apply({
         hook: 'configureServer',
         args: [server],
-        type: PluginHookType.Parallel,
+        type: PluginHookType.Series,
         pluginContext: context.pluginContext,
       });
     },

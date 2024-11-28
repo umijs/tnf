@@ -1,8 +1,11 @@
+import defu from 'defu';
 import type { Plugin } from './types';
 
 export enum PluginHookType {
   First = 'first',
   Series = 'series',
+  SeriesMerge = 'seriesMerge',
+  SeriesLast = 'seriesLast',
   Parallel = 'parallel',
 }
 
@@ -32,7 +35,7 @@ export class PluginManager<T extends Plugin> {
     const plugins = this.#plugins.filter((p) => !!p[hook]);
     if (type === PluginHookType.First) {
       for (const plugin of plugins) {
-        const hookFn = plugin[hook] as Function;
+        const hookFn = plugin[hook];
         if (typeof hookFn === 'function') {
           const result = await hookFn.apply(pluginContext, args);
           if (result != null) {
@@ -44,7 +47,7 @@ export class PluginManager<T extends Plugin> {
     } else if (type === PluginHookType.Parallel) {
       const results = await Promise.all(
         plugins.map((p) => {
-          const hookFn = p[hook] as Function;
+          const hookFn = p[hook];
           if (typeof hookFn === 'function') {
             return hookFn.apply(pluginContext, args);
           }
@@ -53,11 +56,27 @@ export class PluginManager<T extends Plugin> {
       );
       return results.filter((r) => r != null);
     } else if (type === PluginHookType.Series) {
+      for (const plugin of plugins) {
+        const hookFn = plugin[hook];
+        if (typeof hookFn === 'function') {
+          await hookFn.apply(pluginContext, args);
+        }
+      }
+    } else if (type === PluginHookType.SeriesLast) {
       let result = memo;
       for (const plugin of plugins) {
-        const hookFn = plugin[hook] as Function;
+        const hookFn = plugin[hook];
         if (typeof hookFn === 'function') {
           result = await hookFn.apply(pluginContext, [result, ...args]);
+        }
+      }
+      return result;
+    } else if (type === PluginHookType.SeriesMerge) {
+      let result = memo;
+      for (const plugin of plugins) {
+        const hookFn = plugin[hook];
+        if (typeof hookFn === 'function') {
+          result = defu(await hookFn.apply(pluginContext, args), result);
         }
       }
       return result;

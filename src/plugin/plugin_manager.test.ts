@@ -51,7 +51,7 @@ test('Series hook type should pass result through plugins', async () => {
     hook: 'transform',
     args: [],
     memo: 5,
-    type: PluginHookType.Series,
+    type: PluginHookType.SeriesLast,
     pluginContext: {},
   });
 
@@ -119,4 +119,91 @@ test('Invalid hook type should throw error', async () => {
       pluginContext: {},
     }),
   ).rejects.toThrow('Invalid hook type: invalid');
+});
+
+test('Series hook type should execute plugins in order', async () => {
+  const order: string[] = [];
+  const plugins: Plugin[] = [
+    { buildStart: () => order.push('first') },
+    { buildStart: () => order.push('second') },
+    { buildStart: () => order.push('third') },
+  ];
+
+  const manager = new PluginManager(plugins);
+  await manager.apply({
+    hook: 'buildStart',
+    args: [],
+    type: PluginHookType.Series,
+    pluginContext: {},
+  });
+
+  expect(order).toEqual(['first', 'second', 'third']);
+});
+
+test('SeriesMerge hook type should merge objects in series', async () => {
+  const plugins: (Plugin & { config: () => object })[] = [
+    {
+      config: () => ({
+        foo: 'foo1',
+        bar: 'bar1',
+        deep: { a: 1 },
+      }),
+    },
+    {
+      config: () => ({
+        foo: 'foo2',
+        baz: 'baz2',
+        deep: { b: 2 },
+      }),
+    },
+    {
+      config: () => ({
+        bar: 'bar3',
+        deep: { c: 3 },
+      }),
+    },
+  ];
+
+  const manager = new PluginManager(plugins);
+  const result = await manager.apply({
+    hook: 'config',
+    args: [],
+    type: PluginHookType.SeriesMerge,
+    pluginContext: {},
+  });
+
+  // Later plugins take precedence for top-level properties
+  // Deep objects are merged
+  expect(result).toEqual({
+    foo: 'foo2',
+    bar: 'bar3',
+    baz: 'baz2',
+    deep: {
+      a: 1,
+      b: 2,
+      c: 3,
+    },
+  });
+});
+
+test('SeriesMerge hook type should handle undefined returns', async () => {
+  const plugins: (Plugin & { config: () => object | undefined })[] = [
+    { config: () => undefined },
+    { config: () => ({ foo: 'bar' }) },
+    { config: () => undefined },
+    { config: () => ({ baz: 'qux' }) },
+  ];
+
+  const manager = new PluginManager(plugins);
+  const result = await manager.apply({
+    hook: 'config',
+    args: [],
+    type: PluginHookType.SeriesMerge,
+    pluginContext: {},
+  });
+
+  expect(result).toEqual({
+    foo: 'bar',
+    baz: 'qux',
+  });
 });

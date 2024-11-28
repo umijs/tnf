@@ -9,6 +9,15 @@ export default defineConfig({
   },
   plugins: [
     {
+      config: ({ command }) => {
+        console.log('config', command);
+        return {
+          // foo: 'bar',
+        };
+      },
+      configResolved: (config) => {
+        // console.log('configResolved', config);
+      },
       buildStart: ({ command }) => {
         console.log('buildStart', command);
       },
