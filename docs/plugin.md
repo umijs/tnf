@@ -1,10 +1,22 @@
 # Plugin
 
+## Properties
+
+### name
+
+- Type: `string`
+
+Plugin name.
+
+### enforce
+
+- Type: `'pre' | 'post'`
+
+Plugin execution order.
+
 ## General Hooks
 
 ### buildStart
-
-> Not implemented
 
 - Type: `(ctx: { command: string }) => void | Promise<void>`
 

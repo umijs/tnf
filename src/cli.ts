@@ -7,7 +7,7 @@ import { debug, error, info, warn } from './fishkit/logger';
 import * as logger from './fishkit/logger';
 import { checkVersion, setNoDeprecation, setNodeTitle } from './fishkit/node';
 import { mock } from './funplugins/mock/mock';
-import { PluginManager } from './plugin/plugin_manager';
+import { PluginHookType, PluginManager } from './plugin/plugin_manager';
 import { type Context, Mode } from './types';
 
 async function buildContext(cwd: string): Promise<Context> {
@@ -46,6 +46,16 @@ async function run(cwd: string) {
   const context = await buildContext(cwd);
   const cmd = context.argv._[0];
   assert(cmd, 'Command is required');
+
+  if (cmd === 'build' || cmd === 'dev') {
+    await context.pluginManager.apply({
+      hook: 'buildStart',
+      args: [{ command: cmd }],
+      type: PluginHookType.Parallel,
+      pluginContext: context.pluginContext,
+    });
+  }
+
   switch (cmd) {
     case 'build':
       const { build } = await import('./build.js');

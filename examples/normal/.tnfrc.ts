@@ -9,6 +9,9 @@ export default defineConfig({
   },
   plugins: [
     {
+      buildStart: ({ command }) => {
+        console.log('buildStart', command);
+      },
       buildEnd: ({ command, err }) => {
         console.log('buildEnd', command, err);
       },
