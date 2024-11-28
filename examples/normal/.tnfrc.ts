@@ -7,4 +7,11 @@ export default defineConfig({
       routeFileIgnorePattern: 'components',
     },
   },
+  plugins: [
+    {
+      buildEnd: ({ command, err }) => {
+        console.log('buildEnd', command, err);
+      },
+    },
+  ],
 });

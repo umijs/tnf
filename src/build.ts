@@ -76,7 +76,11 @@ export async function build({
   // build end
   await context.pluginManager.apply({
     hook: 'buildEnd',
-    args: [],
+    args: [
+      {
+        command: context.argv._[0],
+      },
+    ],
     type: PluginHookType.Parallel,
     pluginContext: context.pluginContext,
   });
