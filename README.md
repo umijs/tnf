@@ -122,6 +122,13 @@ An object that maps package names to their corresponding paths.
 
 The configuration passed to lessLoader.
 
+### plugins
+
+- Type: `Plugin[]`
+- Default: `[]`
+
+The plugins configuration. Checkout [plugin.md](./docs/plugin.md) for more details.
+
 ### router
 
 - Type: `{ defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false; convention?: any }`
