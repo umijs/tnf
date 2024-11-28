@@ -27,8 +27,12 @@ async function runE2E() {
     const browser = await chromium.launch();
     const page = await browser.newPage();
     await page.goto(`http://localhost:${port}`);
+    await page.waitForTimeout(1000);
     const content = await page.textContent('body');
-    assert(content?.includes('Hello'), 'Page content should include "Hello"');
+    assert(
+      content?.includes('Hello'),
+      `Page content should include "Hello" but got ${content}`,
+    );
 
     console.log('E2E tests passed!');
     process.exit(0);
