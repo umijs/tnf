@@ -20,7 +20,10 @@ export async function generatePage({ context }: { context: Context }) {
 
   fs.ensureDirSync(pagesDir);
 
-  const componentName = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+  const componentName = pageName
+    .split('.')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('');
   const pageContent = `import React from 'react';
 import { createFileRoute } from '@umijs/tnf/router';
 import styles from './${pageName}.module.less';
