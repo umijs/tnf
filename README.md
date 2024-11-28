@@ -149,6 +149,33 @@ const Route = createFileRoute('/foo')({
 });
 ```
 
+### How to get the loader data from parent route?
+
+First, define parent route with `beforeLoad`.
+
+```tsx
+const parentRoute = createFileRoute('/foo')({
+  beforeLoad: () => ({ foo: 'foo' }),
+});
+```
+
+If it's root route, you can use `createRootRouteWithContext` instead.
+
+```tsx
+const rootRoute = createRootRouteWithContext<{ root: string }>()({
+  beforeLoad: () => ({ root: 'root' }),
+});
+```
+
+Second, fetch the loader data in child route with `context`.
+
+```tsx
+const childRoute = createFileRoute('/foo/bar')({
+  // context: { root: 'root', foo: 'foo' },
+  loader: async ({ context }) => ({ ...context }),
+});
+```
+
 ## CREDITS
 
 This project is inspired by:

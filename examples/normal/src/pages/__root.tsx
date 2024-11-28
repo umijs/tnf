@@ -1,6 +1,13 @@
-import { Link, Outlet, createRootRoute } from '@umijs/tnf/router';
+import { Link, Outlet, createRootRouteWithContext } from '@umijs/tnf/router';
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<{
+  root: string;
+}>()({
+  beforeLoad: () => {
+    return {
+      root: 'root',
+    };
+  },
   component: () => (
     <>
       <div>Hello "__root"!</div>

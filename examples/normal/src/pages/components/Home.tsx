@@ -1,5 +1,4 @@
-import { createFileRoute } from '@umijs/tnf/router';
-import styles from './index.module.less';
+import styles from './Home.module.less';
 
 function Home() {
   return (

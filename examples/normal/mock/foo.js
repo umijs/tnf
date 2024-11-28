@@ -1,6 +1,6 @@
 
 module.exports = {
-  'GET /foo': (req, res) => {
+  'GET /api/foo': (req, res) => {
     res.json({ message: 'hello' });
   },
 };
