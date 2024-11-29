@@ -27,23 +27,26 @@ export function createMockMiddleware(context: MockData): RequestHandler {
           }
           req.params = params;
 
-          // delay
-          const delayValue = context.config?.mock?.delay;
-          let delay = 0;
-          if (typeof delayValue === 'string' && delayValue.includes('-')) {
-            const [min, max] = delayValue
-              .split('-')
-              .map((val) => Number(val) || 0);
-            if (
-              min !== undefined &&
-              max !== undefined &&
-              !isNaN(min) &&
-              !isNaN(max)
-            ) {
-              delay = Math.floor(Math.random() * (max - min + 1)) + min;
+          // parse delay from path, like /api/users?delay=3000
+          // delay in params url is greater than that configuration mock.delay
+          let delay = Number(req.query?.delay) || 0;
+          if (delay === 0) {
+            const delayValue = context.config?.mock?.delay;
+            if (typeof delayValue === 'string' && delayValue.includes('-')) {
+              const [min, max] = delayValue
+                .split('-')
+                .map((val) => Number(val) || 0);
+              if (
+                min !== undefined &&
+                max !== undefined &&
+                !isNaN(min) &&
+                !isNaN(max)
+              ) {
+                delay = Math.floor(Math.random() * (max - min + 1)) + min;
+              }
+            } else {
+              delay = Number(delayValue ?? 0);
             }
-          } else {
-            delay = Number(delayValue ?? 0);
           }
           if (delay > 0) {
             await new Promise((resolve) => setTimeout(resolve, delay));

@@ -9,7 +9,7 @@ export const Route = createFileRoute('/foo')({
   component: Foo,
   loader: async ({ context }) => {
     // const res = await fetch('https://dummyjson.com/users');
-    const res = await fetch('/api/foo');
+    const res = await fetch('/api/foo?delay=5000');
     const data = await res.json();
     return data;
   },
