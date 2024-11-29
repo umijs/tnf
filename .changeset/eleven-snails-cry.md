@@ -1,5 +1,5 @@
 ---
-'@umijs/tnf': major
+'@umijs/tnf': patch
 ---
 
-configure the delay of the mock globally.
+feat: configure the delay of the mock globally.
