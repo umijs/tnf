@@ -11,6 +11,7 @@ export function mock(opts: MockOptions): Plugin {
       server.middlewares.use(
         createMockMiddleware({
           mocks,
+          config: opts.config,
         }),
       );
     },

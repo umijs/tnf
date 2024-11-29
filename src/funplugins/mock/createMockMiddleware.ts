@@ -6,7 +6,7 @@ import pathToRegexp from 'path-to-regexp';
 import type { MockData } from './types';
 
 export function createMockMiddleware(context: MockData): RequestHandler {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const method = req.method.toUpperCase();
     for (const key of Object.keys(context.mocks)) {
       const mock = context.mocks[key]!;
@@ -26,6 +26,29 @@ export function createMockMiddleware(context: MockData): RequestHandler {
             }
           }
           req.params = params;
+
+          // delay
+          const delayValue = context.config?.mock?.delay;
+          let delay = 0;
+          if (typeof delayValue === 'string' && delayValue.includes('-')) {
+            const [min, max] = delayValue
+              .split('-')
+              .map((val) => Number(val) || 0);
+            if (
+              min !== undefined &&
+              max !== undefined &&
+              !isNaN(min) &&
+              !isNaN(max)
+            ) {
+              delay = Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+          } else {
+            delay = Number(delayValue ?? 0);
+          }
+          if (delay > 0) {
+            await new Promise((resolve) => setTimeout(resolve, delay));
+          }
+
           // handler
           if (method === 'GET') {
             mock.handler(req, res, next);

@@ -93,6 +93,19 @@ export const ConfigSchema = z
         renderMode: z.enum(['stream', 'string']).optional(),
       })
       .optional(),
+    mock: z
+      .object({
+        delay: z
+          .union([
+            z.number().optional(),
+            z
+              .string()
+              .regex(/^\d+-\d+$/)
+              .optional(),
+          ])
+          .optional(),
+      })
+      .optional(),
   })
   .strict();
 

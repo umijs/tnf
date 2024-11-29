@@ -143,6 +143,13 @@ The router configuration. Checkout [@tanstack/router-generator](https://github.c
 
 The ssr configuration.
 
+### mock
+
+- Type: `{ delay?: string | number }`
+- Default: `{ delay: 0 }`
+
+In addition to supporting numbers, delay also supports string ranges, such as delay: '500-1000', which randomly selects a value between 500ms and 1000ms.
+
 ## FAQ
 
 ### How to specify a redirect route?
