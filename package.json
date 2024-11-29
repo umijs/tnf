@@ -11,6 +11,7 @@
     "bootstrap:examples": "tsx scripts/bootstrapExample.ts",
     "bootstrap:funplugins": "tsx scripts/bootstrapFunplugin.ts",
     "build": "father build",
+    "compile": "tsx scripts/compile.ts",
     "changeset": "tsx scripts/changeset.ts && changeset",
     "check": "prettier --check .",
     "ci": "npm run check && npm run build && npm run tsc && npm run test --run && npm run test:e2e && father doctor",
@@ -27,6 +28,7 @@
   },
   "files": [
     "bin",
+    "compiled",
     "client",
     "dist",
     "templates"
@@ -67,6 +69,7 @@
     "fs-extra": "^11.1.0",
     "get-port-please": "^3.1.2",
     "glob": "^11.0.0",
+    "gradient-string": "^3.0.0",
     "http-proxy-middleware": "^3.0.3",
     "jsesc": "^3.0.2",
     "json5": "^2.2.3",

@@ -80,6 +80,8 @@ Register command.
 
 ### transformHtml
 
+> Not implemented
+
 - Type: `(html: string, ctx: { path: string, filename: string }) => string | Promise<string>`
 
 Modify html content.

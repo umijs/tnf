@@ -1,6 +1,7 @@
 import assert from 'assert';
 import path from 'pathe';
 import yargsParser from 'yargs-parser';
+import { instagram } from '../compiled/gradient-string';
 import { loadConfig } from './config/config';
 import { ConfigSchema } from './config/types';
 import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants';
@@ -66,6 +67,17 @@ async function buildContext(cwd: string): Promise<Context> {
 }
 
 async function run(cwd: string) {
+  console.log(
+    instagram(`
+ ████████╗███╗   ██╗███████╗
+    ██╔══╝████╗  ██║██╔════╝
+    ██║   ██╔██╗ ██║█████╗
+    ██║   ██║╚██╗██║██╔══╝
+    ██║   ██║ ╚████║██║
+    ╚═╝   ╚═╝  ╚═══╝╚═╝
+  `),
+  );
+
   const context = await buildContext(cwd);
   const cmd = context.argv._[0];
   assert(cmd, 'Command is required');
