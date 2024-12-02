@@ -136,6 +136,13 @@ In addition to supporting numbers, delay also supports string ranges, such as de
 
 The plugins configuration. Checkout [plugin.md](./docs/plugin.md) for more details.
 
+### publicPath
+
+- Type: `string`
+- Default: `/`
+
+The publicPath configuration.
+
 ### router
 
 - Type: `{ defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false; convention?: any }`
