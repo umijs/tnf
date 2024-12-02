@@ -22,6 +22,7 @@ export default {
         less: bundlerConfig.less,
         mode: bundlerConfig.mode,
         platform: bundlerConfig.platform,
+        publicPath: bundlerConfig.publicPath,
         resolve: {
           alias: bundlerConfig.alias,
         },

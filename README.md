@@ -129,6 +129,13 @@ The configuration passed to lessLoader.
 
 The plugins configuration. Checkout [plugin.md](./docs/plugin.md) for more details.
 
+### publicPath
+
+- Type: `string`
+- Default: `/`
+
+PublicPath configuration.
+
 ### router
 
 - Type: `{ defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false; convention?: any }`

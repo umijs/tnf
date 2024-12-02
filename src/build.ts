@@ -42,6 +42,7 @@ export async function build({
     mode,
     alias: config.alias,
     externals: config.externals,
+    publicPath: config.publicPath,
   };
 
   // bundler configs

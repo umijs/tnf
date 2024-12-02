@@ -24,6 +24,7 @@ export interface BundlerConfig {
   alias?: Config['alias'];
   externals?: Config['externals'];
   less?: Config['less'];
+  publicPath?: Config['publicPath'];
 }
 
 export interface BundlerBuildOptions {
