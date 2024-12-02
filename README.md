@@ -134,7 +134,7 @@ The plugins configuration. Checkout [plugin.md](./docs/plugin.md) for more detai
 - Type: `string`
 - Default: `/`
 
-PublicPath configuration.
+The publicPath configuration.
 
 ### router
 
