@@ -1,3 +1,4 @@
+import type { Config } from '../../config/types';
 import type { Plugin } from '../../plugin/types';
 import { createMockMiddleware } from './createMockMiddleware';
 import { getMockData } from './getMockData';
@@ -11,6 +12,7 @@ export function mock(opts: MockOptions): Plugin {
       server.middlewares.use(
         createMockMiddleware({
           mocks,
+          config: this.config as Config,
         }),
       );
     },
