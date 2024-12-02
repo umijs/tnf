@@ -17,10 +17,7 @@ async function buildContext(cwd: string): Promise<Context> {
   const command = argv._[0];
   const isDev = command === 'dev';
   const config = await loadConfig({ cwd });
-  const plugins = [
-    ...(config.plugins || []),
-    mock({ paths: ['mock'], cwd, config }),
-  ];
+  const plugins = [...(config.plugins || []), mock({ paths: ['mock'], cwd })];
   const pluginManager = new PluginManager(plugins);
 
   // hook: config

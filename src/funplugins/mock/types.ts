@@ -11,7 +11,6 @@ export interface MockOptions {
   paths: string[];
   cwd: string;
   ignore?: string[];
-  config?: Config;
 }
 
 export interface MockData {

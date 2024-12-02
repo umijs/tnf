@@ -122,6 +122,13 @@ An object that maps package names to their corresponding paths.
 
 The configuration passed to lessLoader.
 
+### mock
+
+- Type: `{ delay?: string | number }`
+- Default: `{ delay: 0 }`
+
+In addition to supporting numbers, delay also supports string ranges, such as delay: '500-1000', which randomly selects a value between 500ms and 1000ms.And allowing the configuration to be overridden by the url parameter, such as /api/users?delay=3000.
+
 ### plugins
 
 - Type: `Plugin[]`
@@ -142,13 +149,6 @@ The router configuration. Checkout [@tanstack/router-generator](https://github.c
 - Default: `{ renderMode: 'stream' }`
 
 The ssr configuration.
-
-### mock
-
-- Type: `{ delay?: string | number }`
-- Default: `{ delay: 0 }`
-
-In addition to supporting numbers, delay also supports string ranges, such as delay: '500-1000', which randomly selects a value between 500ms and 1000ms.
 
 ## FAQ
 

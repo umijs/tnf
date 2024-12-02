@@ -35,13 +35,9 @@ export function createMockMiddleware(context: MockData): RequestHandler {
             if (typeof delayValue === 'string' && delayValue.includes('-')) {
               const [min, max] = delayValue
                 .split('-')
-                .map((val) => Number(val) || 0);
-              if (
-                min !== undefined &&
-                max !== undefined &&
-                !isNaN(min) &&
-                !isNaN(max)
-              ) {
+                .map(Number)
+                .filter((n) => !isNaN(n));
+              if (min !== undefined && max !== undefined) {
                 delay = Math.floor(Math.random() * (max - min + 1)) + min;
               }
             } else {
