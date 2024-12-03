@@ -9,7 +9,7 @@
   "dependencies": {
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@umijs/tnf": "^0.1.5"
+    "@umijs/tnf": "^0.1.6"
   },
   "devDependencies": {
     "@total-typescript/tsconfig": "^1.0.4",
