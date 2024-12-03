@@ -13,10 +13,6 @@ export const Route = createFileRoute('/foo')({
     const data = await res.json();
     return data;
   },
-  pendingComponent: () => <div>Loading...</div>,
-  pendingMs: 0,
-  gcTime: 1000 * 60 * 5,
-  staleTime: 1000 * 60 * 2,
   beforeLoad: async () => {
     return {
       foo: 'foo',

@@ -51,7 +51,7 @@ export async function build({
   bundlerConfigs.push({
     ...baseBundleConfig,
     entry: {
-      client: path.join(context.paths.tmpPath, 'client.tsx'),
+      client: path.join(context.paths.tmpPath, 'client-entry.tsx'),
     },
     less: config.less,
   });

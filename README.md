@@ -18,6 +18,8 @@ Tnf, ~~the north face~~, the next framework. Tnf is focused on simple, performan
 - Less, CSS Modules support built-in.
 - Tailwind CSS support built-in.
 - [Framework unified plugin system](./docs/plugin.md) which is compatible with umi and other frameworks.
+- Mock.
+- Conventional client entry with `src/client.tsx`.
 - [ ] Security built-in. Including doctor rules which is used in Ant Group.
 - Support SSR.
 - [ ] Support API routes and server functions.

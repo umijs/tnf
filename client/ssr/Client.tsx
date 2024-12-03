@@ -6,7 +6,7 @@ import { afterHydrate } from './utils/serialization';
 let cleaned = false;
 
 export function Client(props: { router: AnyRouter }) {
-  if (!props.router.state.matches.length) {
+  if (window.__TSR__ && !props.router.state.matches.length) {
     props.router.hydrate();
     afterHydrate({ router: props.router });
   }
