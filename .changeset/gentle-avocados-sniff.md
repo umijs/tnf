@@ -1,5 +1,5 @@
 ---
-'@umijs/tnf': minor
+'@umijs/tnf': patch
 ---
 
 feat: support Mako publicPath
