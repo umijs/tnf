@@ -11,8 +11,8 @@ export interface AssetProps {
   children?: ReactNode;
 }
 
-export function StartClient(props: StartClientProps): JSX.Element;
-export function StartServer<TRouter extends AnyRouter>(props: {
+export function Client(props: StartClientProps): JSX.Element;
+export function Server<TRouter extends AnyRouter>(props: {
   router: TRouter;
 }): JSX.Element;
 export function Meta(): JSX.Element;
