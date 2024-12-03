@@ -1,5 +1,11 @@
 # @umijs/tnf
 
+## 0.1.7
+
+### Patch Changes
+
+- [`7c711fb`](https://github.com/umijs/tnf/commit/7c711fb4f3d98e199161ec17c3db7afbe94db618) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: conventional client entry with `src/client.tsx`
+
 ## 0.1.6
 
 ### Patch Changes
