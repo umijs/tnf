@@ -41,9 +41,9 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
-    "@tanstack/react-router": "^1.82.11",
-    "@tanstack/router-devtools": "^1.82.11",
-    "@tanstack/router-generator": "^1.82.10",
+    "@tanstack/react-router": "^1.85.3",
+    "@tanstack/router-devtools": "^1.85.3",
+    "@tanstack/router-generator": "^1.85.3",
     "@types/body-parser": "^1.19.5",
     "@types/compression": "^1.7.5",
     "@types/connect-history-api-fallback": "^1.5.4",
@@ -101,12 +101,12 @@
     "git-repo-info": "^2.1.1",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.1",
     "serve-handler": "^6.1.6",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.5",
-    "zx": "^8.2.2"
+    "vitest": "^2.1.8",
+    "zx": "^8.2.4"
   },
   "lint-staged": {
     "*.{jsx,less,md,json}": [
