@@ -6,4 +6,7 @@
 /create-tnf/node_modules
 /create-tnf/dist
 /fyi.md
+/e2e/fixtures/*/.tnf
+/e2e/fixtures/*/dist
+/e2e/fixtures/*/node_modules
 .DS_Store

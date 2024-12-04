@@ -8,6 +8,8 @@ on:
       - 'examples/**'
       - 'scripts/**'
       - 'docs/**'
+      - '.github/**'
+      - '.changeset/**'
       - '**/*.md'
   pull_request:
     types:

@@ -16,3 +16,4 @@ Other Rules need to follow:
 - Keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.
 - Make sure the created files are ending with a new line at the end of the file.
 - Api, commands and config in README.md should be ordered alphabetically.
+- Use `printWidth: 80, singleQuote: true, trailingComma: all, indent_style: space, indent_width: 2` for code formatting.
