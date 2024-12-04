@@ -9,6 +9,7 @@
   },
   "scripts": {
     "bootstrap:examples": "tsx scripts/bootstrapExample.ts",
+    "bootstrap:e2e": "tsx scripts/bootstrapE2e.ts",
     "bootstrap:funplugins": "tsx scripts/bootstrapFunplugin.ts",
     "build": "father build",
     "compile": "tsx scripts/compile.ts",
