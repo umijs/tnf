@@ -62,6 +62,33 @@ export const installWithNpmClient = ({
   }
 };
 
+export const installSpecifiedDepsWithNpmClient = ({
+  npmClient,
+  cwd,
+  pkg,
+  flags,
+}: {
+  npmClient: NpmClient;
+  cwd?: string;
+  pkg: string;
+  flags?: string[];
+}): void => {
+  const { NODE_ENV: _, ...env } = process.env;
+
+  const flag = flags ?? [];
+  const args = npmClient === 'yarn' ? ['add', pkg, ...flag] : ['install', pkg, ...flag];
+
+  const npm = spawnSync(npmClient, args, {
+    stdio: 'inherit',
+    cwd,
+    env,
+  });
+
+  if (npm.error) {
+    throw npm.error;
+  }
+};
+
 type Dependencies = Record<string, string>;
 
 interface PackageJson {
@@ -128,7 +155,32 @@ export class PackageManager {
 
       const npmClient = getNpmClient({ cwd: this.cwd });
       await installWithNpmClient({
+        npmClient
+      });
+
+      console.info(`Dependencies installed with ${npmClient}`);
+    } catch (error) {
+      throw new Error(`Failed to install dependencies: ${error}`);
+    }
+  }
+
+  public installSpecifiedDeps({
+    pkg,
+    isDev,
+    cwd,
+  }: {
+    pkg: string;
+    isDev?: boolean;
+    cwd?: string;
+  }): void {
+    try {
+      const npmClient = getNpmClient({ cwd: this.cwd });
+
+      installSpecifiedDepsWithNpmClient({
         npmClient,
+        cwd,
+        pkg,
+        flags: isDev ? ['-D'] : [],
       });
 
       console.info(`Dependencies installed with ${npmClient}`);
