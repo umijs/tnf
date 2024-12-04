@@ -2,7 +2,7 @@ import { createRouter } from '@umijs/tnf/router';
 import { Client } from '@umijs/tnf/ssr';
 import { routeTree } from '../.tnf/routeTree.gen';
 
-export function createApp() {
+export function createClient() {
   const router = createRouter({
     routeTree,
     context: { root: '/' },

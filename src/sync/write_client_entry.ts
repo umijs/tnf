@@ -26,7 +26,7 @@ import React from 'react';
 import { Client } from '@umijs/tnf/ssr';
 import { createRouter } from './router';
 
-export function createApp() {
+export function createClient() {
   const router = createRouter();
   return {
     Root: function Root() {
@@ -72,8 +72,8 @@ const pathModifier = (path) => {
   return path.startsWith('${cwd}') ? path : '${cwd}/' + path;
 };
 
-if (client.createApp) {
-  const { Root, router } = client.createApp();
+if (client.createClient) {
+  const { Root, router } = client.createClient();
   const elements = <>
       <Root />
       ${
