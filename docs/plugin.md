@@ -78,7 +78,7 @@ Modify bundler config, return an array of [unplugin](https://unplugin.unjs.io/) 
 
 Register command.
 
-### transformHtml
+### transformIndexHtml
 
 > Not implemented
 

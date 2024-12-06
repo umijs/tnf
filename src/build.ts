@@ -1,7 +1,9 @@
 import chokidar from 'chokidar';
+import fs from 'fs';
 import path from 'pathe';
 import { BundlerType, createBundler } from './bundler/bundler';
 import * as logger from './fishkit/logger';
+import { buildHtml } from './html';
 import { PluginHookType } from './plugin/plugin_manager';
 import { sync } from './sync/sync';
 import { type Context } from './types';
@@ -73,6 +75,10 @@ export async function build({
     cwd,
     watch,
   });
+
+  // build html
+  const html = await buildHtml(context);
+  fs.writeFileSync(path.join(context.paths.outputPath, 'index.html'), html);
 
   // build end
   await context.pluginManager.apply({

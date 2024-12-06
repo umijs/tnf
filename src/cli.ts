@@ -62,6 +62,7 @@ async function buildContext(cwd: string): Promise<Context> {
     mode: isDev ? Mode.Development : Mode.Production,
     paths: {
       tmpPath: path.join(cwd, `.${FRAMEWORK_NAME}`),
+      outputPath: path.join(cwd, 'dist'),
     },
   };
 }

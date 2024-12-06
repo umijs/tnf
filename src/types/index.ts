@@ -5,6 +5,7 @@ import type { Plugin } from '../plugin/types';
 
 interface ContextPaths {
   tmpPath: string;
+  outputPath: string;
 }
 
 interface PluginContext {

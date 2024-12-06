@@ -49,10 +49,6 @@ export const Route = createRootRoute({
 }
       `.trimStart(),
     );
-    fs.copySync(
-      path.join(__dirname, '..', 'e2e', 'fixtures', 'simple', 'public'),
-      path.join(fixtureDir, 'public'),
-    );
     fs.writeFileSync(
       path.join(fixtureDir, '.tnfrc.ts'),
       `

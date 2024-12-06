@@ -26,6 +26,12 @@ export const PluginSchema = z.object({
       z.union([z.any(), z.promise(z.any()), z.null()]),
     )
     .optional(),
+  transformIndexHtml: z
+    .function(
+      z.tuple([z.string(), z.any()]),
+      z.union([z.string(), z.promise(z.string()), z.null()]),
+    )
+    .optional(),
 });
 
 export type Plugin = z.infer<typeof PluginSchema>;
