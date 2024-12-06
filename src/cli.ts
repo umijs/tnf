@@ -1,4 +1,5 @@
 import assert from 'assert';
+import fs from 'fs';
 import path from 'pathe';
 import yargsParser from 'yargs-parser';
 import { instagram } from '../compiled/gradient-string';
@@ -17,7 +18,11 @@ async function buildContext(cwd: string): Promise<Context> {
   const argv = yargsParser(process.argv.slice(2));
   const command = argv._[0];
   const isDev = command === 'dev';
-  const config = await loadConfig({ cwd });
+  const pkgPath = path.join(cwd, 'package.json');
+  const pkg = fs.existsSync(pkgPath)
+    ? JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
+    : {};
+  const config = await loadConfig({ cwd, pkg });
   const plugins = [
     ...(config.plugins || []),
     mock({ paths: ['mock'], cwd }),
