@@ -41,7 +41,6 @@ test('should use default HTML when document.html does not exist', async () => {
     pluginContext: {},
   } as any;
   const result = await buildHtml(mockContext);
-  console.log('result', result);
   expect(result).toContain('<div id="root"></div>');
 });
 
