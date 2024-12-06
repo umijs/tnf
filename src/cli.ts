@@ -9,6 +9,7 @@ import { debug, error, info, warn } from './fishkit/logger';
 import * as logger from './fishkit/logger';
 import { checkVersion, setNoDeprecation, setNodeTitle } from './fishkit/node';
 import { mock } from './funplugins/mock/mock';
+import { reactScan } from './funplugins/react-scan/react-scan';
 import { PluginHookType, PluginManager } from './plugin/plugin_manager';
 import { type Context, Mode } from './types';
 
@@ -17,7 +18,11 @@ async function buildContext(cwd: string): Promise<Context> {
   const command = argv._[0];
   const isDev = command === 'dev';
   const config = await loadConfig({ cwd });
-  const plugins = [...(config.plugins || []), mock({ paths: ['mock'], cwd })];
+  const plugins = [
+    ...(config.plugins || []),
+    mock({ paths: ['mock'], cwd }),
+    ...(config.reactScan && isDev ? [reactScan()] : []),
+  ];
   const pluginManager = new PluginManager(plugins);
 
   // hook: config

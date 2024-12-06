@@ -63,6 +63,7 @@ export const ConfigSchema = z
       })
       .optional(),
     plugins: z.array(PluginSchema).optional(),
+    reactScan: z.object({}).optional(),
     publicPath: z.string().optional(),
     router: z
       .object({

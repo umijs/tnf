@@ -145,6 +145,13 @@ The plugins configuration. Checkout [plugin.md](./docs/plugin.md) for more detai
 
 The publicPath configuration.
 
+### reactScan
+
+- Type: `{}`
+- Default: `false`
+
+Enable [react scan](https://react-scan.com/) to detects performance issues in your React code.
+
 ### router
 
 - Type: `{ defaultPreload?: 'intent' | 'render' | 'viewport'; defaultPreloadDelay?: number; devtool?: { options?: { initialIsOpen?: boolean; position?: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' }; } | false; convention?: any }`

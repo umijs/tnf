@@ -27,4 +27,5 @@ export default defineConfig({
     },
   ],
   mock: { delay: '500-1000' },
+  reactScan: {},
 });
