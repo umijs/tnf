@@ -9,18 +9,9 @@ import path from 'pathe';
 import pc from 'picocolors';
 import { CONFIG_FILE } from '../constants';
 import * as logger from '../fishkit/logger';
-import type { Context } from '../types';
+import type { Context, Pkg } from '../types';
 import type { Config } from './types';
 import { ConfigSchema } from './types';
-
-interface Pkg {
-  name?: string;
-  version?: string;
-  scripts?: Record<string, string>;
-  dependencies?: Record<string, string>;
-  devDependencies?: Record<string, string>;
-  [key: string]: any;
-}
 
 interface ConfigOpts {
   cwd: string;
