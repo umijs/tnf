@@ -1,5 +1,15 @@
 # @umijs/tnf
 
+## 0.1.8
+
+### Patch Changes
+
+- [`7b94851`](https://github.com/umijs/tnf/commit/7b948514101eba167705e62ac66d48d581f6bc3b) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: default react 19
+
+- [`c08bfc9`](https://github.com/umijs/tnf/commit/c08bfc92ed763ee35ccdf143d145922662a5936c) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: generate html
+
+- [`30badfe`](https://github.com/umijs/tnf/commit/30badfe21a87fc2db465b2eebf15d9a04e6c9ada) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: support react scan
+
 ## 0.1.7
 
 ### Patch Changes
