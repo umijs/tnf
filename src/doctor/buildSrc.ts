@@ -4,15 +4,15 @@ import { init, parse } from 'es-module-lexer';
 import esbuild from 'esbuild';
 import fs from 'fs';
 import path from 'pathe';
+import * as logger from '../fishkit/logger';
 
 interface BuildSrcOptions {
   entry: string;
   alias: [string, string][];
-  verbose?: boolean;
 }
 
 export async function buildSrc(opts: BuildSrcOptions) {
-  const { entry, alias, verbose = false } = opts;
+  const { entry, alias } = opts;
   const aliasMap = alias.reduce<Record<string, string>>((acc, [key, value]) => {
     acc[key] = value;
     return acc;
@@ -33,9 +33,7 @@ export async function buildSrc(opts: BuildSrcOptions) {
   const pkgs = new Set<string>();
   while (queue.length) {
     const file = queue.shift()!;
-    if (verbose) {
-      console.log('file', file);
-    }
+    logger.debug('file', file);
     const content = fs.readFileSync(file, 'utf-8');
     const loader = file.endsWith('.tsx') ? 'tsx' : 'ts';
     const { imports, exports } = parseFile(content, loader);
@@ -49,15 +47,13 @@ export async function buildSrc(opts: BuildSrcOptions) {
     for (const imp of imports) {
       if (imp.n) {
         const n = imp.n;
-        if (verbose) {
-          console.log(
-            '  > n',
-            n,
-            n.includes('node_modules'),
-            isStartWithNpmPackage(n),
-            !isJsOrTs(n),
-          );
-        }
+        logger.debug(
+          '  > n',
+          n,
+          n.includes('node_modules'),
+          isStartWithNpmPackage(n),
+          !isJsOrTs(n),
+        );
         // TODO:  aliased path should be resolved with enhanced-resolve
         // if (!isAliased(n, aliasKeys)) {
         if (n.includes('node_modules')) {

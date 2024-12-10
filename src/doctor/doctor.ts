@@ -1,4 +1,5 @@
 import path from 'pathe';
+import * as logger from '../fishkit/logger';
 import { sync as runSync } from '../sync/sync';
 import type { Context } from '../types';
 import { buildSrc } from './buildSrc';
@@ -9,11 +10,10 @@ import { checkReactConflicts } from './checkPkg';
 interface DoctorOptions {
   context: Context;
   sync?: boolean;
-  verbose?: boolean;
 }
 
 export async function doctor(opts: DoctorOptions) {
-  const { context, verbose = false, sync = false } = opts;
+  const { context, sync = false } = opts;
 
   if (sync) {
     await runSync({
@@ -21,11 +21,14 @@ export async function doctor(opts: DoctorOptions) {
     });
   }
 
+  const buildSrcResultStart = new Date();
   const buildSrcResult = await buildSrc({
     entry: path.join(context.paths.tmpPath, 'client-entry.tsx'),
     alias: context.config.alias || [],
-    verbose,
   });
+  logger.debug(
+    `buildSrc took ${new Date().getTime() - buildSrcResultStart.getTime()}ms`,
+  );
 
   // TODO: don't check when using pnpm
   const aliasKeys = context.config.alias?.map(([key]) => key) || [];

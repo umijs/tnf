@@ -119,7 +119,6 @@ async function run(cwd: string) {
       return doctor({
         context,
         sync: true,
-        verbose: !!context.argv.verbose,
       });
     case 'generate':
     case 'g':
