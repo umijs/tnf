@@ -20,6 +20,7 @@ Tnf, ~~the north face~~, the next framework. Tnf is focused on simple, performan
 - [Framework unified plugin system](./docs/plugin.md) which is compatible with umi and other frameworks.
 - Mock.
 - Conventional client entry with `src/client.tsx`.
+- Doctor to check potential issues.
 - [ ] Security built-in. Including doctor rules which is used in Ant Group.
 - Support SSR.
 - [ ] Support API routes and server functions.
@@ -56,6 +57,7 @@ $ pnpm preview
 - `tnf build`: Build the project.
 - `tnf config list/get/set/remove [name] [value]`: Manage the config.
 - `tnf dev`: Start the development server.
+- `tnf doctor`: Check the project for potential issues.
 - `tnf generate/g <type> <name>`: Generate a new page (or component and other types in the future).
 - `tnf preview`: Preview the product after building the project.
 - `tnf sync --mode=<mode>`: Sync the project to the temporary directory.
@@ -109,6 +111,13 @@ Click the component to open in the editor.
 - Default: `{ port: 8000, host: 'localhost' }`
 
 The development server configuration.
+
+### doctor
+
+- Type: `{ phantomDeps?: { exclude?: string[] } }`
+- Default: `{}`
+
+The doctor configuration.
 
 ### externals
 

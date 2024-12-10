@@ -16,7 +16,7 @@ export function checkReactConflicts(opts: {
   const reactDomMajorVersion = reactDomVersion.split('.')[0];
   assert(
     reactMajorVersion === reactDomMajorVersion,
-    'react and react-dom have different major versions',
+    `react(${reactMajorVersion}) and react-dom(${reactDomMajorVersion}) have different major versions`,
   );
 
   const { dependencies, devDependencies } = pkg;
@@ -25,15 +25,19 @@ export function checkReactConflicts(opts: {
   const reactDomTypesVersion =
     dependencies?.['@types/react-dom'] || devDependencies?.['@types/react-dom'];
   if (reactTypesVersion && reactDomTypesVersion) {
-    const reactTypesMajorVersion = reactTypesVersion.split('.')[0];
-    const reactDomTypesMajorVersion = reactDomTypesVersion.split('.')[0];
+    const reactTypesMajorVersion = reactTypesVersion
+      .split('.')[0]
+      ?.match(/\d+/)?.[0];
+    const reactDomTypesMajorVersion = reactDomTypesVersion
+      .split('.')[0]
+      ?.match(/\d+/)?.[0];
     assert(
       reactTypesMajorVersion === reactDomTypesMajorVersion,
-      'react and react-dom have different @types major versions',
+      `react(${reactTypesMajorVersion}) and react-dom(${reactDomTypesMajorVersion}) have different @types major versions`,
     );
     assert(
       reactTypesMajorVersion === reactMajorVersion,
-      'react and @types/react have different major versions',
+      `react(${reactMajorVersion}) and @types/react(${reactTypesMajorVersion}) have different major versions`,
     );
   }
 }

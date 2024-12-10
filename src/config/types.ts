@@ -40,7 +40,6 @@ export const ConfigSchema = z
         z.literal(false),
       ])
       .optional(),
-    externals: z.record(z.string()).optional(),
     devServer: z
       .object({
         port: z.number().optional(),
@@ -53,6 +52,16 @@ export const ConfigSchema = z
         host: z.string().optional(),
       })
       .optional(),
+    doctor: z
+      .object({
+        phantomDeps: z
+          .object({
+            exclude: z.array(z.string()).optional(),
+          })
+          .optional(),
+      })
+      .optional(),
+    externals: z.record(z.string()).optional(),
     less: z
       .object({
         modifyVars: z.any().optional(),

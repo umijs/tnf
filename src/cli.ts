@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'pathe';
 import yargsParser from 'yargs-parser';
 import { instagram } from '../compiled/gradient-string';
-import { check } from './check/check';
 import { loadConfig } from './config/config';
 import { ConfigSchema } from './config/types';
 import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants';
@@ -93,9 +92,6 @@ async function run(cwd: string) {
 
   const context = await buildContext(cwd);
 
-  // checker
-  await check({ context });
-
   const cmd = context.argv._[0];
   assert(cmd, 'Command is required');
 
@@ -112,22 +108,29 @@ async function run(cwd: string) {
     case 'build':
       const { build } = await import('./build.js');
       return build({ context });
+    case 'config':
+      const { config } = await import('./config/config.js');
+      return config({ context });
     case 'dev':
       const { dev } = await import('./dev.js');
       return dev({ context });
-    case 'preview':
-      const { preview } = await import('./preview.js');
-      return preview({ context });
+    case 'doctor':
+      const { doctor } = await import('./doctor/doctor.js');
+      return doctor({
+        context,
+        sync: true,
+        verbose: !!context.argv.verbose,
+      });
     case 'generate':
     case 'g':
       const { generate } = await import('./generate/generate.js');
       return generate({ context });
+    case 'preview':
+      const { preview } = await import('./preview.js');
+      return preview({ context });
     case 'sync':
       const { sync } = await import('./sync/sync.js');
       return sync({ context });
-    case 'config':
-      const { config } = await import('./config/config.js');
-      return config({ context });
     default:
       throw new Error(`Unknown command: ${cmd}`);
   }

@@ -2,6 +2,7 @@ import chokidar from 'chokidar';
 import fs from 'fs';
 import path from 'pathe';
 import { BundlerType, createBundler } from './bundler/bundler';
+import { doctor } from './doctor/doctor';
 import * as logger from './fishkit/logger';
 import { buildHtml } from './html';
 import { PluginHookType } from './plugin/plugin_manager';
@@ -37,6 +38,9 @@ export async function build({
         await runSync();
       });
   }
+
+  // check source
+  await doctor({ context });
 
   // build
   const bundler = createBundler({ bundler: BundlerType.MAKO });
