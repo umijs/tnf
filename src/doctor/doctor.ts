@@ -2,6 +2,7 @@ import path from 'pathe';
 import { sync as runSync } from '../sync/sync';
 import type { Context } from '../types';
 import { buildSrc } from './buildSrc';
+import { checkPackageUsage } from './checkPackageUsage';
 import { checkPhantomDeps } from './checkPhantomDeps';
 import { checkReactConflicts } from './checkPkg';
 
@@ -37,6 +38,9 @@ export async function doctor(opts: DoctorOptions) {
       ]),
     ),
     pkg: context.pkg,
+  });
+  checkPackageUsage({
+    usedPkgs: buildSrcResult.pkgs,
   });
   checkReactConflicts({
     pkg: context.pkg,
