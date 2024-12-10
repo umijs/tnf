@@ -20,8 +20,7 @@ Tnf, ~~the north face~~, the next framework. Tnf is focused on simple, performan
 - [Framework unified plugin system](./docs/plugin.md) which is compatible with umi and other frameworks.
 - Mock.
 - Conventional client entry with `src/client.tsx`.
-- Doctor to check potential issues.
-- [ ] Security built-in. Including doctor rules which is used in Ant Group.
+- Security built-in. Including doctor rules which is used in Ant Group.
 - Support SSR.
 - [ ] Support API routes and server functions.
 - [ ] AI based generator and other features.
