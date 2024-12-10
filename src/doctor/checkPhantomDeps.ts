@@ -1,7 +1,6 @@
 import assert from 'assert';
 import type { Pkg } from '../types';
 
-// TODO: don't check when using pnpm
 export function checkPhantomDeps(opts: {
   usedPkgs: string[];
   exclude: string[];

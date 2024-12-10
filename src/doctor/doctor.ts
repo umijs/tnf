@@ -13,16 +13,20 @@ interface DoctorOptions {
 
 export async function doctor(opts: DoctorOptions) {
   const { context, verbose = false, sync = false } = opts;
+
   if (sync) {
     await runSync({
       context,
     });
   }
+
   const buildSrcResult = await buildSrc({
     entry: path.join(context.paths.tmpPath, 'client-entry.tsx'),
     alias: context.config.alias || [],
     verbose,
   });
+
+  // TODO: don't check when using pnpm
   const aliasKeys = context.config.alias?.map(([key]) => key) || [];
   checkPhantomDeps({
     usedPkgs: buildSrcResult.pkgs,
