@@ -1,5 +1,4 @@
 import path from 'pathe';
-import { TNF_PKG } from '../constants';
 import { sync as runSync } from '../sync/sync';
 import type { Context } from '../types';
 import { buildSrc } from './buildSrc';
@@ -31,7 +30,6 @@ export async function doctor(opts: DoctorOptions) {
       new Set([
         ...(context.config.doctor?.phantomDeps?.exclude || []),
         ...aliasKeys,
-        TNF_PKG,
       ]),
     ),
     pkg: context.pkg,
