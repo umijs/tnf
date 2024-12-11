@@ -3,9 +3,9 @@ import * as logger from '../fishkit/logger';
 import { sync as runSync } from '../sync/sync';
 import type { Context } from '../types';
 import { buildSrc } from './build_src';
+import { checkReactConflicts } from './check_dependency';
 import { checkPackageUsage } from './check_package_usage';
 import { checkPhantomDeps } from './check_phantom_deps';
-import { checkReactConflicts } from './check_pkg';
 
 interface DoctorOptions {
   context: Context;

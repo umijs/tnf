@@ -66,10 +66,21 @@ ${fileDirs.join('\n')}
   );
   fs.writeFileSync(path.join(aiPath, 'tnf.md'), tnfContent, 'utf-8');
 
-  // TODO: best practices
   fs.writeFileSync(
     path.join(aiPath, 'best_practices.md'),
     '/* TODO: best practices */',
+    'utf-8',
+  );
+
+  fs.writeFileSync(
+    path.join(aiPath, 'engineering.md'),
+    '/* TODO: engineering */',
+    'utf-8',
+  );
+
+  fs.writeFileSync(
+    path.join(aiPath, 'routing.md'),
+    '/* TODO: routing */',
     'utf-8',
   );
 }
