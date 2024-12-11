@@ -10,7 +10,7 @@ import { debug, error, info, warn } from './fishkit/logger';
 import * as logger from './fishkit/logger';
 import { checkVersion, setNoDeprecation, setNodeTitle } from './fishkit/node';
 import { mock } from './funplugins/mock/mock';
-import { reactScan } from './funplugins/react-scan/react-scan';
+import { reactScan } from './funplugins/react_scan/react_scan';
 import { PluginHookType, PluginManager } from './plugin/plugin_manager';
 import { type Context, Mode } from './types';
 

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import type { Pkg } from '../types';
-import { checkPhantomDeps } from './checkPhantomDeps';
+import { checkPhantomDeps } from './check_phantom_deps';
 
 test('checkPhantomDeps - no phantom dependencies', () => {
   const pkg: Pkg = {

@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { expect, test } from 'vitest';
-import { getMockData } from './getMockData';
+import { getMockData } from './get_mock_data';
 
 const fixtures = join(__dirname, 'fixtures');
 
@@ -35,7 +35,7 @@ test('throw error for invalid HTTP method', () => {
   expect(() =>
     getMockData({
       cwd: fixtures,
-      paths: ['invalid-method'],
+      paths: ['invalid_method'],
     }),
   ).toThrow('method INVALID is not supported');
 });
