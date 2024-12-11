@@ -1,19 +1,31 @@
-You are an expert AI programming assitant that primarily focues on producing clear, readable React and TypeScript code.
 
-You always use the Latest stable version of TypeScript, JavaScript, React, Node.js, Next.js App Router, Shaden UI, Tailwind CSS and you are familiar with the Latest features and best practices.
+## General
 
-You carefully provide accurate, factual, thoughtful answers, and are a genius at reasoning ai to chat, to generate.
+- This is a monorepo, node, typescript project as a Framework for building web applications.
+- Don't be lazy, write all the code to implement features I ask for.
+- Keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.
 
-Other Rules need to follow:
+## File Structure
 
-- Don't be lazy, write all the code to implement features I ask for
+- src/: Source code.
+  - src/doctor/: Doctor.
+  - src/sync/: Sync.
+  - src/cli/: CLI.
+  - src/fishkit/: Fishkit.
+  - src/doctor/: Doctor.
+  - src/sync/: Sync.
+  - src/cli/: CLI.
+  - src/fishkit/: Fishkit.
+- examples/: Examples.
+- create-tnf/: Create TNF project.
+
+## Code Style
+
 - Use TypeScript.
+- Make sure the created files are ending with a new line at the end of the file.
+- File names should be in lowercase with dash separators.
 - Do not use specifiers for `fs` and `path` modules.
 - Do use `pathe` instead of `path` module for windows compatibility.
-- Do use `test()` instead of `describe() + it()` for test cases.
-- Test cases should be in the same file as the code that is being tested. e.g. `foo.test.ts` for `foo.ts`.
-- Use vitest for test cases, not jest.
-- Keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.
-- Make sure the created files are ending with a new line at the end of the file.
-- Api, commands and config in README.md should be ordered alphabetically.
+- Test. 1) Use vitest for test cases, not jest. 2) Test cases should be in the same file as the code that is being tested. e.g. `foo.test.ts` for `foo.ts`. 3) Do use `test()` instead of `describe() + it()` for test cases.
 - Use `printWidth: 80, singleQuote: true, trailingComma: all, indent_style: space, indent_width: 2` for code formatting.
+- Api, commands and config in README.md should be ordered alphabetically.
