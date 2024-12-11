@@ -66,6 +66,7 @@ $ pnpm preview
 - `@umijs/tnf`: The entry of tnf, including `defineConfig`, ...
 - `@umijs/tnf/router`: The router module, reexported from `@tanstack/react-router`.
 - `@umijs/tnf/ssr`: The ssr module, including `Meta`, `Client` and `Server`.
+- `@umijs/tnf/ai`: The ai module, including `tools`.
 
 ## Config
 
