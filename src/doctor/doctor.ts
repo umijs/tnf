@@ -3,7 +3,10 @@ import * as logger from '../fishkit/logger';
 import { sync as runSync } from '../sync/sync';
 import type { Context } from '../types';
 import { buildSrc } from './build_src';
-import { checkReactConflicts } from './check_dependency';
+import {
+  checkReactConflicts,
+  checkUnsupportedPackages,
+} from './check_dependency';
 import { checkPackageUsage } from './check_package_usage';
 import { checkPhantomDeps } from './check_phantom_deps';
 
@@ -51,5 +54,8 @@ export async function doctor(opts: DoctorOptions) {
       context.config.alias?.find(([key]) => key === 'react')?.[1] || '',
     reactDomPath:
       context.config.alias?.find(([key]) => key === 'react-dom')?.[1] || '',
+  });
+  checkUnsupportedPackages({
+    pkg: context.pkg,
   });
 }

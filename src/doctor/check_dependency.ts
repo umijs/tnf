@@ -2,6 +2,26 @@ import assert from 'assert';
 import path from 'pathe';
 import type { Pkg } from '../types';
 
+export function checkUnsupportedPackages(opts: { pkg: Pkg }) {
+  const { pkg } = opts;
+  const deps = {
+    ...pkg.dependencies,
+    ...pkg.devDependencies,
+  };
+  assert(
+    !deps['monaco-editor'],
+    '`monaco-editor` is not supported, please use `@monaco-editor/react` instead.',
+  );
+  const pdfjsDistVersion = deps['pdfjs-dist'];
+  if (pdfjsDistVersion) {
+    const pdfjsMainVersion = pdfjsDistVersion.match(/\d/)?.[0];
+    assert(
+      pdfjsMainVersion === '3',
+      '`pdfjs-dist@1` or `pdfjs-dist@2` is not supported, please use `pdfjs-dist@3` or above instead.',
+    );
+  }
+}
+
 export function checkReactConflicts(opts: {
   pkg: Pkg;
   reactPath: string;
