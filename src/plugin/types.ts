@@ -19,6 +19,7 @@ export const PluginSchema = z.object({
       z.union([z.any(), z.promise(z.any()), z.null()]),
     )
     .optional(),
+  configureBundler: z.function(z.tuple([]), z.any()).optional(),
   configResolved: z.function(z.tuple([z.any()]), z.void()).optional(),
   configureServer: z
     .function(

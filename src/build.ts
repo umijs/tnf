@@ -44,11 +44,19 @@ export async function build({
 
   // build
   const bundler = createBundler({ bundler: BundlerType.MAKO });
+  const unplugins = await context.pluginManager.apply({
+    hook: 'configureBundler',
+    args: [],
+    memo: [],
+    type: PluginHookType.SeriesMerge,
+    pluginContext: context.pluginContext,
+  });
   const baseBundleConfig = {
     mode,
     alias: config.alias,
     externals: config.externals,
     publicPath: config.publicPath,
+    unplugins,
   };
 
   // bundler configs

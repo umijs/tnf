@@ -25,6 +25,7 @@ export interface BundlerConfig {
   externals?: Config['externals'];
   less?: Config['less'];
   publicPath?: Config['publicPath'];
+  unplugins?: any[];
 }
 
 export interface BundlerBuildOptions {

@@ -64,8 +64,6 @@ configureServer(server) {
 
 ### configureBundler
 
-> Not implemented
-
 - Type: `() => unplugin.Plugin[] | Promise<unplugin.Plugin[]>`
 
 Modify bundler config, return an array of [unplugin](https://unplugin.unjs.io/) plugins.
