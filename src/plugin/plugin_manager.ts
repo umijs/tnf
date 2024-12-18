@@ -73,10 +73,15 @@ export class PluginManager<T extends Plugin> {
       return result;
     } else if (type === PluginHookType.SeriesMerge) {
       let result = memo;
+      const isArray = Array.isArray(result);
       for (const plugin of plugins) {
         const hookFn = plugin[hook];
         if (typeof hookFn === 'function') {
-          result = defu(await hookFn.apply(pluginContext, args), result);
+          if (isArray) {
+            result = result.concat(await hookFn.apply(pluginContext, args));
+          } else {
+            result = defu(await hookFn.apply(pluginContext, args), result);
+          }
         }
       }
       return result;

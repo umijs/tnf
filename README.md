@@ -154,6 +154,13 @@ The plugins configuration. Checkout [plugin.md](./docs/plugin.md) for more detai
 
 The publicPath configuration.
 
+### reactCompiler
+
+- Type: `{ target?: '17' | '18' | '19'; sources?: (filePath: string) => boolean }`
+- Default: `false`
+
+Enable [react compiler](https://react.dev/learn/react-compiler) for better performance.
+
 ### reactScan
 
 - Type: `{}`

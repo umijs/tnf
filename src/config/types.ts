@@ -72,6 +72,12 @@ export const ConfigSchema = z
       })
       .optional(),
     plugins: z.array(PluginSchema).optional(),
+    reactCompiler: z
+      .object({
+        target: z.enum(['17', '18', '19']).optional(),
+        sources: z.function().optional(),
+      })
+      .optional(),
     reactScan: z.object({}).optional(),
     publicPath: z.string().optional(),
     router: z

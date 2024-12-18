@@ -43,10 +43,14 @@
     ".": "./dist/index.js"
   },
   "dependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
     "@clack/prompts": "^0.8.2",
     "@tanstack/react-router": "^1.85.10",
     "@tanstack/router-devtools": "^1.85.10",
     "@tanstack/router-generator": "^1.85.3",
+    "@types/babel__core": "^7.20.5",
     "@types/body-parser": "^1.19.5",
     "@types/compression": "^1.7.5",
     "@types/connect-history-api-fallback": "^1.5.4",
@@ -59,6 +63,7 @@
     "@types/spdy": "^3.4.9",
     "@types/yargs-parser": "^21.0.3",
     "@umijs/mako": "^0.9.8",
+    "babel-plugin-react-compiler": "19.0.0-beta-201e55d-20241215",
     "body-parser": "^1.20.3",
     "c12": "^2.0.1",
     "chokidar": "^4.0.1",
