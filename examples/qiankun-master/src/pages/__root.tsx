@@ -14,7 +14,10 @@ export const Route = createRootRoute({
     return (
       <>
         <div>Hello "qiankun-master"!</div>
-        <div id="sub-app-container"></div>
+        <div
+          id="sub-app-container"
+          style={{ height: '100px', background: 'lightblue' }}
+        ></div>
         <div>ok</div>
       </>
     );
