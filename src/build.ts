@@ -82,14 +82,14 @@ export async function build({
   }
 
   // build
-  await bundler.build({
+  const stats = await bundler.build({
     bundlerConfigs,
     cwd,
     watch,
   });
 
   // build html
-  const html = await buildHtml(context);
+  const html = await buildHtml(context, stats?.[0] || {});
   fs.writeFileSync(path.join(context.paths.outputPath, 'index.html'), html);
 
   // build end

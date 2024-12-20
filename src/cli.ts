@@ -142,6 +142,6 @@ checkVersion(MIN_NODE_VERSION);
 setNodeTitle(FRAMEWORK_NAME);
 
 run(process.cwd()).catch((err) => {
-  logger.error(err.message);
+  logger.error(err);
   process.exit(1);
 });

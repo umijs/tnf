@@ -12,16 +12,17 @@ const DEFAULT_HTML = `
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
-    <link rel="stylesheet" href="/client.css" />
   </head>
   <body>
     <div id="<%= config.mountElementId %>"></div>
-    <script src="/client.js"></script>
   </body>
 </html>
 `;
 
-export async function buildHtml(ctx: Context) {
+export async function buildHtml(ctx: Context, stat?: any) {
+  stat = stat || {};
+  const css = buildAsset('client', 'css', ctx, stat);
+  const js = buildAsset('client', 'js', ctx, stat);
   const { cwd } = ctx;
   const publicIndexHtmlPath = path.join(cwd, 'public', 'index.html');
   assert(
@@ -35,6 +36,10 @@ export async function buildHtml(ctx: Context) {
   html = await ejs.render(html, {
     config: ctx.config,
   });
+  assert(html.includes('</head>'), 'html must contain </head>');
+  assert(html.includes('</body>'), 'html must contain </body>');
+  html = html.replace('</head>', `${css}</head>`);
+  html = html.replace('</body>', `${js}</body>`);
   // TODO: support HtmlTagDescriptor[] & { html: string, tags: HtmlTagDescriptor[] }
   const result = await ctx.pluginManager.apply({
     hook: 'transformIndexHtml',
@@ -44,4 +49,20 @@ export async function buildHtml(ctx: Context) {
     type: PluginHookType.SeriesLast,
   });
   return result;
+}
+
+function buildAsset(
+  name: string,
+  type: 'js' | 'css',
+  ctx: Context,
+  stat: Record<string, any>,
+) {
+  const publicPath = ctx.config.publicPath || '/';
+  const asset = Object.keys(stat).find(
+    (key) => key.startsWith(`${name}.`) && key.endsWith(`.${type}`),
+  );
+  if (!asset) return '';
+  return type === 'css'
+    ? `<link rel="stylesheet" href="${publicPath}${asset}" />`
+    : `<script src="${publicPath}${asset}"></script>`;
 }
