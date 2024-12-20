@@ -9,6 +9,7 @@
   "dependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@umijs/bundler-webpack": "^4.4.2",
     "@umijs/tnf": "workspace:*",
     "unplugin-starter": "^0.1.0"
   },
