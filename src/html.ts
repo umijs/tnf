@@ -14,7 +14,7 @@ const DEFAULT_HTML = `
     <link rel="stylesheet" href="/client.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="<%= mountElementId %>"></div>
     <script src="/client.js"></script>
   </body>
 </html>
@@ -29,9 +29,13 @@ export async function buildHtml(ctx: Context) {
   );
   // TODO: support index.ejs
   const htmlPath = path.join(cwd, 'src', 'index.html');
-  const html = fs.existsSync(htmlPath)
+  let html = fs.existsSync(htmlPath)
     ? fs.readFileSync(htmlPath, 'utf-8')
     : DEFAULT_HTML;
+  html = html.replace(
+    /<%= mountElementId %>/g,
+    ctx.config.mountElementId || 'root',
+  );
   // TODO: support HtmlTagDescriptor[] & { html: string, tags: HtmlTagDescriptor[] }
   const result = await ctx.pluginManager.apply({
     hook: 'transformIndexHtml',

@@ -140,6 +140,13 @@ The configuration passed to lessLoader.
 
 In addition to supporting numbers, delay also supports string ranges, such as delay: '500-1000', which randomly selects a value between 500ms and 1000ms.And allowing the configuration to be overridden by the url parameter, such as /api/users?delay=3000.
 
+### mountElementId
+
+- Type: `string`
+- Default: `'root'`
+
+The mount element id.
+
 ### plugins
 
 - Type: `Plugin[]`

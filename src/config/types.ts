@@ -71,6 +71,7 @@ export const ConfigSchema = z
         plugins: z.array(z.any()).optional(),
       })
       .optional(),
+    mountElementId: z.string().optional(),
     plugins: z.array(PluginSchema).optional(),
     reactCompiler: z
       .object({

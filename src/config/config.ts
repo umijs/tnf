@@ -41,6 +41,7 @@ export async function loadConfig(opts: ConfigOpts): Promise<Config> {
     ['click-to-react-component', require.resolve('click-to-react-component')],
     ...(config.alias || []),
   ];
+  config.mountElementId = config.mountElementId || 'root';
   return config;
 }
 

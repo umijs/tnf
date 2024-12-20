@@ -39,6 +39,9 @@ test('should use default HTML when document.html does not exist', async () => {
       apply: vi.fn().mockImplementation(({ memo }) => Promise.resolve(memo)),
     },
     pluginContext: {},
+    config: {
+      mountElementId: 'root',
+    },
   } as any;
   const result = await buildHtml(mockContext);
   expect(result).toContain('<div id="root"></div>');

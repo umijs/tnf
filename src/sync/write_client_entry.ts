@@ -43,6 +43,7 @@ export function createClient() {
   const srcClientPath = path.join(cwd, 'src/client.tsx');
   const clientPath = fs.existsSync(srcClientPath) ? srcClientPath : './client';
   const relativeClientPath = path.relative(cwd, clientPath);
+  const mountElementId = config.mountElementId!;
   writeFileSync(
     clientEntry,
     `
@@ -96,7 +97,7 @@ if (client.createClient) {
   if (window.__TSR__) {
     ReactDOM.hydrateRoot(document, elements);
   } else {
-    ReactDOM.createRoot(document.getElementById('root')!).render(elements);
+    ReactDOM.createRoot(document.getElementById('${mountElementId}')!).render(elements);
   }
 }
     `,
