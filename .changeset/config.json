@@ -21,6 +21,8 @@
     "@examples/shadcn-cli",
     "@examples/ssr",
     "@examples/tailwindcss",
-    "@examples/with-antdx"
+    "@examples/with-antdx",
+    "@examples/qiankun-master",
+    "@examples/qiankun-slave"
   ]
 }

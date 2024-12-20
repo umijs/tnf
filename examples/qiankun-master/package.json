@@ -1,0 +1,18 @@
+{
+  "name": "@examples/qiankun-master",
+  "private": true,
+  "scripts": {
+    "build": "tnf build",
+    "dev": "tnf dev",
+    "preview": "tnf preview"
+  },
+  "dependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@umijs/tnf": "workspace:*",
+    "qiankun": "^2.10.16"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

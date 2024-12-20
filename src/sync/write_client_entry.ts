@@ -42,6 +42,7 @@ export function createClient() {
   const clientEntry = path.join(tmpPath, 'client-entry.tsx');
   const srcClientPath = path.join(cwd, 'src/client.tsx');
   const clientPath = fs.existsSync(srcClientPath) ? srcClientPath : './client';
+  const relativeClientPath = path.relative(cwd, clientPath);
   writeFileSync(
     clientEntry,
     `
@@ -50,6 +51,8 @@ ${tailwindcssPath ? `import '${tailwindcssPath}'` : ''}
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import * as client from '${clientPath}';
+
+export * from '${clientPath}';
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
