@@ -58,10 +58,10 @@ function buildAsset(
   stat: Record<string, any>,
 ) {
   const publicPath = ctx.config.publicPath || '/';
-  const asset = Object.keys(stat).find(
-    (key) => key.startsWith(`${name}.`) && key.endsWith(`.${type}`),
-  );
-  if (!asset) return '';
+  const asset =
+    Object.keys(stat).find(
+      (key) => key.startsWith(`${name}.`) && key.endsWith(`.${type}`),
+    ) || `${name}.${type}`;
   return type === 'css'
     ? `<link rel="stylesheet" href="${publicPath}${asset}" />`
     : `<script src="${publicPath}${asset}"></script>`;

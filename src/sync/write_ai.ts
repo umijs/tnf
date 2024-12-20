@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'pathe';
 import type { Context } from '../types';
+import { writeFileSync } from './fs';
 
 export async function writeAi(opts: { context: Context }) {
   const { context } = opts;
@@ -36,7 +37,7 @@ export async function writeAi(opts: { context: Context }) {
     `- src/types/: Types.`,
   ];
 
-  fs.writeFileSync(
+  writeFileSync(
     path.join(aiPath, 'general.md'),
     `
 
@@ -57,30 +58,26 @@ ${fileDirs.join('\n')}
 - Use \`printWidth: 80, singleQuote: true, trailingComma: all, indent_style: space, indent_width: 2\` for code formatting.
 
   `,
-    'utf-8',
   );
 
   const tnfContent = fs.readFileSync(
     path.join(__dirname, '../../README.md'),
     'utf-8',
   );
-  fs.writeFileSync(path.join(aiPath, 'tnf.md'), tnfContent, 'utf-8');
+  writeFileSync(path.join(aiPath, 'tnf.md'), tnfContent);
 
-  fs.writeFileSync(
+  writeFileSync(
     path.join(aiPath, 'best_practices.md'),
     '/* TODO: best practices */',
-    'utf-8',
   );
 
-  fs.writeFileSync(
-    path.join(aiPath, 'engineering.md'),
-    '/* TODO: engineering */',
-    'utf-8',
-  );
+  writeFileSync(path.join(aiPath, 'engineering.md'), '/* TODO: engineering */');
 
-  fs.writeFileSync(
-    path.join(aiPath, 'routing.md'),
-    '/* TODO: routing */',
-    'utf-8',
-  );
+  writeFileSync(path.join(aiPath, 'routing.md'), '/* TODO: routing */');
+
+  // copy third-party docs
+  const docsDir = path.join(__dirname, '../../third-party-docs');
+  fs.cpSync(docsDir, path.join(aiPath, 'third-party-docs'), {
+    recursive: true,
+  });
 }
