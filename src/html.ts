@@ -1,4 +1,5 @@
 import assert from 'assert';
+import ejs from 'ejs';
 import fs from 'fs';
 import path from 'pathe';
 import { PluginHookType } from './plugin/plugin_manager';
@@ -14,7 +15,7 @@ const DEFAULT_HTML = `
     <link rel="stylesheet" href="/client.css" />
   </head>
   <body>
-    <div id="<%= mountElementId %>"></div>
+    <div id="<%= config.mountElementId %>"></div>
     <script src="/client.js"></script>
   </body>
 </html>
@@ -27,15 +28,13 @@ export async function buildHtml(ctx: Context) {
     !fs.existsSync(publicIndexHtmlPath),
     `public/index.html is not allowed, please use src/index.html instead`,
   );
-  // TODO: support index.ejs
   const htmlPath = path.join(cwd, 'src', 'index.html');
   let html = fs.existsSync(htmlPath)
     ? fs.readFileSync(htmlPath, 'utf-8')
     : DEFAULT_HTML;
-  html = html.replace(
-    /<%= mountElementId %>/g,
-    ctx.config.mountElementId || 'root',
-  );
+  html = await ejs.render(html, {
+    config: ctx.config,
+  });
   // TODO: support HtmlTagDescriptor[] & { html: string, tags: HtmlTagDescriptor[] }
   const result = await ctx.pluginManager.apply({
     hook: 'transformIndexHtml',
