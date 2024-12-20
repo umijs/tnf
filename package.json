@@ -23,7 +23,8 @@
     "test": "vitest",
     "test:unit": "vitest src/**/*.test.ts",
     "test:e2e": "vitest e2e/e2e.test.ts",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "sync:docs": "tsx scripts/syncDocs.ts"
   },
   "bin": {
     "tnf": "bin/tnf.js"
@@ -33,7 +34,8 @@
     "compiled",
     "client",
     "dist",
-    "templates"
+    "templates",
+    "third-party-docs"
   ],
   "exports": {
     "./package.json": "./package.json",
