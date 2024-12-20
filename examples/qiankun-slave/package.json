@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "tnf build",
-    "dev": "tnf dev",
+    "dev": "PORT=3003 tnf dev",
     "preview": "tnf preview"
   },
   "dependencies": {

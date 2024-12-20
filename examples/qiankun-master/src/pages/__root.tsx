@@ -6,7 +6,7 @@ export const Route = createRootRoute({
   component: () => {
     useEffect(() => {
       loadMicroApp({
-        name: 'qiankun-slave',
+        name: 'foooo',
         entry: 'http://localhost:3003',
         container: '#sub-app-container',
       });

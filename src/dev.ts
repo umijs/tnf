@@ -8,6 +8,12 @@ import type { Context } from './types';
 
 export async function dev({ context }: { context: Context }) {
   const devServer = context.config?.devServer || {};
+  if (process.env.PORT) {
+    devServer.port = parseInt(process.env.PORT);
+  }
+  if (process.env.HOST) {
+    devServer.host = process.env.HOST;
+  }
   const { port, host, server, app } = await createServer({
     devServer,
     configureServer: (server) => {

@@ -182,6 +182,13 @@ The router configuration. Checkout [@tanstack/router-generator](https://github.c
 
 The ssr configuration.
 
+## Environment Variables
+
+Environment variables are used to override the config.
+
+- `PORT`: The port to use.
+- `HOST`: The host to use.
+
 ## FAQ
 
 ### How to specify a redirect route?
