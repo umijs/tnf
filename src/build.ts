@@ -43,7 +43,9 @@ export async function build({
   await doctor({ context });
 
   // build
-  const bundler = createBundler({ bundler: BundlerType.MAKO });
+  const bundler = createBundler({
+    bundler: (config.bundler || BundlerType.MAKO) as BundlerType,
+  });
   const unplugins = await context.pluginManager.apply({
     hook: 'configureBundler',
     args: [],
