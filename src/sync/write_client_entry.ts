@@ -76,9 +76,12 @@ const pathModifier = (path) => {
 };
 
 if (client.createClient) {
-  const { Root, router } = client.createClient();
+  const created = client.createClient();
+  if (!created.Root) {
+    throw new Error('createClient does not return Root in ${relativeClientPath}');
+  }
   const elements = <>
-      <Root />
+      <created.Root />
       ${
         config?.clickToComponent !== false
           ? `<ClickToComponent editor="${config?.clickToComponent?.editor || 'vscode'}" pathModifier={pathModifier} />`
@@ -86,7 +89,7 @@ if (client.createClient) {
       }
       ${
         config?.router?.devtool !== false
-          ? `<TanStackRouterDevtools router={router} initialIsOpen=${config?.router?.devtool?.options?.initialIsOpen || '{false}'} position=${config?.router?.devtool?.options?.position || '"bottom-left"'} />`
+          ? `{created.router && <TanStackRouterDevtools router={created.router} initialIsOpen=${config?.router?.devtool?.options?.initialIsOpen || '{false}'} position=${config?.router?.devtool?.options?.position || '"bottom-left"'} />}`
           : ''
       }
   </>;
