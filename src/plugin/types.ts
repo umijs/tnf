@@ -33,6 +33,15 @@ export const PluginSchema = z.object({
       z.union([z.string(), z.promise(z.string()), z.null()]),
     )
     .optional(),
+  watchChange: z
+    .function(
+      z.tuple([
+        z.string(),
+        z.object({ event: z.enum(['create', 'update', 'delete']) }),
+      ]),
+      z.void(),
+    )
+    .optional(),
 });
 
 export type Plugin = z.infer<typeof PluginSchema>;
