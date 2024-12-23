@@ -17,6 +17,13 @@ export async function writeAi(opts: { context: Context }) {
     `- Use @tanstack/react-router for routing.`,
     `- Don't be lazy, write all the code to implement features I ask for.`,
     `- Keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.`,
+    `- Use zod to validate api response.`,
+    `- Keep ui components simple and pure.`,
+    `- Extract logic from ui components to hooks, deep module is preferred.`,
+    `- Use hooks to format data.`,
+    `- Hard code values should be replaced by variables with meaningful names.`,
+    `- Extract api logic to services, keep services simple.`,
+    `- Use react-i18next for internationalization.`,
   ];
   if (deps['@tanstack/react-query']) {
     generals.push(`- Use @tanstack/react-query for data fetching.`);
@@ -33,9 +40,19 @@ export async function writeAi(opts: { context: Context }) {
     `- src/pages/: Pages.`,
     `- src/components/: Components.`,
     `- src/hooks/: Hooks.`,
+    `- src/services/: Services.`,
     `- src/utils/: Utils.`,
     `- src/types/: Types.`,
+    `- mock/: Mock data.`,
+    `- public/: Static files.`,
   ];
+  fileDirs.push('');
+  fileDirs.push(
+    `- Components under src/components/ directory should be named using upper camel case and using tsx, e.g. \`FooBar.tsx\`.`,
+  );
+  fileDirs.push(
+    `- Mock files are js only, ts is not allowed. Content example: \`module.exports = { 'GET /api/foo': (req, res) => { res.json(data); } }\``,
+  );
 
   writeFileSync(
     path.join(aiPath, 'general.md'),
