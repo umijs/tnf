@@ -92,6 +92,12 @@ Modify html content.
 
 Modify entry content.
 
+### watchChange
+
+- Type: `(path: string, ctx: { event: 'create' | 'update' | 'delete' }) => void | Promise<void>`
+
+Called when file change.
+
 ## Plugin Context
 
 Most hooks will pass in a ctx object, which contains some useful information.
@@ -143,11 +149,3 @@ Return current user config.
 - Type: `(message: string) => void`
 
 Print warning information.
-
-### ctx.watcher
-
-> Not implemented
-
-- Type: `Watcher`
-
-Built-in file watcher.
