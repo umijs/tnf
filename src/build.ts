@@ -8,6 +8,7 @@ import { buildHtml } from './html';
 import { PluginHookType } from './plugin/plugin_manager';
 import { sync } from './sync/sync';
 import { type Context } from './types';
+import { Watcher } from './watch/watcher';
 
 export async function build({
   context,
@@ -28,6 +29,24 @@ export async function build({
 
   // sync with watch
   if (watch) {
+    const watcher = new Watcher({
+      chokidar: {
+        ignoreInitial: true,
+      },
+    });
+
+    watcher.watch(['./src']);
+
+    watcher.on('change', async (id, { event }) => {
+      await context.pluginManager.apply({
+        hook: 'watchChange',
+        args: [id, { event }],
+        memo: [],
+        type: PluginHookType.Parallel,
+        pluginContext: context.pluginContext,
+      });
+    });
+
     const pagesDir = path.join(cwd, 'src/pages');
     chokidar
       .watch(pagesDir, {
