@@ -3,14 +3,14 @@ import path from 'pathe';
 import type { Context } from '../types';
 import { writeFileSync } from './fs';
 
-export async function writeAi(opts: { context: Context }) {
+export async function writeDocs(opts: { context: Context }) {
   const { context } = opts;
-  const aiPath = path.join(context.paths.tmpPath, 'ai');
+  const docsPath = path.join(context.paths.tmpPath, 'docs');
   const deps = {
     ...context.pkg.dependencies,
     ...context.pkg.devDependencies,
   };
-  fs.mkdirSync(aiPath, { recursive: true });
+  fs.mkdirSync(docsPath, { recursive: true });
 
   const generals = [
     `- This a react project.`,
@@ -55,7 +55,7 @@ export async function writeAi(opts: { context: Context }) {
   );
 
   writeFileSync(
-    path.join(aiPath, 'general.md'),
+    path.join(docsPath, 'general.md'),
     `
 
 ## General
@@ -81,20 +81,23 @@ ${fileDirs.join('\n')}
     path.join(__dirname, '../../README.md'),
     'utf-8',
   );
-  writeFileSync(path.join(aiPath, 'tnf.md'), tnfContent);
+  writeFileSync(path.join(docsPath, 'tnf.md'), tnfContent);
 
   writeFileSync(
-    path.join(aiPath, 'best_practices.md'),
+    path.join(docsPath, 'best_practices.md'),
     '/* TODO: best practices */',
   );
 
-  writeFileSync(path.join(aiPath, 'engineering.md'), '/* TODO: engineering */');
+  writeFileSync(
+    path.join(docsPath, 'engineering.md'),
+    '/* TODO: engineering */',
+  );
 
-  writeFileSync(path.join(aiPath, 'routing.md'), '/* TODO: routing */');
+  writeFileSync(path.join(docsPath, 'routing.md'), '/* TODO: routing */');
 
   // copy third-party docs
   const docsDir = path.join(__dirname, '../../third-party-docs');
-  fs.cpSync(docsDir, path.join(aiPath, 'third-party-docs'), {
+  fs.cpSync(docsDir, path.join(docsPath, 'third-party-docs'), {
     recursive: true,
   });
 }

@@ -1,8 +1,8 @@
 import fs from 'fs';
 import * as logger from '../fishkit/logger';
 import type { Context } from '../types';
-import { writeAi } from './write_ai';
 import { writeClientEntry } from './write_client_entry';
+import { writeDocs } from './write_docs';
 import { writeGlobalStyle } from './write_global_style';
 import { writeRouteTree } from './write_route_tree';
 import { writeRouter } from './write_router';
@@ -24,7 +24,7 @@ export async function sync(opts: SyncOptions) {
     fs.mkdirSync(tmpPath, { recursive: true });
   }
 
-  await writeAi({ context });
+  await writeDocs({ context });
   await writeTypes({ context });
   await writeRouteTree({ context });
   const globalStyleImportPath = writeGlobalStyle({ context });
