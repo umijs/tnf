@@ -18,10 +18,11 @@
   "ignore": [
     "@examples/hackernews",
     "@examples/normal",
+    "@examples/qiankun-master",
+    "@examples/qiankun-slave",
     "@examples/shadcn-cli",
     "@examples/ssr",
     "@examples/tailwindcss",
-    "@examples/with-antd4",
     "@examples/with-antdx"
   ]
 }

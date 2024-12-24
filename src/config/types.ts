@@ -40,7 +40,6 @@ export const ConfigSchema = z
         z.literal(false),
       ])
       .optional(),
-    externals: z.record(z.string()).optional(),
     devServer: z
       .object({
         port: z.number().optional(),
@@ -53,6 +52,16 @@ export const ConfigSchema = z
         host: z.string().optional(),
       })
       .optional(),
+    doctor: z
+      .object({
+        phantomDeps: z
+          .object({
+            exclude: z.array(z.string()).optional(),
+          })
+          .optional(),
+      })
+      .optional(),
+    externals: z.record(z.string()).optional(),
     less: z
       .object({
         modifyVars: z.any().optional(),
@@ -62,7 +71,16 @@ export const ConfigSchema = z
         plugins: z.array(z.any()).optional(),
       })
       .optional(),
+    mountElementId: z.string().optional(),
     plugins: z.array(PluginSchema).optional(),
+    reactCompiler: z
+      .object({
+        target: z.enum(['17', '18', '19']).optional(),
+        sources: z.function().optional(),
+      })
+      .optional(),
+    reactScan: z.object({}).optional(),
+    publicPath: z.string().optional(),
     router: z
       .object({
         defaultPreload: z.enum(['intent', 'render', 'viewport']).optional(),

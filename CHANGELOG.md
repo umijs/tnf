@@ -1,5 +1,20 @@
 # @umijs/tnf
 
+## 0.1.7
+
+### Patch Changes
+
+- [`7c711fb`](https://github.com/umijs/tnf/commit/7c711fb4f3d98e199161ec17c3db7afbe94db618) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: conventional client entry with `src/client.tsx`
+
+## 0.1.6
+
+### Patch Changes
+
+- [`6a360d9`](https://github.com/umijs/tnf/commit/6a360d9484cdcee472828fec9549677a7ec38c65) Thanks [@sorrycc](https://github.com/sorrycc)! - feat(plugin): add buildStart hook
+- [#73](https://github.com/umijs/tnf/pull/73) [`76d4023`](https://github.com/umijs/tnf/commit/76d4023551b655dc2196443e44dd3d0ab22c4796) Thanks [@Wu-kung](https://github.com/Wu-kung)! - feat: configure the delay of the mock globally.
+- [#74](https://github.com/umijs/tnf/pull/74) [`84c61fa`](https://github.com/umijs/tnf/commit/84c61facec012d54be805ab657f28d0e9e1184d3) Thanks [@jrr997](https://github.com/jrr997)! - feat: support Mako publicPath
+- [`6fa704f`](https://github.com/umijs/tnf/commit/6fa704f418fe8f3e38db952c342f556d6a28687b) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: generate src/tailwind.css when not exists
+
 ## 0.1.5
 
 ### Patch Changes

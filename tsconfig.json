@@ -18,5 +18,6 @@
     "module": "esnext",
     "moduleResolution": "node"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/**/fixtures/**"]
 }

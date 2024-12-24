@@ -33,8 +33,8 @@ import 'zx/globals';
             preview: 'tnf preview',
           },
           dependencies: {
-            '@types/react': '^18.3.12',
-            '@types/react-dom': '^18.3.1',
+            '@types/react': '^19.0.0',
+            '@types/react-dom': '^19.0.0',
             '@umijs/tnf': 'workspace:*',
           },
           devDependencies: {
@@ -79,25 +79,6 @@ export const Route = createRootRoute({
     </>
   ),
 });
-    `.trimStart(),
-    );
-    fs.mkdirSync(path.join(exampleDir, 'public'));
-    fs.writeFileSync(
-      path.join(exampleDir, 'public', 'index.html'),
-      `
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/client.css" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script src="/client.js"></script>
-  </body>
-</html>
     `.trimStart(),
     );
 

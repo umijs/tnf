@@ -18,7 +18,9 @@ Tnf, ~~the north face~~, the next framework. Tnf is focused on simple, performan
 - Less, CSS Modules support built-in.
 - Tailwind CSS support built-in.
 - [Framework unified plugin system](./docs/plugin.md) which is compatible with umi and other frameworks.
-- [ ] Security built-in. Including doctor rules which is used in Ant Group.
+- Mock.
+- Conventional client entry with `src/client.tsx`.
+- Security built-in. Including doctor rules which is used in Ant Group.
 - Support SSR.
 - [ ] Support API routes and server functions.
 - [ ] AI based generator and other features.
@@ -54,6 +56,7 @@ $ pnpm preview
 - `tnf build`: Build the project.
 - `tnf config list/get/set/remove [name] [value]`: Manage the config.
 - `tnf dev`: Start the development server.
+- `tnf doctor`: Check the project for potential issues.
 - `tnf generate/g <type> <name>`: Generate a new page (or component and other types in the future).
 - `tnf preview`: Preview the product after building the project.
 - `tnf sync --mode=<mode>`: Sync the project to the temporary directory.
@@ -63,6 +66,7 @@ $ pnpm preview
 - `@umijs/tnf`: The entry of tnf, including `defineConfig`, ...
 - `@umijs/tnf/router`: The router module, reexported from `@tanstack/react-router`.
 - `@umijs/tnf/ssr`: The ssr module, including `Meta`, `Client` and `Server`.
+- `@umijs/tnf/ai`: The ai module, including `tools`.
 
 ## Config
 
@@ -108,6 +112,13 @@ Click the component to open in the editor.
 
 The development server configuration.
 
+### doctor
+
+- Type: `{ phantomDeps?: { exclude?: string[] } }`
+- Default: `{}`
+
+The doctor configuration.
+
 ### externals
 
 - Type: `Record<string, string>`
@@ -129,12 +140,40 @@ The configuration passed to lessLoader.
 
 In addition to supporting numbers, delay also supports string ranges, such as delay: '500-1000', which randomly selects a value between 500ms and 1000ms.And allowing the configuration to be overridden by the url parameter, such as /api/users?delay=3000.
 
+### mountElementId
+
+- Type: `string`
+- Default: `'root'`
+
+The mount element id.
+
 ### plugins
 
 - Type: `Plugin[]`
 - Default: `[]`
 
 The plugins configuration. Checkout [plugin.md](./docs/plugin.md) for more details.
+
+### publicPath
+
+- Type: `string`
+- Default: `/`
+
+The publicPath configuration.
+
+### reactCompiler
+
+- Type: `{ target?: '17' | '18' | '19'; sources?: (filePath: string) => boolean }`
+- Default: `false`
+
+Enable [react compiler](https://react.dev/learn/react-compiler) for better performance.
+
+### reactScan
+
+- Type: `{}`
+- Default: `false`
+
+Enable [react scan](https://react-scan.com/) to detects performance issues in your React code.
 
 ### router
 
@@ -149,6 +188,13 @@ The router configuration. Checkout [@tanstack/router-generator](https://github.c
 - Default: `{ renderMode: 'stream' }`
 
 The ssr configuration.
+
+## Environment Variables
+
+Environment variables are used to override the config.
+
+- `PORT`: The port to use.
+- `HOST`: The host to use.
 
 ## FAQ
 

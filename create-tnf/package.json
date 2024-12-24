@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build": "father build",
+    "dev": "father dev",
     "doctor": "father doctor",
     "release": "tsx ../scripts/releasePackage.ts --pkg create-tnf"
   },
@@ -23,6 +24,7 @@
   "dependencies": {
     "@types/yargs-parser": "^21.0.3",
     "@clack/prompts": "^0.7.0",
+    "picocolors": "^1.1.1",
     "yargs-parser": "^21.1.1"
   },
   "devDependencies": {

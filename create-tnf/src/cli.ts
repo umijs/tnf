@@ -1,3 +1,5 @@
+import { outro } from '@clack/prompts';
+import pc from 'picocolors';
 import yargsParser from 'yargs-parser';
 import { create } from './create.js';
 
@@ -42,6 +44,6 @@ Examples:
 }
 
 run(process.cwd()).catch((err) => {
-  console.error(`Create failed, ${err.message}`);
+  console.error(outro(pc.red(`Create failed, ${err.message}`)));
   process.exit(1);
 });

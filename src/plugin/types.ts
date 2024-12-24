@@ -19,11 +19,27 @@ export const PluginSchema = z.object({
       z.union([z.any(), z.promise(z.any()), z.null()]),
     )
     .optional(),
+  configureBundler: z.function(z.tuple([]), z.any()).optional(),
   configResolved: z.function(z.tuple([z.any()]), z.void()).optional(),
   configureServer: z
     .function(
       z.tuple([z.object({ middlewares: z.any() })]),
       z.union([z.any(), z.promise(z.any()), z.null()]),
+    )
+    .optional(),
+  transformIndexHtml: z
+    .function(
+      z.tuple([z.string(), z.any()]),
+      z.union([z.string(), z.promise(z.string()), z.null()]),
+    )
+    .optional(),
+  watchChange: z
+    .function(
+      z.tuple([
+        z.string(),
+        z.object({ event: z.enum(['create', 'update', 'delete']) }),
+      ]),
+      z.void(),
     )
     .optional(),
 });

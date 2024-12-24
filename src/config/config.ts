@@ -1,18 +1,21 @@
+import assert from 'assert';
 import {
   loadConfig as loadC12Config,
   watchConfig as watchC12Config,
 } from 'c12';
 import { updateConfig } from 'c12/update';
+import fs from 'fs';
 import path from 'pathe';
 import pc from 'picocolors';
 import { CONFIG_FILE } from '../constants';
 import * as logger from '../fishkit/logger';
-import type { Context } from '../types';
+import type { Context, Pkg } from '../types';
 import type { Config } from './types';
 import { ConfigSchema } from './types';
 
 interface ConfigOpts {
   cwd: string;
+  pkg?: Pkg;
   defaults?: Partial<Config>;
   overrides?: Partial<Config>;
 }
@@ -24,16 +27,35 @@ export async function loadConfig(opts: ConfigOpts): Promise<Config> {
     throw new Error(`Invalid configuration: ${result.error.message}`);
   }
   const config = result.data;
+  const reactPath =
+    resolveUserLib('react', opts.pkg || {}, opts.cwd) || resolveLib('react');
+  const reactDomPath =
+    resolveUserLib('react-dom', opts.pkg || {}, opts.cwd) ||
+    resolveLib('react-dom');
   config.alias = [
     ['@', path.join(opts.cwd, 'src')],
-    ['react', resolveLib('react')],
-    ['react-dom', resolveLib('react-dom')],
+    ['react', reactPath],
+    ['react-dom', reactDomPath],
     ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
     ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
     ['click-to-react-component', require.resolve('click-to-react-component')],
     ...(config.alias || []),
   ];
+  config.mountElementId = config.mountElementId || 'root';
   return config;
+}
+
+function resolveUserLib(lib: string, pkg: Record<string, any>, cwd: string) {
+  const version = pkg.dependencies?.[lib] || pkg.devDependencies?.[lib];
+  if (version) {
+    const libPath = path.join(cwd, 'node_modules', lib);
+    assert(
+      fs.existsSync(libPath),
+      `Library ${lib} is specified in package.json but not found.`,
+    );
+    return libPath;
+  }
+  return null;
 }
 
 function resolveLib(lib: string) {

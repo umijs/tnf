@@ -1,10 +1,14 @@
 import chokidar from 'chokidar';
+import fs from 'fs';
 import path from 'pathe';
 import { BundlerType, createBundler } from './bundler/bundler';
+import { doctor } from './doctor/doctor';
 import * as logger from './fishkit/logger';
+import { buildHtml } from './html';
 import { PluginHookType } from './plugin/plugin_manager';
 import { sync } from './sync/sync';
 import { type Context } from './types';
+import { Watcher } from './watch/watcher';
 
 export async function build({
   context,
@@ -25,6 +29,24 @@ export async function build({
 
   // sync with watch
   if (watch) {
+    const watcher = new Watcher({
+      chokidar: {
+        ignoreInitial: true,
+      },
+    });
+
+    watcher.watch(['./src']);
+
+    watcher.on('change', async (id, { event }) => {
+      await context.pluginManager.apply({
+        hook: 'watchChange',
+        args: [id, { event }],
+        memo: [],
+        type: PluginHookType.Parallel,
+        pluginContext: context.pluginContext,
+      });
+    });
+
     const pagesDir = path.join(cwd, 'src/pages');
     chokidar
       .watch(pagesDir, {
@@ -36,12 +58,24 @@ export async function build({
       });
   }
 
+  // check source
+  await doctor({ context });
+
   // build
   const bundler = createBundler({ bundler: BundlerType.MAKO });
+  const unplugins = await context.pluginManager.apply({
+    hook: 'configureBundler',
+    args: [],
+    memo: [],
+    type: PluginHookType.SeriesMerge,
+    pluginContext: context.pluginContext,
+  });
   const baseBundleConfig = {
     mode,
     alias: config.alias,
     externals: config.externals,
+    publicPath: config.publicPath,
+    unplugins,
   };
 
   // bundler configs
@@ -50,7 +84,7 @@ export async function build({
   bundlerConfigs.push({
     ...baseBundleConfig,
     entry: {
-      client: path.join(context.paths.tmpPath, 'client.tsx'),
+      client: path.join(context.paths.tmpPath, 'client-entry.tsx'),
     },
     less: config.less,
   });
@@ -67,11 +101,15 @@ export async function build({
   }
 
   // build
-  await bundler.build({
+  const stats = await bundler.build({
     bundlerConfigs,
     cwd,
     watch,
   });
+
+  // build html
+  const html = await buildHtml(context, stats?.[0] || {});
+  fs.writeFileSync(path.join(context.paths.outputPath, 'index.html'), html);
 
   // build end
   await context.pluginManager.apply({

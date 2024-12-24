@@ -1,6 +1,7 @@
 import { intro, isCancel, outro, select, text } from '@clack/prompts';
 import fs from 'fs';
 import path from 'path';
+import pc from 'picocolors';
 
 const CANCEL_TEXT = '\x1b[31mOperation cancelled.\x1b[0m';
 
@@ -13,7 +14,8 @@ export async function create({
   name?: string;
   template?: string;
 }) {
-  intro('Creating a new project...');
+  console.log();
+  intro(pc.bgCyan(' Creating a new TNF project... '));
 
   const templatesPath = path.join(__dirname, '../templates');
   const templateList = fs
@@ -75,7 +77,7 @@ export async function create({
   const templatePath = path.join(templatesPath, selectedTemplate as string);
   const projectPath = path.join(cwd, projectName);
   fs.cpSync(templatePath, projectPath, { recursive: true });
-  outro(`Project created in ${projectPath}.`);
+  outro(pc.green(`Project created in ${projectPath}`));
   console.log(`Now run:
 
     cd ${projectName}

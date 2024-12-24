@@ -1,4 +1,5 @@
 import assert from 'assert';
+import fs from 'fs';
 import path from 'pathe';
 import yargsParser from 'yargs-parser';
 import { instagram } from '../compiled/gradient-string';
@@ -9,6 +10,8 @@ import { debug, error, info, warn } from './fishkit/logger';
 import * as logger from './fishkit/logger';
 import { checkVersion, setNoDeprecation, setNodeTitle } from './fishkit/node';
 import { mock } from './funplugins/mock/mock';
+import { reactCompiler } from './funplugins/react_compiler/react_compiler';
+import { reactScan } from './funplugins/react_scan/react_scan';
 import { PluginHookType, PluginManager } from './plugin/plugin_manager';
 import { type Context, Mode } from './types';
 
@@ -16,8 +19,17 @@ async function buildContext(cwd: string): Promise<Context> {
   const argv = yargsParser(process.argv.slice(2));
   const command = argv._[0];
   const isDev = command === 'dev';
-  const config = await loadConfig({ cwd });
-  const plugins = [...(config.plugins || []), mock({ paths: ['mock'], cwd })];
+  const pkgPath = path.join(cwd, 'package.json');
+  const pkg = fs.existsSync(pkgPath)
+    ? JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
+    : {};
+  const config = await loadConfig({ cwd, pkg });
+  const plugins = [
+    ...(config.plugins || []),
+    mock({ paths: ['mock'], cwd }),
+    ...(config.reactScan && isDev ? [reactScan()] : []),
+    ...(config.reactCompiler ? [reactCompiler(config.reactCompiler)] : []),
+  ];
   const pluginManager = new PluginManager(plugins);
 
   // hook: config
@@ -56,12 +68,14 @@ async function buildContext(cwd: string): Promise<Context> {
   return {
     argv,
     config,
+    pkg,
     pluginManager,
     pluginContext,
     cwd,
     mode: isDev ? Mode.Development : Mode.Production,
     paths: {
       tmpPath: path.join(cwd, `.${FRAMEWORK_NAME}`),
+      outputPath: path.join(cwd, 'dist'),
     },
   };
 }
@@ -79,6 +93,7 @@ async function run(cwd: string) {
   );
 
   const context = await buildContext(cwd);
+
   const cmd = context.argv._[0];
   assert(cmd, 'Command is required');
 
@@ -95,22 +110,28 @@ async function run(cwd: string) {
     case 'build':
       const { build } = await import('./build.js');
       return build({ context });
+    case 'config':
+      const { config } = await import('./config/config.js');
+      return config({ context });
     case 'dev':
       const { dev } = await import('./dev.js');
       return dev({ context });
-    case 'preview':
-      const { preview } = await import('./preview.js');
-      return preview({ context });
+    case 'doctor':
+      const { doctor } = await import('./doctor/doctor.js');
+      return doctor({
+        context,
+        sync: true,
+      });
     case 'generate':
     case 'g':
       const { generate } = await import('./generate/generate.js');
       return generate({ context });
+    case 'preview':
+      const { preview } = await import('./preview.js');
+      return preview({ context });
     case 'sync':
       const { sync } = await import('./sync/sync.js');
       return sync({ context });
-    case 'config':
-      const { config } = await import('./config/config.js');
-      return config({ context });
     default:
       throw new Error(`Unknown command: ${cmd}`);
   }
@@ -121,6 +142,6 @@ checkVersion(MIN_NODE_VERSION);
 setNodeTitle(FRAMEWORK_NAME);
 
 run(process.cwd()).catch((err) => {
-  logger.error(err.message);
+  logger.error(err);
   process.exit(1);
 });

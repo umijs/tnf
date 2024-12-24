@@ -1,4 +1,5 @@
 import type { Context } from '../types';
+import { generateCursor } from './generate_cursor';
 import { generatePage } from './generate_page';
 import { generateTailwindcss } from './generate_tailwindcss';
 
@@ -15,6 +16,8 @@ export async function generate({ context }: { context: Context }) {
     return await generatePage({ context });
   } else if (type === 'tailwindcss') {
     return await generateTailwindcss({ context });
+  } else if (type === 'cursor') {
+    return await generateCursor({ context, force: context.argv.force });
   } else {
     throw new Error(`Unknown type: ${type}`);
   }

@@ -64,8 +64,6 @@ configureServer(server) {
 
 ### configureBundler
 
-> Not implemented
-
 - Type: `() => unplugin.Plugin[] | Promise<unplugin.Plugin[]>`
 
 Modify bundler config, return an array of [unplugin](https://unplugin.unjs.io/) plugins.
@@ -78,7 +76,7 @@ Modify bundler config, return an array of [unplugin](https://unplugin.unjs.io/) 
 
 Register command.
 
-### transformHtml
+### transformIndexHtml
 
 > Not implemented
 
@@ -93,6 +91,12 @@ Modify html content.
 - Type: `(code: string, ctx: { path: string, filename: string }) => string | Promise<string>`
 
 Modify entry content.
+
+### watchChange
+
+- Type: `(path: string, ctx: { event: 'create' | 'update' | 'delete' }) => void | Promise<void>`
+
+Called when file change.
 
 ## Plugin Context
 
@@ -145,11 +149,3 @@ Return current user config.
 - Type: `(message: string) => void`
 
 Print warning information.
-
-### ctx.watcher
-
-> Not implemented
-
-- Type: `Watcher`
-
-Built-in file watcher.

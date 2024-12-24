@@ -12,7 +12,7 @@ export enum BundlerType {
 }
 
 export interface Bundler {
-  build: (opts: BundlerBuildOptions) => Promise<void>;
+  build: (opts: BundlerBuildOptions) => Promise<any[]>;
   configDevServer: (opts: BundlerDevOptions) => Promise<void>;
 }
 
@@ -24,6 +24,8 @@ export interface BundlerConfig {
   alias?: Config['alias'];
   externals?: Config['externals'];
   less?: Config['less'];
+  publicPath?: Config['publicPath'];
+  unplugins?: any[];
 }
 
 export interface BundlerBuildOptions {

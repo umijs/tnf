@@ -12,6 +12,7 @@ let _host: string;
 export default {
   build: async (opts) => {
     const { bundlerConfigs, cwd, watch } = opts;
+    const stats = [];
 
     for (const bundlerConfig of bundlerConfigs) {
       // build config
@@ -22,10 +23,20 @@ export default {
         less: bundlerConfig.less,
         mode: bundlerConfig.mode,
         platform: bundlerConfig.platform,
+        plugins: bundlerConfig.unplugins || [],
+        publicPath: bundlerConfig.publicPath,
         resolve: {
           alias: bundlerConfig.alias,
         },
       } as BuildParams['config'];
+
+      let statsJson;
+      config.plugins!.push({
+        name: 'mako-stats',
+        generateEnd: (args: any) => {
+          statsJson = args.stats;
+        },
+      });
 
       const isDev = bundlerConfig.mode === Mode.Development;
       if (isDev) {
@@ -49,7 +60,18 @@ export default {
         root: cwd,
         watch: Boolean(watch),
       });
+      const assets = statsJson!.assets.reduce(
+        // @ts-ignore
+        (acc, asset) => ({
+          ...acc,
+          [asset.name]: { size: asset.size },
+        }),
+        {},
+      );
+      stats.push(assets);
     }
+
+    return stats;
   },
 
   configDevServer: async (opts) => {
