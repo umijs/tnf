@@ -104,6 +104,7 @@ export const ConfigSchema = z
           ])
           .optional(),
         convention: RouterGeneratorConfig,
+        routeFileSimplify: z.boolean().optional(),
       })
       .optional(),
     ssr: z
