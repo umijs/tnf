@@ -18,7 +18,11 @@ export async function generateCursor(opts: GenerateCursorOpts) {
       `Cursor rules file already exists at ${cursorRulesPath}`,
     );
   }
-  const generalFilePath = path.join(context.paths.tmpPath, 'ai', 'general.md');
+  const generalFilePath = path.join(
+    context.paths.tmpPath,
+    'docs',
+    'general.md',
+  );
   assert(
     fs.existsSync(generalFilePath),
     `General file not found at ${generalFilePath}, please run \`tnf sync\` first.`,
