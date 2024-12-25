@@ -14,7 +14,7 @@ export async function writeDocs(opts: { context: Context }) {
 
   const generals = [
     `- This a react project.`,
-    `- Use @tanstack/react-router for routing.`,
+    `- Use @umijs/tnf/router for routing, which is reexported from @tanstack/react-router.`,
     `- Don't be lazy, write all the code to implement features I ask for.`,
     `- Keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.`,
     `- Use zod to validate api response.`,
@@ -24,6 +24,7 @@ export async function writeDocs(opts: { context: Context }) {
     `- Hard code values should be replaced by variables with meaningful names.`,
     `- Extract api logic to services, keep services simple.`,
     `- Use react-i18next for internationalization.`,
+    `- No need to declare types for *.less or *.css .`,
   ];
   if (deps['@tanstack/react-query']) {
     generals.push(`- Use @tanstack/react-query for data fetching.`);
