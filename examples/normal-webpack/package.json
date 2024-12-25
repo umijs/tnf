@@ -1,0 +1,19 @@
+{
+  "name": "@examples/normal-webpack",
+  "private": true,
+  "scripts": {
+    "build": "tnf build",
+    "dev": "tnf dev",
+    "preview": "tnf preview"
+  },
+  "dependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@umijs/bundler-webpack": "^4.4.2",
+    "@umijs/tnf": "workspace:*",
+    "unplugin-starter": "^0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

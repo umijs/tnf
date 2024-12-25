@@ -18,6 +18,7 @@
   "ignore": [
     "@examples/hackernews",
     "@examples/normal",
+    "@examples/normal-webpack",
     "@examples/qiankun-master",
     "@examples/qiankun-slave",
     "@examples/shadcn-cli",
