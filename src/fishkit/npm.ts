@@ -48,15 +48,12 @@ export const installWithNpmClient = ({
   cwd?: string;
 }): void => {
   const { NODE_ENV: _, ...env } = process.env;
-
   const args = npmClient === 'yarn' ? [] : ['install'];
-
   const npm = spawnSync(npmClient, args, {
     stdio: 'inherit',
     cwd,
     env,
   });
-
   if (npm.error) {
     throw npm.error;
   }
