@@ -11,6 +11,13 @@ const __dirname = path.dirname(__filename);
 
 type NpmClient = 'pnpm' | 'yarn' | 'npm';
 
+const templates = {
+  minimal: {
+    label: 'Minimal',
+    hint: 'Minimal template for quick start',
+  },
+} as const;
+
 export async function create({
   cwd,
   name,
@@ -35,15 +42,15 @@ export async function create({
       const template = await p.select({
         message: 'Which template would you like?',
         options: templateList.map((template) => ({
-          label: template,
           value: template,
+          label: templates[template as keyof typeof templates].label,
+          hint: templates[template as keyof typeof templates].hint,
         })),
       });
       return template;
     })());
   if (p.isCancel(selectedTemplate)) {
-    p.cancel(CANCEL_TEXT);
-    return;
+    throw new Error(CANCEL_TEXT);
   }
 
   const projectName = await (async () => {
@@ -69,8 +76,7 @@ export async function create({
     }
   })();
   if (p.isCancel(projectName)) {
-    p.cancel(CANCEL_TEXT);
-    return;
+    throw new Error(CANCEL_TEXT);
   }
 
   if (fs.existsSync(path.join(cwd, projectName))) {

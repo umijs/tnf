@@ -32,9 +32,9 @@ Tnf, ~~the north face~~, the next framework. Tnf is focused on simple, performan
 Create a new project with the following command:
 
 ```bash
-$ pnpm create tnf myapp --template=simple
+$ pnpm create tnf myapp --template=minimal
 $ cd myapp
-$ pnpm i
+$ pnpm dev
 ```
 
 Then you can generate a page with the following command.

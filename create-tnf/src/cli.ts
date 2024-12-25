@@ -1,6 +1,12 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import yargsParser from 'yargs-parser';
 import * as p from './clack/prompt/index.js';
 import { create } from './create.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function run(cwd: string) {
   const argv = yargsParser(process.argv.slice(2), {
@@ -14,8 +20,9 @@ async function run(cwd: string) {
 
   // Check if the version flag is set
   if (argv.version) {
-    const { name, version } = require('../package.json');
-    console.log(`${name}@${version}`);
+    const pkgPath = path.join(__dirname, '../package.json');
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+    console.log(`${pkg.name}@${pkg.version}`);
     return;
   }
 
@@ -31,8 +38,8 @@ Options:
 
 Examples:
   create-tnf                          Create a new project
-  create-tnf my-app                   Create a new project named 'my-app'
-  create-tnf my-app --template=simple Create a new project named 'my-app' using the 'simple' template`);
+  create-tnf myapp                    Create a new project named 'myapp'
+  create-tnf myapp --template=minimal Create a new project named 'myapp' using the 'minimal' template`);
     return;
   }
 
