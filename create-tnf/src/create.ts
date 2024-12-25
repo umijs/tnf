@@ -18,11 +18,17 @@ const templates = {
   },
 } as const;
 
+const devCommands = {
+  pnpm: 'pnpm dev',
+  yarn: 'yarn dev',
+  npm: 'npm run dev',
+} as const;
+
 export async function create({
   cwd,
   name,
   template,
-  npmClient = 'pnpm',
+  npmClient,
 }: {
   cwd: string;
   name?: string;
@@ -79,6 +85,19 @@ export async function create({
     throw new Error(CANCEL_TEXT);
   }
 
+  const selectedNpmClient =
+    npmClient ||
+    (await p.select({
+      message: 'Which npm client would you like?',
+      options: ['pnpm', 'yarn', 'npm'].map((client) => ({
+        value: client,
+        label: client,
+      })),
+    }));
+  if (p.isCancel(selectedNpmClient)) {
+    throw new Error(CANCEL_TEXT);
+  }
+
   if (fs.existsSync(path.join(cwd, projectName))) {
     throw new Error('Project already exists');
   }
@@ -90,20 +109,24 @@ export async function create({
   fs.cpSync(templatePath, projectPath, { recursive: true });
   copySpinner.stop(`Copied template ${selectedTemplate}`);
 
-  const installTask = p.taskLog(`Installing dependencies with ${npmClient}...`);
-  const args = npmClient === 'yarn' ? [] : ['install'];
+  const installTask = p.taskLog(
+    `Installing dependencies with ${selectedNpmClient}...`,
+  );
+  const args = selectedNpmClient === 'yarn' ? [] : ['install'];
   try {
-    await execa(npmClient, args, {
+    await execa(selectedNpmClient, args, {
       cwd: projectPath,
       onData: (data) => {
         installTask.text = data;
       },
     });
   } catch (error) {
-    installTask.fail(`Failed to install dependencies with ${npmClient}`);
+    installTask.fail(
+      `Failed to install dependencies with ${selectedNpmClient}`,
+    );
     throw error;
   }
-  installTask.success(`Installed dependencies with ${npmClient}`);
+  installTask.success(`Installed dependencies with ${selectedNpmClient}`);
 
   const syncTask = p.taskLog('Setting up project...');
   try {
@@ -123,7 +146,7 @@ export async function create({
     `
 1: ${pc.bold(pc.cyan(`cd ${projectName}`))}
 2: ${pc.bold(pc.cyan(`git init && git add -A && git commit -m "Initial commit"`))} (optional)
-3: ${pc.bold(pc.cyan(`${npmClient} run dev`))}
+3: ${pc.bold(pc.cyan(devCommands[selectedNpmClient as keyof typeof devCommands]))}
 
 To close the dev server, hit ${pc.bold(pc.cyan('Ctrl+C'))}
     `.trim(),
