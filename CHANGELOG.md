@@ -5,27 +5,16 @@
 ### Patch Changes
 
 - [`7b94851`](https://github.com/umijs/tnf/commit/7b948514101eba167705e62ac66d48d581f6bc3b) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: default react 19
-
 - [`c08bfc9`](https://github.com/umijs/tnf/commit/c08bfc92ed763ee35ccdf143d145922662a5936c) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: generate html
-
 - [`6e38fb1`](https://github.com/umijs/tnf/commit/6e38fb128c494b8a85b1746f3b124689734c1ec4) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: add ai tools
-
 - [`5676479`](https://github.com/umijs/tnf/commit/5676479b369c7edcbec742b23e5d733d49791262) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: add doctor command and checkPhantomDeps
-
 - [`ac5e8f3`](https://github.com/umijs/tnf/commit/ac5e8f393c502d9466a23f67c49efc8603fedf5c) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: sync third-party docs under ai dir
-
 - [#79](https://github.com/umijs/tnf/pull/79) [`40bc0fd`](https://github.com/umijs/tnf/commit/40bc0fdf6f1105572cbfa821c0616ee656b7fc08) Thanks [@Xy2002](https://github.com/Xy2002)! - Add watchChange hook in Plugin
-
 - [`30badfe`](https://github.com/umijs/tnf/commit/30badfe21a87fc2db465b2eebf15d9a04e6c9ada) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: support react scan
-
 - [`ab948c7`](https://github.com/umijs/tnf/commit/ab948c709c8a157efb14282cc398ddd6d4a68edc) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: support config mountElementId
-
 - [`457f1fa`](https://github.com/umijs/tnf/commit/457f1faca4076cea02f3d2c20acbcbcf771fd243) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: generate ai contexts and add generate cursor
-
 - [`da8222e`](https://github.com/umijs/tnf/commit/da8222e132499d88f57d1b473c7bc4018090a737) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: html support ejs
-
 - [`8f8d703`](https://github.com/umijs/tnf/commit/8f8d703aec3f761e2ce626ed46730ea2f4378db3) Thanks [@sorrycc](https://github.com/sorrycc)! - feat(plugin): support configureBundler
-
 - [`788aae1`](https://github.com/umijs/tnf/commit/788aae108686da574f52a6ab6051b00e6998d036) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: support react compiler
 
 ## 0.1.7
