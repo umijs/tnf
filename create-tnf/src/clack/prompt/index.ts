@@ -13,9 +13,9 @@ import {
   TextPrompt,
   block,
   isCancel,
-} from '../core/index.js';
+} from '../core/index';
 
-export { isCancel } from '../core/index.js';
+export { isCancel } from '../core/index';
 
 const unicode = isUnicodeSupported();
 const s = (c: string, fallback: string) => (unicode ? c : fallback);

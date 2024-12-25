@@ -1,5 +1,5 @@
 import { cursor } from 'sisteransi';
-import Prompt, { type PromptOptions } from './prompt.js';
+import Prompt, { type PromptOptions } from './prompt';
 
 interface ConfirmOptions extends PromptOptions<ConfirmPrompt> {
   active: string;
