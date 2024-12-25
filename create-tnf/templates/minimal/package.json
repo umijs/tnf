@@ -7,12 +7,11 @@
     "postinstall": "tnf sync"
   },
   "dependencies": {
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
     "@umijs/tnf": "^0.1.8"
   },
   "devDependencies": {
-    "@total-typescript/tsconfig": "^1.0.4",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   }
 }
