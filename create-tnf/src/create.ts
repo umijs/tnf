@@ -107,6 +107,10 @@ export async function create({
   const templatePath = path.join(templatesPath, selectedTemplate as string);
   const projectPath = path.join(cwd, projectName);
   fs.cpSync(templatePath, projectPath, { recursive: true });
+  const gitignorePath = path.join(projectPath, '_gitignore');
+  if (fs.existsSync(gitignorePath)) {
+    fs.renameSync(gitignorePath, path.join(projectPath, '.gitignore'));
+  }
   copySpinner.stop(`Copied template ${selectedTemplate}`);
 
   const installTask = p.taskLog(
