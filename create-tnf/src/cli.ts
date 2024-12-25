@@ -1,12 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import yargsParser from 'yargs-parser';
-import * as p from './clack/prompt/index.js';
-import { create } from './create.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import * as p from './clack/prompt/index';
+import { create } from './create';
 
 async function run(cwd: string) {
   const argv = yargsParser(process.argv.slice(2), {

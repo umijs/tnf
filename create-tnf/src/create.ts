@@ -2,12 +2,9 @@ import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import pc from 'picocolors';
-import { fileURLToPath } from 'url';
-import * as p from './clack/prompt/index.js';
+import * as p from './clack/prompt/index';
 
 const CANCEL_TEXT = 'Operation cancelled.';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 type NpmClient = 'pnpm' | 'yarn' | 'npm';
 
