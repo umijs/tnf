@@ -60,8 +60,10 @@ import 'zx/globals';
     fs.writeFileSync(
       path.join(exampleDir, '.tnfrc.ts'),
       `
-export default {
-};
+import { defineConfig } from '@umijs/tnf';
+
+export default defineConfig({
+});
     `.trimStart(),
     );
     fs.mkdirSync(path.join(exampleDir, 'src'));
