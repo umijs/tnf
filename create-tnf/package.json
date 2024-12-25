@@ -22,12 +22,12 @@
     "templates"
   ],
   "dependencies": {
-    "@types/yargs-parser": "^21.0.3",
     "@clack/prompts": "^0.7.0",
     "picocolors": "^1.1.1",
     "yargs-parser": "^21.1.1"
   },
   "devDependencies": {
+    "@types/yargs-parser": "^21.0.3",
     "father": "^4.5.1",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"

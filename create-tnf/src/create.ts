@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import pc from 'picocolors';
 
-const CANCEL_TEXT = '\x1b[31mOperation cancelled.\x1b[0m';
+const CANCEL_TEXT = 'Operation cancelled.';
 
 export async function create({
   cwd,
@@ -35,7 +35,7 @@ export async function create({
     }));
 
   if (isCancel(selectedTemplate)) {
-    outro(CANCEL_TEXT);
+    outro(pc.red(CANCEL_TEXT));
     return;
   }
 
