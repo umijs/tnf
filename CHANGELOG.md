@@ -1,5 +1,11 @@
 # @umijs/tnf
 
+## 0.1.9
+
+### Patch Changes
+
+- [#84](https://github.com/umijs/tnf/pull/84) [`1f1e518`](https://github.com/umijs/tnf/commit/1f1e518e8d07118cf3c989c5e7b994bbab103615) Thanks [@sorrycc](https://github.com/sorrycc)! - refactor: using esm
+
 ## 0.1.8
 
 ### Patch Changes
