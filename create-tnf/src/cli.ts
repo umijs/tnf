@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { instagram } from 'gradient-string';
 import path from 'path';
 import yargsParser from 'yargs-parser';
 import * as p from './clack/prompt/index';
@@ -13,6 +14,17 @@ async function run(cwd: string) {
     },
     boolean: ['version', 'help'],
   });
+
+  console.log(
+    instagram(`
+ ████████╗███╗   ██╗███████╗
+    ██╔══╝████╗  ██║██╔════╝
+    ██║   ██╔██╗ ██║█████╗
+    ██║   ██║╚██╗██║██╔══╝
+    ██║   ██║ ╚████║██║
+    ╚═╝   ╚═╝  ╚═══╝╚═╝
+  `),
+  );
 
   // Check if the version flag is set
   if (argv.version) {

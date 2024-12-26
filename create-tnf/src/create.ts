@@ -6,7 +6,7 @@ import * as p from './clack/prompt/index';
 
 const CANCEL_TEXT = 'Operation cancelled.';
 
-type PackageManager = 'pnpm' | 'yarn' | 'npm';
+type PackageManager = 'pnpm' | 'yarn' | 'npm' | 'bun';
 
 const templates = {
   minimal: {
@@ -19,6 +19,7 @@ const devCommands = {
   pnpm: 'pnpm dev',
   yarn: 'yarn dev',
   npm: 'npm run dev',
+  bun: 'bun run dev',
 } as const;
 
 export async function create({
@@ -86,7 +87,7 @@ export async function create({
     packageManager ||
     (await p.select({
       message: 'Which npm client would you like?',
-      options: ['pnpm', 'yarn', 'npm'].map((client) => ({
+      options: ['pnpm', 'yarn', 'npm', 'bun'].map((client) => ({
         value: client,
         label: client,
       })),
