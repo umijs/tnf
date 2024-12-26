@@ -1,6 +1,11 @@
 import assert from 'assert';
 import getGitRepoInfo from 'git-repo-info';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import 'zx/globals';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 (async () => {
   const { branch } = getGitRepoInfo();
@@ -22,7 +27,7 @@ import 'zx/globals';
   // const currentVersion = require('../package.json').version;
   // console.log('current version', currentVersion);
   // const version = await question('Enter the new version: ');
-  const pkg = require('../package.json');
+  const pkg = await import('../package.json');
   const version = pkg.version;
   // pkg.version = version;
   // fs.writeFileSync(

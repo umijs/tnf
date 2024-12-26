@@ -1,5 +1,11 @@
 import assert from 'assert';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import 'zx/globals';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 (async () => {
   const pkg = argv.pkg;
@@ -20,7 +26,9 @@ import 'zx/globals';
   console.log('Publishing package...');
   await $`cd ${pkgDir} && npm publish`;
 
-  const newVersion = require(path.join(pkgDir, 'package.json')).version;
+  const newVersion = await import(path.join(pkgDir, 'package.json')).then(
+    (pkg) => pkg.version,
+  );
 
   if (bump) {
     console.log('Adding to git...');
