@@ -44,6 +44,7 @@ Examples:
     cwd: cwd,
     name: argv._[0] as string | undefined,
     template: argv.template,
+    packageManager: argv.packageManager,
   })
     .then(() => {
       p.outro('Create success!');

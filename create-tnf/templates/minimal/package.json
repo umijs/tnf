@@ -1,10 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "dev": "tnf dev",
     "build": "tnf build",
+    "dev": "tnf dev",
+    "postinstall": "tnf sync",
     "preview": "tnf preview",
-    "postinstall": "tnf sync"
+    "sync": "tnf sync"
   },
   "dependencies": {
     "@types/react": "^19.0.2",

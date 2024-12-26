@@ -6,7 +6,7 @@ import * as p from './clack/prompt/index';
 
 const CANCEL_TEXT = 'Operation cancelled.';
 
-type NpmClient = 'pnpm' | 'yarn' | 'npm';
+type PackageManager = 'pnpm' | 'yarn' | 'npm';
 
 const templates = {
   minimal: {
@@ -25,12 +25,12 @@ export async function create({
   cwd,
   name,
   template,
-  npmClient,
+  packageManager,
 }: {
   cwd: string;
   name?: string;
   template?: string;
-  npmClient?: NpmClient;
+  packageManager?: PackageManager;
 }) {
   const templatesPath = path.join(__dirname, '../templates');
   const templateList = fs
@@ -82,8 +82,8 @@ export async function create({
     throw new Error(CANCEL_TEXT);
   }
 
-  const selectedNpmClient =
-    npmClient ||
+  const selectedPackageManager =
+    packageManager ||
     (await p.select({
       message: 'Which npm client would you like?',
       options: ['pnpm', 'yarn', 'npm'].map((client) => ({
@@ -91,7 +91,7 @@ export async function create({
         label: client,
       })),
     }));
-  if (p.isCancel(selectedNpmClient)) {
+  if (p.isCancel(selectedPackageManager)) {
     throw new Error(CANCEL_TEXT);
   }
 
@@ -111,11 +111,11 @@ export async function create({
   copySpinner.stop(`Copied template ${selectedTemplate}`);
 
   const installTask = p.taskLog(
-    `Installing dependencies with ${selectedNpmClient}...`,
+    `Installing dependencies with ${selectedPackageManager}...`,
   );
-  const args = selectedNpmClient === 'yarn' ? [] : ['install'];
+  const args = selectedPackageManager === 'yarn' ? [] : ['install'];
   try {
-    await execa(selectedNpmClient, args, {
+    await execa(selectedPackageManager, args, {
       cwd: projectPath,
       onData: (data) => {
         installTask.text = data;
@@ -123,11 +123,11 @@ export async function create({
     });
   } catch (error) {
     installTask.fail(
-      `Failed to install dependencies with ${selectedNpmClient}`,
+      `Failed to install dependencies with ${selectedPackageManager}`,
     );
     throw error;
   }
-  installTask.success(`Installed dependencies with ${selectedNpmClient}`);
+  installTask.success(`Installed dependencies with ${selectedPackageManager}`);
 
   const syncTask = p.taskLog('Setting up project...');
   try {
@@ -147,7 +147,7 @@ export async function create({
     `
 1: ${pc.bold(pc.cyan(`cd ${projectName}`))}
 2: ${pc.bold(pc.cyan(`git init && git add -A && git commit -m "Initial commit"`))} (optional)
-3: ${pc.bold(pc.cyan(devCommands[selectedNpmClient as keyof typeof devCommands]))}
+3: ${pc.bold(pc.cyan(devCommands[selectedPackageManager as keyof typeof devCommands]))}
 
 To close the dev server, hit ${pc.bold(pc.cyan('Ctrl+C'))}
     `.trim(),
