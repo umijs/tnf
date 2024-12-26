@@ -1,8 +1,8 @@
+import * as p from '@umijs/clack-prompt';
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import pc from 'picocolors';
-import * as p from './clack/prompt/index';
 
 const CANCEL_TEXT = 'Operation cancelled.';
 

@@ -237,33 +237,24 @@ importers:
 
   create-tnf:
     devDependencies:
-      '@clack/prompts':
-        specifier: ^0.9.0
-        version: 0.9.0
       '@types/yargs-parser':
         specifier: ^21.0.3
         version: 21.0.3
+      '@umijs/clack-prompt':
+        specifier: ^0.0.3
+        version: 0.0.3
       gradient-string:
         specifier: ^3.0.0
         version: 3.0.0
-      is-unicode-supported:
-        specifier: ^1.3.0
-        version: 1.3.0
       picocolors:
         specifier: ^1.1.1
         version: 1.1.1
-      sisteransi:
-        specifier: ^1.0.5
-        version: 1.0.5
       tsx:
         specifier: ^4.19.2
         version: 4.19.2
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
-      wrap-ansi:
-        specifier: ^8.1.0
-        version: 8.1.0
       yargs-parser:
         specifier: ^21.1.1
         version: 21.1.1
@@ -1241,6 +1232,7 @@ packages:
     dependencies:
       picocolors: 1.1.1
       sisteransi: 1.0.5
+    dev: false
 
   /@clack/prompts@0.9.0:
     resolution: {integrity: sha512-nGsytiExgUr4FL0pR/LeqxA28nz3E0cW7eLTSh3Iod9TGrbBt8Y7BHbV3mmkNC4G0evdYyQ3ZsbiBkk7ektArA==}
@@ -1248,6 +1240,7 @@ packages:
       '@clack/core': 0.4.0
       picocolors: 1.1.1
       sisteransi: 1.0.5
+    dev: false
 
   /@commitlint/cli@19.6.1(@types/node@22.10.2)(typescript@5.7.2):
     resolution: {integrity: sha512-8hcyA6ZoHwWXC76BoC8qVOSr8xHy00LZhZpauiD0iO0VYbVhMnED0da85lTfIULxl7Lj4c6vZgF0Wu/ed1+jlQ==}
@@ -4316,6 +4309,15 @@ packages:
 
   /@umijs/case-sensitive-paths-webpack-plugin@1.0.1:
     resolution: {integrity: sha512-kDKJ8yTarxwxGJDInG33hOpaQRZ//XpNuuznQ/1Mscypw6kappzFmrBr2dOYave++K7JHouoANF354UpbEQw0Q==}
+    dev: true
+
+  /@umijs/clack-prompt@0.0.3:
+    resolution: {integrity: sha512-r2SF7UcuiyAsPVtaMFvURVWeU2Xoo4uWklgr0RgOuq6AWT6X8nl1vUTnWTIT/gX44yca7l7G9adDEK9zWuBVBg==}
+    dependencies:
+      is-unicode-supported: 1.3.0
+      picocolors: 1.1.1
+      sisteransi: 1.0.5
+      wrap-ansi: 8.1.0
     dev: true
 
   /@umijs/core@4.3.30:

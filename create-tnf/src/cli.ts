@@ -1,8 +1,8 @@
+import * as p from '@umijs/clack-prompt';
 import fs from 'fs';
 import { instagram } from 'gradient-string';
 import path from 'path';
 import yargsParser from 'yargs-parser';
-import * as p from './clack/prompt/index';
 import { create } from './create';
 
 async function run(cwd: string) {
