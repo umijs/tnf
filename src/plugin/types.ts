@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Mode } from '../types';
+import { Mode } from '../types/index.js';
 
 export const PluginSchema = z.object({
   enforce: z.enum(['pre', 'post']).optional(),

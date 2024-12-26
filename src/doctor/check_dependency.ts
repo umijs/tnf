@@ -1,6 +1,7 @@
 import assert from 'assert';
+import fs from 'fs';
 import path from 'pathe';
-import type { Pkg } from '../types';
+import type { Pkg } from '../types/index.js';
 
 export function checkUnsupportedPackages(opts: { pkg: Pkg }) {
   const { pkg } = opts;
@@ -28,9 +29,11 @@ export function checkReactConflicts(opts: {
   reactDomPath: string;
 }) {
   const { pkg, reactPath, reactDomPath } = opts;
-  const reactVersion = require(path.join(reactPath, 'package.json')).version;
-  const reactDomVersion = require(
-    path.join(reactDomPath, 'package.json'),
+  const reactVersion = JSON.parse(
+    fs.readFileSync(path.join(reactPath, 'package.json'), 'utf-8'),
+  ).version;
+  const reactDomVersion = JSON.parse(
+    fs.readFileSync(path.join(reactDomPath, 'package.json'), 'utf-8'),
   ).version;
   const reactMajorVersion = reactVersion.split('.')[0];
   const reactDomMajorVersion = reactDomVersion.split('.')[0];

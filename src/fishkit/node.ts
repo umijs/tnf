@@ -1,4 +1,4 @@
-import * as logger from './logger';
+import * as logger from './logger.js';
 
 export function setNoDeprecation() {
   // Use magic to suppress node deprecation warnings

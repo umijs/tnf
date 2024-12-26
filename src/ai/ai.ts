@@ -1,8 +1,8 @@
-import * as buildTools from './tools_build';
-import * as configTools from './tools_config';
-import * as doctorTools from './tools_doctor';
-import * as generateTools from './tools_generate';
-import * as syncTools from './tools_sync';
+import * as buildTools from './tools_build.js';
+import * as configTools from './tools_config.js';
+import * as doctorTools from './tools_doctor.js';
+import * as generateTools from './tools_generate.js';
+import * as syncTools from './tools_sync.js';
 
 const tools = {
   ...generateTools,

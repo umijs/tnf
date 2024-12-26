@@ -1,6 +1,6 @@
 import { type Config, generator } from '@tanstack/router-generator';
 import path from 'pathe';
-import type { SyncOptions } from './sync';
+import type { SyncOptions } from './sync.js';
 
 export async function writeRouteTree({ context }: SyncOptions) {
   const {

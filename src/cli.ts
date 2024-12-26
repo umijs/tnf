@@ -1,19 +1,23 @@
 import assert from 'assert';
 import fs from 'fs';
+import { instagram } from 'gradient-string';
 import path from 'pathe';
 import yargsParser from 'yargs-parser';
-import { instagram } from '../compiled/gradient-string';
-import { loadConfig } from './config/config';
-import { ConfigSchema } from './config/types';
-import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants';
-import { debug, error, info, warn } from './fishkit/logger';
-import * as logger from './fishkit/logger';
-import { checkVersion, setNoDeprecation, setNodeTitle } from './fishkit/node';
-import { mock } from './funplugins/mock/mock';
-import { reactCompiler } from './funplugins/react_compiler/react_compiler';
-import { reactScan } from './funplugins/react_scan/react_scan';
-import { PluginHookType, PluginManager } from './plugin/plugin_manager';
-import { type Context, Mode } from './types';
+import { loadConfig } from './config/config.js';
+import { ConfigSchema } from './config/types.js';
+import { FRAMEWORK_NAME, MIN_NODE_VERSION } from './constants.js';
+import { debug, error, info, warn } from './fishkit/logger.js';
+import * as logger from './fishkit/logger.js';
+import {
+  checkVersion,
+  setNoDeprecation,
+  setNodeTitle,
+} from './fishkit/node.js';
+import { mock } from './funplugins/mock/mock.js';
+import { reactCompiler } from './funplugins/react_compiler/react_compiler.js';
+import { reactScan } from './funplugins/react_scan/react_scan.js';
+import { PluginHookType, PluginManager } from './plugin/plugin_manager.js';
+import { type Context, Mode } from './types/index.js';
 
 async function buildContext(cwd: string): Promise<Context> {
   const argv = yargsParser(process.argv.slice(2));

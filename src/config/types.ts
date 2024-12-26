@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { PluginSchema } from '../plugin/types';
+import { PluginSchema } from '../plugin/types.js';
 
 // why no use { configSchema } from '@tanstack/router-generator';
 // configSchema has default

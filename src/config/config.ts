@@ -7,17 +7,22 @@ import { updateConfig } from 'c12/update';
 import fs from 'fs';
 import path from 'pathe';
 import pc from 'picocolors';
-import { CONFIG_FILE } from '../constants';
-import * as logger from '../fishkit/logger';
-import type { Context, Pkg } from '../types';
-import type { Config } from './types';
-import { ConfigSchema } from './types';
+import { fileURLToPath } from 'url';
+import { CONFIG_FILE } from '../constants.js';
+import * as logger from '../fishkit/logger.js';
+import type { Context, Pkg } from '../types/index.js';
+import type { Config } from './types.js';
+import { ConfigSchema } from './types.js';
 
 interface ConfigOpts {
   cwd: string;
   pkg?: Pkg;
   defaults?: Partial<Config>;
   overrides?: Partial<Config>;
+}
+
+async function resolveModule(id: string) {
+  return fileURLToPath(await import.meta.resolve(id));
 }
 
 export async function loadConfig(opts: ConfigOpts): Promise<Config> {
@@ -28,17 +33,24 @@ export async function loadConfig(opts: ConfigOpts): Promise<Config> {
   }
   const config = result.data;
   const reactPath =
-    resolveUserLib('react', opts.pkg || {}, opts.cwd) || resolveLib('react');
+    resolveUserLib('react', opts.pkg || {}, opts.cwd) ||
+    (await resolveLib('react'));
   const reactDomPath =
     resolveUserLib('react-dom', opts.pkg || {}, opts.cwd) ||
-    resolveLib('react-dom');
+    (await resolveLib('react-dom'));
   config.alias = [
     ['@', path.join(opts.cwd, 'src')],
     ['react', reactPath],
     ['react-dom', reactDomPath],
-    ['@tanstack/react-router', resolveLib('@tanstack/react-router')],
-    ['@tanstack/router-devtools', resolveLib('@tanstack/router-devtools')],
-    ['click-to-react-component', require.resolve('click-to-react-component')],
+    ['@tanstack/react-router', await resolveLib('@tanstack/react-router')],
+    [
+      '@tanstack/router-devtools',
+      await resolveLib('@tanstack/router-devtools'),
+    ],
+    [
+      'click-to-react-component',
+      await resolveModule('click-to-react-component'),
+    ],
     ...(config.alias || []),
   ];
   config.mountElementId = config.mountElementId || 'root';
@@ -58,8 +70,8 @@ function resolveUserLib(lib: string, pkg: Record<string, any>, cwd: string) {
   return null;
 }
 
-function resolveLib(lib: string) {
-  return path.dirname(require.resolve(`${lib}/package.json`));
+async function resolveLib(lib: string) {
+  return path.dirname(await resolveModule(`${lib}/package.json`));
 }
 
 export function watchConfig(opts: ConfigOpts) {

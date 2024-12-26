@@ -27,6 +27,7 @@
     "tsc": "tsc --noEmit",
     "sync:docs": "tsx scripts/syncDocs.ts"
   },
+  "type": "module",
   "bin": {
     "tnf": "bin/tnf.js"
   },

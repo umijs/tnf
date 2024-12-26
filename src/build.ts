@@ -1,14 +1,14 @@
 import chokidar from 'chokidar';
 import fs from 'fs';
 import path from 'pathe';
-import { BundlerType, createBundler } from './bundler/bundler';
-import { doctor } from './doctor/doctor';
-import * as logger from './fishkit/logger';
-import { buildHtml } from './html';
-import { PluginHookType } from './plugin/plugin_manager';
-import { sync } from './sync/sync';
-import { type Context } from './types';
-import { Watcher } from './watch/watcher';
+import { BundlerType, createBundler } from './bundler/bundler.js';
+import { doctor } from './doctor/doctor.js';
+import * as logger from './fishkit/logger.js';
+import { buildHtml } from './html.js';
+import { PluginHookType } from './plugin/plugin_manager.js';
+import { sync } from './sync/sync.js';
+import { type Context } from './types/index.js';
+import { Watcher } from './watch/watcher.js';
 
 export async function build({
   context,

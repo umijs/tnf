@@ -1,8 +1,8 @@
-import type { Config } from '../../config/types';
-import type { Plugin } from '../../plugin/types';
-import { createMockMiddleware } from './create_mock_middleware';
-import { getMockData } from './get_mock_data';
-import type { MockOptions } from './types';
+import type { Config } from '../../config/types.js';
+import type { Plugin } from '../../plugin/types.js';
+import { createMockMiddleware } from './create_mock_middleware.js';
+import { getMockData } from './get_mock_data.js';
+import type { MockOptions } from './types.js';
 
 export function mock(opts: MockOptions): Plugin {
   return {

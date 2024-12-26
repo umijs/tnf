@@ -1,6 +1,6 @@
-import { WatchEmitter } from './emitter';
-import { FileWatcher } from './fileWatcher';
-import type { ChangeEvent, ChokidarOptions, WatchEvent } from './types';
+import { WatchEmitter } from './emitter.js';
+import { FileWatcher } from './fileWatcher.js';
+import type { ChangeEvent, ChokidarOptions, WatchEvent } from './types.js';
 
 export interface WatchOptions {
   include?: string | RegExp | Array<string | RegExp>;

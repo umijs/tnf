@@ -3,9 +3,9 @@ import { type ChildProcess, spawn } from 'child_process';
 import fs from 'fs-extra';
 import module from 'module';
 import path from 'pathe';
-import * as logger from '../fishkit/logger';
-import { Mode } from '../types';
-import type { SyncOptions } from './sync';
+import * as logger from '../fishkit/logger.js';
+import { Mode } from '../types/index.js';
+import type { SyncOptions } from './sync.js';
 
 interface Paths {
   input: string;

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'pathe';
-import type { SyncOptions } from './sync';
+import type { SyncOptions } from './sync.js';
 
 const supportedExtensions = ['.css', '.less'];
 

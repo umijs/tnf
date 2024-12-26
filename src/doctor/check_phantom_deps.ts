@@ -1,5 +1,5 @@
 import assert from 'assert';
-import type { Pkg } from '../types';
+import type { Pkg } from '../types/index.js';
 
 export function checkPhantomDeps(opts: {
   usedPkgs: string[];

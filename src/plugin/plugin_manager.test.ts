@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
-import { PluginHookType, PluginManager } from './plugin_manager';
-import type { Plugin } from './types';
+import { PluginHookType, PluginManager } from './plugin_manager.js';
+import type { Plugin } from './types.js';
 
 test('PluginManager should execute plugins in correct order (pre -> normal -> post)', async () => {
   const order: string[] = [];

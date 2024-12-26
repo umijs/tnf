@@ -1,6 +1,6 @@
 import path from 'pathe';
 import { expect, test } from 'vitest';
-import { buildSrc } from './build_src';
+import { buildSrc } from './build_src.js';
 
 test('buildSrc', async () => {
   const entry = path.join(__dirname, 'fixtures/build_src/index.tsx');

@@ -1,10 +1,13 @@
 import assert from 'assert';
 import { glob } from 'glob';
+import { createRequire } from 'module';
 import path from 'pathe';
-import type { Mock, MockOptions } from './types';
+import type { Mock, MockOptions } from './types.js';
 
 const DEFAULT_METHOD = 'GET';
 const VALID_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'];
+
+const require = createRequire(import.meta.url);
 
 export function getMockData(opts: MockOptions) {
   const files = opts.paths.reduce<string[]>((acc, mockPath) => {

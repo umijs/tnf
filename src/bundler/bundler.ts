@@ -1,6 +1,6 @@
 import express from 'express';
-import type { Config } from '../config/types';
-import type { Mode } from '../types';
+import type { Config } from '../config/types.js';
+import type { Mode } from '../types/index.js';
 
 interface BundlerOpts {
   bundler: BundlerType;
