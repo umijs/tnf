@@ -1,6 +1,6 @@
 import * as babel from '@babel/core';
 import path from 'pathe';
-import type { Plugin } from '../../plugin/types';
+import type { Plugin } from '../../plugin/types.js';
 
 export function reactCompiler(compilerOpts: any): Plugin {
   return {

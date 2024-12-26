@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'pathe';
 import { expect, test } from 'vitest';
-import { reactCompiler } from './react_compiler';
+import { reactCompiler } from './react_compiler.js';
 
 test('should compile react code', async () => {
   const plugin = reactCompiler({});

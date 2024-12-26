@@ -1,6 +1,6 @@
 import path from 'pathe';
-import { writeFileSync } from './fs';
-import type { SyncOptions } from './sync';
+import { writeFileSync } from './fs.js';
+import type { SyncOptions } from './sync.js';
 
 export function writeServerEntry({ opts }: { opts: SyncOptions }) {
   const {

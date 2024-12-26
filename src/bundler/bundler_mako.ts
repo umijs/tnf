@@ -3,8 +3,8 @@ import assert from 'assert';
 import proxy from 'express-http-proxy';
 import { getPort } from 'get-port-please';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { Mode } from '../types';
-import type { Bundler } from './bundler';
+import { Mode } from '../types/index.js';
+import type { Bundler } from './bundler.js';
 
 let _hmrPort: number;
 let _host: string;

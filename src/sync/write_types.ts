@@ -1,9 +1,9 @@
 import fs from 'fs';
 import JSON5 from 'json5';
 import path from 'pathe';
-import { FRAMEWORK_NAME } from '../constants';
-import { writeFileSync } from './fs';
-import type { SyncOptions } from './sync';
+import { FRAMEWORK_NAME } from '../constants.js';
+import { writeFileSync } from './fs.js';
+import type { SyncOptions } from './sync.js';
 
 function checkTsconfig(content: string) {
   const json = JSON5.parse(content);

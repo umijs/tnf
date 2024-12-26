@@ -1,7 +1,7 @@
 import assert from 'assert';
 import fs from 'fs';
 import path from 'pathe';
-import type { Context } from '../types';
+import type { Context } from '../types/index.js';
 
 interface GenerateCursorOpts {
   context: Context;

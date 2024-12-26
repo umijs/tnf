@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import { afterEach, beforeEach, expect, test, vi } from 'vitest';
-import { writeFileSync } from './fs';
+import { writeFileSync } from './fs.js';
 
 vi.mock('fs-extra', () => ({
   default: {

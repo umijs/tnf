@@ -1,4 +1,4 @@
-import type { Bundler } from './bundler';
+import type { Bundler } from './bundler.js';
 
 export default {
   build: async (_opts) => {

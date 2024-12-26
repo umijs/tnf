@@ -1,8 +1,8 @@
 import fs from 'fs-extra';
 import path from 'pathe';
-import { setConfig } from '../config/config';
-import { PackageManager } from '../fishkit/npm';
-import type { Context } from '../types';
+import { setConfig } from '../config/config.js';
+import { PackageManager } from '../fishkit/npm.js';
+import type { Context } from '../types/index.js';
 
 export async function generateTailwindcss({ context }: { context: Context }) {
   const cwd = context.cwd;

@@ -1,10 +1,10 @@
-import { build } from './build';
-import { createBundler } from './bundler/bundler';
-import { BundlerType } from './bundler/bundler';
-import { createServer } from './fishkit/server';
-import { buildHtml } from './html';
-import { PluginHookType } from './plugin/plugin_manager';
-import type { Context } from './types';
+import { build } from './build.js';
+import { createBundler } from './bundler/bundler.js';
+import { BundlerType } from './bundler/bundler.js';
+import { createServer } from './fishkit/server.js';
+import { buildHtml } from './html.js';
+import { PluginHookType } from './plugin/plugin_manager.js';
+import type { Context } from './types/index.js';
 
 export async function dev({ context }: { context: Context }) {
   const devServer = context.config?.devServer || {};

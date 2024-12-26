@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path from 'pathe';
-import type { Context } from '../types';
-import { writeFileSync } from './fs';
+import { fileURLToPath } from 'url';
+import type { Context } from '../types/index.js';
+import { writeFileSync } from './fs.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export async function writeDocs(opts: { context: Context }) {
   const { context } = opts;

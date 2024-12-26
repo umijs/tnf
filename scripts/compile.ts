@@ -1,10 +1,10 @@
 import 'zx/globals';
 
 const files = {
-  'gradient-string': {
-    file: './node_modules/gradient-string/dist/index.js',
-    dts: './node_modules/gradient-string/dist/index.d.ts',
-  },
+  // 'gradient-string': {
+  //   file: './node_modules/gradient-string/dist/index.js',
+  //   dts: './node_modules/gradient-string/dist/index.d.ts',
+  // },
 };
 
 const bundleWithMako = async (name: string) => {

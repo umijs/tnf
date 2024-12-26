@@ -17,4 +17,4 @@ if (process.env.DEBUG_CONSOLE) {
   });
 }
 
-require('../dist/cli');
+import('../dist/cli.js').catch(console.error);

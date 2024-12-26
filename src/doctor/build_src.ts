@@ -1,10 +1,10 @@
 import assert from 'assert';
-import { CachedInputFileSystem, ResolverFactory } from 'enhanced-resolve';
+import enhancedResolve from 'enhanced-resolve';
 import { init, parse } from 'es-module-lexer';
 import esbuild from 'esbuild';
 import fs from 'fs';
 import path from 'pathe';
-import * as logger from '../fishkit/logger';
+import * as logger from '../fishkit/logger.js';
 
 interface BuildSrcOptions {
   entry: string;
@@ -21,6 +21,7 @@ export async function buildSrc(opts: BuildSrcOptions) {
   const queue = [];
   queue.push(entry);
   await init;
+  const { CachedInputFileSystem, ResolverFactory } = enhancedResolve;
   const resolver = ResolverFactory.createResolver({
     fileSystem: new CachedInputFileSystem(fs, 4000),
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],

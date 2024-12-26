@@ -1,4 +1,4 @@
-import type { EventListener } from './types';
+import type { EventListener } from './types.js';
 
 export class WatchEmitter<T extends Record<string, (...args: any[]) => any>> {
   private handlers: {

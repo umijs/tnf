@@ -1,5 +1,5 @@
 import chokidar, { FSWatcher } from 'chokidar';
-import type { ChangeEvent, ChokidarOptions } from './types';
+import type { ChangeEvent, ChokidarOptions } from './types.js';
 
 export class FileWatcher {
   private watcher: FSWatcher;

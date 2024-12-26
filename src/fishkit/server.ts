@@ -4,10 +4,10 @@ import cors from 'cors';
 import express from 'express';
 import { getPort } from 'get-port-please';
 import http from 'http';
-import type { Config } from '../config/types';
-import { DEFAULT_PORT } from '../constants';
-import { createHttpsServer } from './https';
-import * as logger from './logger';
+import type { Config } from '../config/types.js';
+import { DEFAULT_PORT } from '../constants.js';
+import { createHttpsServer } from './https.js';
+import * as logger from './logger.js';
 
 export interface ServerOpts {
   devServer: Config['devServer'];

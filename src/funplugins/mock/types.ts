@@ -1,4 +1,4 @@
-import type { Config } from '../../config/types';
+import type { Config } from '../../config/types.js';
 
 export interface Mock {
   method: string;

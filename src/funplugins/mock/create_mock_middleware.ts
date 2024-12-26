@@ -3,7 +3,7 @@ import type { RequestHandler } from 'express';
 // @ts-ignore
 import multer from 'multer';
 import pathToRegexp from 'path-to-regexp';
-import type { MockData } from './types';
+import type { MockData } from './types.js';
 
 export function createMockMiddleware(context: MockData): RequestHandler {
   return async (req, res, next) => {

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import type { Plugin } from '../../plugin/types';
+import type { Plugin } from '../../plugin/types.js';
 
 export function reactScan(): Plugin {
   return {

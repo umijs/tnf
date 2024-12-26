@@ -1,15 +1,9 @@
-module.exports = {
+export default {
   printWidth: 80,
   singleQuote: true,
   trailingComma: 'all',
   proseWrap: 'never',
   plugins: ['@trivago/prettier-plugin-sort-imports'],
-  importOrder: [
-    '^react',
-    '^@umijs/tnf/?',
-    '^@?\\w',
-    '^@/',
-    '^[./]'
-  ],
+  importOrder: ['^react', '^@umijs/tnf/?', '^@?\\w', '^@/', '^[./]'],
   importOrderSortSpecifiers: true,
 };

@@ -5,7 +5,7 @@ import https from 'https';
 import path from 'pathe';
 import pc from 'picocolors';
 import spdy from 'spdy';
-import * as logger from './logger';
+import * as logger from './logger.js';
 
 export interface HttpsServerOptions {
   key?: string;

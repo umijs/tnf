@@ -3,8 +3,8 @@ import fs from 'fs-extra';
 import path from 'pathe';
 // @ts-ignore
 import randomColor from 'random-color';
-import * as logger from '../fishkit/logger';
-import type { Context } from '../types';
+import * as logger from '../fishkit/logger.js';
+import type { Context } from '../types/index.js';
 
 export async function generatePage({ context }: { context: Context }) {
   const pagesDir = path.join(context.cwd, 'src/pages');

@@ -1,5 +1,5 @@
 import defu from 'defu';
-import type { Plugin } from './types';
+import type { Plugin } from './types.js';
 
 export enum PluginHookType {
   First = 'first',

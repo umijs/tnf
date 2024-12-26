@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'pathe';
 import { afterEach, beforeEach, expect, test, vi } from 'vitest';
-import { buildHtml } from './html';
-import { PluginHookType } from './plugin/plugin_manager';
-import type { Context } from './types';
+import { buildHtml } from './html.js';
+import { PluginHookType } from './plugin/plugin_manager.js';
+import type { Context } from './types/index.js';
 
 vi.mock('fs');
 vi.mock('pathe');

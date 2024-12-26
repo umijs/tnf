@@ -1,14 +1,14 @@
 import path from 'pathe';
-import * as logger from '../fishkit/logger';
-import { sync as runSync } from '../sync/sync';
-import type { Context } from '../types';
-import { buildSrc } from './build_src';
+import * as logger from '../fishkit/logger.js';
+import { sync as runSync } from '../sync/sync.js';
+import type { Context } from '../types/index.js';
+import { buildSrc } from './build_src.js';
 import {
   checkReactConflicts,
   checkUnsupportedPackages,
-} from './check_dependency';
-import { checkPackageUsage } from './check_package_usage';
-import { checkPhantomDeps } from './check_phantom_deps';
+} from './check_dependency.js';
+import { checkPackageUsage } from './check_package_usage.js';
+import { checkPhantomDeps } from './check_phantom_deps.js';
 
 interface DoctorOptions {
   context: Context;
