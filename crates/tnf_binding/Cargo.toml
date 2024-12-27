@@ -1,0 +1,7 @@
+[package]
+name = "tnf_binding"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tnf = { path = "../tnf" }
