@@ -67,7 +67,7 @@
     "@types/react-dom": "^19.0.2",
     "@types/spdy": "^3.4.9",
     "@types/yargs-parser": "^21.0.3",
-    "@umijs/mako": "^0.10.0",
+    "@umijs/mako": "^0.11.0",
     "babel-plugin-react-compiler": "19.0.0-beta-b2e8e9c-20241220",
     "body-parser": "^1.20.3",
     "c12": "^2.0.1",
