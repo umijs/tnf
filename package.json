@@ -16,7 +16,7 @@
     "compile": "tsx scripts/compile.ts",
     "changeset": "tsx scripts/changeset.ts && changeset",
     "check": "prettier --check .",
-    "ci": "npm run check && npm run build && npm run tsc && npm run test --run && father doctor",
+    "ci": "npm run check && npm run build && npm run tsc && npm run test -- --run && father doctor",
     "dev": "father dev",
     "format": "prettier --write .",
     "release": "tsx scripts/release.ts",

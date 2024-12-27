@@ -6,7 +6,6 @@ import path from 'pathe';
 import handler from 'serve-handler';
 import { promisify } from 'util';
 import { test } from 'vitest';
-import yargsParser from 'yargs-parser';
 
 const execAsync = promisify(exec);
 const tnfPath = path.join(process.cwd(), 'bin/tnf.js');
