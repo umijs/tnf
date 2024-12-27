@@ -27,6 +27,5 @@ export async function generateCursor(opts: GenerateCursorOpts) {
     fs.existsSync(generalFilePath),
     `General file not found at ${generalFilePath}, please run \`tnf sync\` first.`,
   );
-  const general = fs.readFileSync(generalFilePath, 'utf-8');
-  fs.writeFileSync(cursorRulesPath, general, 'utf-8');
+  fs.writeFileSync(cursorRulesPath, 'Please follow the docs in ./.tnf/docs/general.md', 'utf-8');
 }
