@@ -8,10 +8,10 @@ export async function preview({ context }: { context: Context }) {
   const devServer = context.config?.devServer || {};
   const { app } = await createServer({
     devServer,
-    configureServer: () => {
+    configureServer: (server) => {
       context.pluginManager.apply({
         hook: 'configureServer',
-        args: [],
+        args: [server],
         type: PluginHookType.Series,
         pluginContext: context.pluginContext,
       });
