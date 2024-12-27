@@ -1,5 +1,9 @@
 {
   "name": "@umijs/tnf-binding",
   "version": "0.0.1",
-  "main": "dist/index.js"
+  "main": "dist/index.js",
+  "scripts": {
+    "build:native": "cargo build --release --manifest-path=../../crates/tnf_binding/Cargo.toml",
+    "build": "tsc && pnpm build:native"
+  }
 }
