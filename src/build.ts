@@ -122,4 +122,10 @@ export async function build({
     type: PluginHookType.Parallel,
     pluginContext: context.pluginContext,
   });
+
+  // mako@0.11 doesn't support exit immediately after build
+  // so we exit manually
+  if (!watch) {
+    process.exit(0);
+  }
 }
