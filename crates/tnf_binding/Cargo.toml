@@ -1,0 +1,9 @@
+[package]
+name = "tnf_binding"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+napi = "2"
+napi-derive = "2"
+tnf = { path = "../tnf" }
