@@ -2,6 +2,7 @@ import assert from 'assert';
 import fs from 'fs';
 import { instagram } from 'gradient-string';
 import path from 'pathe';
+import { fileURLToPath } from 'url';
 import yargsParser from 'yargs-parser';
 import { loadConfig } from './config/config.js';
 import { ConfigSchema } from './config/types.js';
@@ -18,6 +19,9 @@ import { reactCompiler } from './funplugins/react_compiler/react_compiler.js';
 import { reactScan } from './funplugins/react_scan/react_scan.js';
 import { PluginHookType, PluginManager } from './plugin/plugin_manager.js';
 import { type Context, Mode } from './types/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function buildContext(cwd: string): Promise<Context> {
   const argv = yargsParser(process.argv.slice(2));
@@ -98,7 +102,13 @@ async function run(cwd: string) {
 
   const context = await buildContext(cwd);
 
-  const cmd = context.argv._[0];
+  let cmd = context.argv._[0];
+  if (context.argv.v || context.argv.version) {
+    cmd = 'version';
+  }
+  if (context.argv.h || context.argv.help) {
+    cmd = 'help';
+  }
   assert(cmd, 'Command is required');
 
   if (cmd === 'build' || cmd === 'dev') {
@@ -111,6 +121,13 @@ async function run(cwd: string) {
   }
 
   switch (cmd) {
+    case 'version':
+      const pkgPath = path.join(__dirname, '../package.json');
+      const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'));
+      console.log(pkg.version);
+      return;
+    case 'help':
+      throw new Error('Not implemented');
     case 'build':
       const { build } = await import('./build.js');
       return build({ context });
