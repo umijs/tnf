@@ -131,6 +131,9 @@ async function run(cwd: string) {
     case 'build':
       const { build } = await import('./build.js');
       return build({ context });
+    case 'chat':
+      const { chat } = await import('./chat.js');
+      return chat({ context });
     case 'config':
       const { config } = await import('./config/config.js');
       return config({ context });

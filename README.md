@@ -54,6 +54,7 @@ $ pnpm preview
 ## Commands
 
 - `tnf build`: Build the project.
+- `tnf chat --message=<message> --model=<model>  --verbose`: Chat with AI assistant.
 - `tnf config list/get/set/remove [name] [value]`: Manage the config.
 - `tnf dev`: Start the development server.
 - `tnf doctor`: Check the project for potential issues.
