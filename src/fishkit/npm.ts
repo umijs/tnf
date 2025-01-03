@@ -2,10 +2,17 @@ import { spawnSync } from 'child_process';
 import { existsSync, readFileSync } from 'fs';
 import fs from 'fs-extra';
 import path from 'pathe';
+import { fileURLToPath } from 'url';
 
 export type NpmClient = 'npm' | 'cnpm' | 'tnpm' | 'yarn' | 'pnpm';
 
-export const getNpmClient = (opts: { cwd: string }): NpmClient => {
+async function resolveModule(id: string) {
+  return fileURLToPath(await import.meta.resolve(id));
+}
+
+export const getNpmClient = async (opts: {
+  cwd: string;
+}): Promise<NpmClient> => {
   const tnpmRegistries = ['.alibaba-inc.', '.antgroup-inc.'];
   const tcnpmLockPath = path.join(
     opts.cwd,
@@ -20,7 +27,7 @@ export const getNpmClient = (opts: { cwd: string }): NpmClient => {
   }
 
   // 检查 pnpm
-  const chokidarPath = require.resolve('chokidar');
+  const chokidarPath = await resolveModule('chokidar');
   if (
     chokidarPath.includes('.pnpm') ||
     existsSync(path.join(opts.cwd, 'node_modules', '.pnpm'))
@@ -123,7 +130,7 @@ export class PackageManager {
     try {
       await this.writePackageJson();
 
-      const npmClient = getNpmClient({ cwd: this.cwd });
+      const npmClient = await getNpmClient({ cwd: this.cwd });
       await installWithNpmClient({
         npmClient,
       });
