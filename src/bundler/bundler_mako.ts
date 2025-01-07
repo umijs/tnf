@@ -1,6 +1,7 @@
 import type { BuildParams } from '@umijs/mako';
 import assert from 'assert';
 import proxy from 'express-http-proxy';
+import fs from 'fs-extra';
 import { getPort } from 'get-port-please';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { Mode } from '../types/index.js';
@@ -54,7 +55,16 @@ export default {
         config.cjs = true;
       }
 
-      const mako = await import('@umijs/mako');
+      let mako;
+      if (process.env.MAKO_PATH) {
+        assert(
+          fs.existsSync(process.env.MAKO_PATH),
+          'MAKO_PATH is not a valid path',
+        );
+        mako = await import(process.env.MAKO_PATH);
+      } else {
+        mako = await import('@umijs/mako');
+      }
       await mako.build({
         config,
         root: cwd,
