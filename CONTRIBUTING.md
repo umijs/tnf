@@ -88,9 +88,9 @@ $ pnpm release
 Release create-tnf package:
 
 ```bash
-$ pnpm release:create-tnf
+$ pnpm release:create-tnf --no-bump
 # or if you want to bump the version without changeset
-$ pnpm release:create-tnf --bump
+$ pnpm release:create-tnf
 ```
 
 ## Code Style

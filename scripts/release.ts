@@ -63,10 +63,6 @@ const __dirname = path.dirname(__filename);
   }
   await $`npm publish --tag ${tag}`;
 
-  // TODO: remove this after the official release
-  console.log('add dist-tag temporary');
-  await $`npm dist-tag add @umijs/tnf@${version} latest`;
-
   console.log('git push');
   await $`git push origin ${branch} --tags`;
 
