@@ -11,7 +11,7 @@
     "create-tnf": "bin/create-tnf.js"
   },
   "scripts": {
-    "build": "utools bundle",
+    "build": "utools bundle --patch-dirname",
     "release": "utools release"
   },
   "files": [
