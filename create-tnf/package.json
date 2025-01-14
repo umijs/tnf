@@ -29,6 +29,9 @@
     "typescript": "^5.6.3",
     "yargs-parser": "^21.1.1"
   },
+  "authors": [
+    "chencheng <sorrycc@gmail.com> (https://github.com/sorrycc)"
+  ],
   "engines": {
     "node": ">=18.13"
   }

@@ -138,6 +138,9 @@
     "node": ">=18.13",
     "pnpm": "^8.0.0"
   },
+  "authors": [
+    "chencheng <sorrycc@gmail.com> (https://github.com/sorrycc)"
+  ],
   "publishConfig": {
     "access": "public"
   },
