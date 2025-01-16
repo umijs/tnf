@@ -1,4 +1,3 @@
-import assert from 'assert';
 import 'zx/globals';
 
 const DOCS_DIR = path.join(__dirname, '../third-party-docs');
