@@ -246,9 +246,9 @@ importers:
       '@types/yargs-parser':
         specifier: ^21.0.3
         version: 21.0.3
-      '@umijs/clack-prompt':
-        specifier: ^0.0.3
-        version: 0.0.3
+      '@umijs/clack-prompts':
+        specifier: ^0.0.5
+        version: 0.0.5
       gradient-string:
         specifier: ^3.0.0
         version: 3.0.0
@@ -4300,15 +4300,6 @@ packages:
     resolution: {integrity: sha512-kDKJ8yTarxwxGJDInG33hOpaQRZ//XpNuuznQ/1Mscypw6kappzFmrBr2dOYave++K7JHouoANF354UpbEQw0Q==}
     dev: true
 
-  /@umijs/clack-prompt@0.0.3:
-    resolution: {integrity: sha512-r2SF7UcuiyAsPVtaMFvURVWeU2Xoo4uWklgr0RgOuq6AWT6X8nl1vUTnWTIT/gX44yca7l7G9adDEK9zWuBVBg==}
-    dependencies:
-      is-unicode-supported: 1.3.0
-      picocolors: 1.1.1
-      sisteransi: 1.0.5
-      wrap-ansi: 8.1.0
-    dev: true
-
   /@umijs/clack-prompts@0.0.4:
     resolution: {integrity: sha512-cD/PfsuBS+ioDcr+Es+ppZe9TpgQZ+RJled8QwdIxB/7hCrpRV1aIhCytgm9uBeVV++1SdKoGKhkVfKpMv2i7w==}
     dependencies:
@@ -4317,6 +4308,15 @@ packages:
       sisteransi: 1.0.5
       wrap-ansi: 8.1.0
     dev: false
+
+  /@umijs/clack-prompts@0.0.5:
+    resolution: {integrity: sha512-oeHo4KN7tnCbsIo37E+4HiEvC5Ye3fUIVg1JvEXsko2QpaFjg6oXFsuEOI/s5hdzc1sBX8KUIgQrxVSCX4ykRA==}
+    dependencies:
+      is-unicode-supported: 1.3.0
+      picocolors: 1.1.1
+      sisteransi: 1.0.5
+      wrap-ansi: 8.1.0
+    dev: true
 
   /@umijs/core@4.3.30:
     resolution: {integrity: sha512-0Ev4BTygHvLAesdTh3mEtXhv7nRGmJpy2zLXzw9nLomY3tFRKFuBRpQwKZKPFOMeMAnUgvpQBHvFL5PSO4WStQ==}

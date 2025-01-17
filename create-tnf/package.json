@@ -21,7 +21,7 @@
   ],
   "devDependencies": {
     "@types/yargs-parser": "^21.0.3",
-    "@umijs/clack-prompt": "^0.0.3",
+    "@umijs/clack-prompts": "^0.0.5",
     "gradient-string": "^3.0.0",
     "picocolors": "^1.1.1",
     "tsx": "^4.19.2",

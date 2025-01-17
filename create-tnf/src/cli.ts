@@ -1,4 +1,4 @@
-import * as p from '@umijs/clack-prompt';
+import * as p from '@umijs/clack-prompts';
 import fs from 'fs';
 import { instagram } from 'gradient-string';
 import path from 'path';

@@ -1,4 +1,4 @@
-import * as p from '@umijs/clack-prompt';
+import * as p from '@umijs/clack-prompts';
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
