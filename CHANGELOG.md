@@ -1,5 +1,13 @@
 # @umijs/tnf
 
+## 0.1.10
+
+### Patch Changes
+
+- [#89](https://github.com/umijs/tnf/pull/89) [`64c7eb0`](https://github.com/umijs/tnf/commit/64c7eb0bea4b242e503c400aca782a08ced6f7d2) Thanks [@devin-ai-integration](https://github.com/apps/devin-ai-integration)! - Replace file copying of general.md with a reference message in generate_cursor.ts for better user experience (#88)
+
+- [#90](https://github.com/umijs/tnf/pull/90) [`dbf33f8`](https://github.com/umijs/tnf/commit/dbf33f83d43790cb9deaebf5222152802f26979c) Thanks [@sorrycc](https://github.com/sorrycc)! - feat: tnf chat
+
 ## 0.1.9
 
 ### Patch Changes
