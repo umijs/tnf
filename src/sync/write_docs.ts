@@ -18,7 +18,6 @@ export async function writeDocs(opts: { context: Context }) {
 
   const generals = [
     `- This a react project.`,
-    `- Use @umijs/tnf/router for routing, which is reexported from @tanstack/react-router.`,
     `- Don't be lazy, write all the code to implement features I ask for.`,
     `- Keep a log of what, why and how you did what you did in "fyi.md". Keep it updated.`,
     `- Use zod to validate api response.`,
@@ -62,6 +61,16 @@ export async function writeDocs(opts: { context: Context }) {
   writeFileSync(
     path.join(docsPath, 'general.md'),
     `
+
+## About Controlled Dependencies
+Some dependencies are governed by the Rome team via the \`@umijs/tnf\` package.
+
+These dependencies are not allowed to be directly updated or imported by the user. Instead, the user should use the \`@umijs/tnf\` package to import the dependencies.
+
+This includes:
+
+- \`@umijs/tnf/router\`: The router module, reexported from \`@tanstack/react-router\`.
+- \`@umijs/tnf/ssr\`: The ssr module, including \`Meta\`, \`Client\` and \`Server\`.
 
 ## General
 
